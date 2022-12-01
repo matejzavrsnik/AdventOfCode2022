@@ -8,7 +8,9 @@
 long elf_with_most_calories(std::string input_file)
 {
    const auto food_calories = mzlib::read_file_lines (input_file);
+
    long max_calories = 0, tally_calories = 0;
+
    for(auto food_calorie : food_calories)
    {
       if (food_calorie.empty())
@@ -27,8 +29,10 @@ long elf_with_most_calories(std::string input_file)
 long top_three_elves_calories(std::string input_file)
 {
    const auto food_calories = mzlib::read_file_lines (input_file);
+
    long tally_calories = 0;
    std::priority_queue<long> top;
+
    for(auto food_calorie : food_calories)
    {
       if (food_calorie.empty())
