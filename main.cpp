@@ -14,7 +14,8 @@ main ()
       << "  Top three elves carry: " << top_three_elves_calories("./res/day1_calories_per_elf.txt") << std::endl
       << "Day 2: Rock Paper Scissors" << std::endl
       << "  I know what he meant, this is the score: " << score_strategy_guide("./res/day2_strategy_guide.txt") << std::endl
-      << "  Well actually, now that the elf explained it: " << score_strategy_guide_proper("./res/day2_strategy_guide.txt") << std::endl;
+      << "  Well actually, now that the elf explained it: " << score_strategy_guide_proper("./res/day2_strategy_guide.txt") << std::endl
+      << "  LOLz: " << lolz::score_strategy_guide_proper("./res/day2_strategy_guide.txt") << std::endl;
 
    return 0;
 }

@@ -5,6 +5,7 @@
 
 #include <string>
 #include <map>
+#include <numeric>
 
 // A, X - rock (1)
 // B, Y - paper (2)
@@ -95,4 +96,29 @@ long score_strategy_guide_proper(std::string input_file)
    }
 
    return cumulative_score;
+}
+
+namespace lolz
+{
+
+// trying to make this a one-liner at the expense of everything else. For the lolz.
+long
+score_strategy_guide_proper (std::string input_file)
+{
+   auto strategy_guide = mzlib::read_file_lines(input_file);
+
+   return std::accumulate(strategy_guide.begin(), strategy_guide.end(), 0,
+      [](auto score, auto& game){
+         const auto& r = mzlib::split(game, " ");
+         const auto& t = r[0][0]-'A'+1;
+         const auto& o = r[1][0];
+
+         return score +=
+              o == 'Z' ? (6 + (t == 0 ? 3 : t == 3 ? 1 : t+1))
+            : o == 'Y' ? (3 + (t)                            )
+            : o == 'X' ? (0 + (t == 1 ? 3 : t == 5 ? 1 : t-1))
+            : 0;
+      });
+}
+
 }
