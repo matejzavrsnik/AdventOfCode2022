@@ -121,4 +121,56 @@ score_strategy_guide_proper (std::string input_file)
       });
 }
 
+// A version that uses emojis instead of letters :)
+// I can afford to do that because my original code didn't imply relationships between symbols.
+long score_strategy_guide_proper2(std::string input_file)
+{
+   auto strategy_guide = mzlib::read_file_lines(input_file);
+
+   std::map<std::string_view, std::string_view> translate{
+      {"A", "🪨"}, // rock
+      {"B", "📜"}, // paper
+      {"C", "✂️"}, // scissors
+      {"X", "☠️"}, // lose
+      {"Y", "🎨"}, // draw
+      {"Z", "🏆"}, // win
+   };
+
+   std::map<std::string_view, int> choice_score {
+      {"🪨", 1},
+      {"📜", 2},
+      {"✂️", 3}};
+
+   // If they play ___ and I need to ___ I will play ___
+   std::map<std::string_view, std::map<std::string_view, std::string_view>> hand_suggestion {
+      {"🪨",{{"☠️", "✂️"},
+             {"🏆", "📜"}}},
+      {"📜",{{"☠️", "🪨"},
+             {"🏆", "✂️"}}},
+      {"✂️",{{"☠️", "📜"},
+             {"🏆", "🪨"}}}
+   };
+
+   // 🤣
+
+   long cumulative_score = 0;
+
+   for(auto game : strategy_guide)
+   {
+      auto row = mzlib::split(game, " ");
+      auto outcome = translate[row[1]];
+      auto their_hand = translate[row[0]];
+
+      // score the outcome
+      if (outcome == "🎨")
+         cumulative_score += 3 + choice_score[their_hand];
+      if (outcome == "🏆")
+         cumulative_score += 6 + choice_score[hand_suggestion[their_hand]["🏆"]];
+      if (outcome == "☠️")
+         cumulative_score += 0 + choice_score[hand_suggestion[their_hand]["☠️"]];
+   }
+
+   return cumulative_score;
+}
+
 }
