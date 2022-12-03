@@ -84,30 +84,39 @@ long find_badges(std::string input_file)
 namespace bonus
 {
 
-// tried to refactor a bit but ran out of time at this point
+// refactored version
 long find_badges(std::string input_file)
 {
    auto rucksacks_content = mzlib::read_file_lines(input_file);
 
+   std::string all_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+   std::sort(all_letters.begin(), all_letters.end()); // in case I didn't order them correctly
+
+   auto first_elf_it = rucksacks_content.begin();
+   decltype(first_elf_it) elf_it;
+
    long priorities = 0;
-   for(
-      auto first_in_group_it = rucksacks_content.begin();
-      first_in_group_it != rucksacks_content.end();
-      first_in_group_it+=3)
+   do
    {
-      auto elf1 = *(first_in_group_it);
-      auto elf2 = *(first_in_group_it + 1);
-      auto elf3 = *(first_in_group_it + 2);
-      std::sort(elf1.begin(), elf1.end());
-      std::sort(elf2.begin(), elf2.end());
-      std::sort(elf3.begin(), elf3.end());
-
-      auto hopefully_one_badge = sets_intersection_plural(elf1, elf2, elf3);
-      if(hopefully_one_badge.size()!=1)
-         std::terminate();
-
-      priorities += prioritise(hopefully_one_badge[0]);
+      std::string possible_badges = all_letters;
+      elf_it = first_elf_it;
+      do
+      {
+         std::string new_possible_badges;
+         std::sort(elf_it->begin(), elf_it->end());
+         std::set_intersection(
+            possible_badges.begin(), possible_badges.end(),
+            elf_it->begin(), elf_it->end(),
+            std::back_inserter(new_possible_badges)
+         );
+         std::swap(possible_badges, new_possible_badges);
+         ++elf_it;
+      }
+      while (elf_it - first_elf_it < 3 && elf_it != rucksacks_content.end());
+      first_elf_it = elf_it;
+      priorities += prioritise(possible_badges[0]);
    }
+   while (first_elf_it != rucksacks_content.end());
 
    return priorities;
 }
