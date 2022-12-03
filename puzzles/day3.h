@@ -1,9 +1,11 @@
 #pragma once
 
+#include "../reusables/sets_intersection_plural.h"
 #include "filesystem/read_write_file.h"
 #include <numeric>
 #include <set>
 #include <algorithm>
+#include <span>
 
 long prioritise(char item)
 {
@@ -14,6 +16,7 @@ long prioritise(char item)
    std::terminate();
 }
 
+// my first attempt that worked; see below for refactor
 long prioritise_rearrangement(std::string input_file)
 {
    auto rucksacks_content = mzlib::read_file_lines(input_file);
@@ -78,33 +81,8 @@ long find_badges(std::string input_file)
    return priorities;
 }
 
-namespace lolz
+namespace bonus
 {
-
-//todo: one for my library: intersections of many sets at once. with this I can call sets_intersections(elf1, elf2, elf3);
-template<class Container>
-Container sets_intersections(Container intersection, Container container)
-{
-   Container new_intersection;
-   std::set_intersection(
-      container.begin(), container.end(),
-      intersection.begin(), intersection.end(),
-      std::back_inserter(new_intersection)
-   );
-   return new_intersection;
-}
-
-template<class Container, class... Containers>
-Container sets_intersections(Container intersection, Container container, Containers... additional)
-{
-   Container new_intersection;
-   std::set_intersection(
-      container.begin(), container.end(),
-      intersection.begin(), intersection.end(),
-      std::back_inserter(new_intersection)
-   );
-   return sets_intersections(new_intersection, additional...);
-}
 
 // tried to refactor a bit but ran out of time at this point
 long find_badges(std::string input_file)
@@ -124,7 +102,7 @@ long find_badges(std::string input_file)
       std::sort(elf2.begin(), elf2.end());
       std::sort(elf3.begin(), elf3.end());
 
-      auto hopefully_one_badge = sets_intersections(elf1, elf2, elf3);
+      auto hopefully_one_badge = sets_intersection_plural(elf1, elf2, elf3);
       if(hopefully_one_badge.size()!=1)
          std::terminate();
 
@@ -132,6 +110,35 @@ long find_badges(std::string input_file)
    }
 
    return priorities;
+}
+
+// not sure why it didn't occur to me earlier that this is an operation over sets
+long prioritise_rearrangement(std::string input_file)
+{
+   auto rucksacks_content = mzlib::read_file_lines(input_file);
+
+   return std::accumulate(rucksacks_content.begin(), rucksacks_content.end(),0,
+      [](auto priority, auto& contents)
+      {
+         // split in two
+         const auto contents_middle = contents.length()/2;
+         std::span first_compartment(&contents[0], &contents[contents_middle]);
+         std::span second_compartment(&contents[contents_middle], &contents[contents.length()]);
+         // sort (in place) so that set operations can work
+         std::sort(first_compartment.begin(), first_compartment.end());
+         std::sort(second_compartment.begin(), second_compartment.end());
+         // get intersection
+         std::set<char> intersection;
+         std::set_intersection(
+            first_compartment.begin(), first_compartment.end(),
+            second_compartment.begin(), second_compartment.end(),
+            std::inserter(intersection, intersection.end())
+         );
+         // each set intersection item is in both compartmens, as per definition
+         for(auto item : intersection)
+            priority += prioritise(item); // calc priority
+         return priority;
+      });
 }
 
 }

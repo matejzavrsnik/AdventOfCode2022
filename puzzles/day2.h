@@ -98,10 +98,10 @@ long score_strategy_guide_proper(std::string input_file)
    return cumulative_score;
 }
 
-namespace lolz
+namespace bonus
 {
 
-// trying to make this a one-liner at the expense of everything else. For the lolz.
+// trying to make this a one-liner at the expense of everything else. For the bonus.
 long
 score_strategy_guide_proper (std::string input_file)
 {

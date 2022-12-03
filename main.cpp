@@ -16,12 +16,13 @@ main ()
       << "Day 2: Rock Paper Scissors" << std::endl
       << "  I know what he meant, this is the score: " << score_strategy_guide("./res/day2_strategy_guide.txt") << std::endl
       << "  Well actually, now that the elf explained it: " << score_strategy_guide_proper("./res/day2_strategy_guide.txt") << std::endl
-      << "  LOLz: " << lolz::score_strategy_guide_proper("./res/day2_strategy_guide.txt") << std::endl
-      << "  LOLz2: " << lolz::score_strategy_guide_proper2("./res/day2_strategy_guide.txt") << std::endl
+      << "  Bonus: " << bonus::score_strategy_guide_proper("./res/day2_strategy_guide.txt") << std::endl
+      << "  Bonus 2: " << bonus::score_strategy_guide_proper2("./res/day2_strategy_guide.txt") << std::endl
       << "Day 3: Rucksack Reorganization" << std::endl
       << "  Prioritise rearrangements: " << prioritise_rearrangement("./res/day3_rucksack_items.txt") << std::endl
       << "  Find badges: " << find_badges("./res/day3_rucksack_items.txt") << std::endl
-      << "  LOLz: " << lolz::find_badges("./res/day3_rucksack_items.txt") << std::endl;
+      << "  Bonus: " << bonus::prioritise_rearrangement("./res/day3_rucksack_items.txt") << std::endl
+      << "  Bonus 2: " << bonus::find_badges("./res/day3_rucksack_items.txt") << std::endl;
 
    return 0;
 }
