@@ -120,21 +120,18 @@ long prioritise_rearrangement(std::string input_file)
    return std::accumulate(rucksacks_content.begin(), rucksacks_content.end(),0,
       [](auto priority, auto& contents)
       {
-         // split in two
-         const auto contents_middle = contents.length()/2;
-         std::span first_compartment(&contents[0], &contents[contents_middle]);
-         std::span second_compartment(&contents[contents_middle], &contents[contents.length()]);
-         // sort (in place) so that set operations can work
-         std::sort(first_compartment.begin(), first_compartment.end());
-         std::sort(second_compartment.begin(), second_compartment.end());
+         const auto contents_middle = contents.begin()+contents.size()/2;
+         // sort each half separately, in place, so that set operation can work
+         std::sort(contents.begin(), contents_middle);
+         std::sort(contents_middle, contents.end());
          // get intersection
          std::set<char> intersection;
          std::set_intersection(
-            first_compartment.begin(), first_compartment.end(),
-            second_compartment.begin(), second_compartment.end(),
+            contents.begin(), contents_middle,
+            contents_middle, contents.end(),
             std::inserter(intersection, intersection.end())
          );
-         // each set intersection item is in both compartmens, as per definition
+         // each set intersection item is in both compartments, as per definition
          for(auto item : intersection)
             priority += prioritise(item); // calc priority
          return priority;
