@@ -58,8 +58,7 @@ long overlapping(std::string input_file)
       | std::views::filter(is_overlapping);
       // | no std::views::count?
 
-   // Ideally I wouldn't count again. I don't know how to do this :(
-   return std::ranges::count_if(overlapping, is_overlapping);
+   return std::ranges::distance(overlapping);
 }
 
 }
