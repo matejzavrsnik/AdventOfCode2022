@@ -53,12 +53,10 @@ namespace bonus
 // try ranges
 long overlapping(std::string input_file)
 {
-   auto overlapping = mzlib::read_file_lines(input_file)
+   return std::ranges::distance(
+      mzlib::read_file_lines(input_file)
       | std::views::transform(convert)
-      | std::views::filter(is_overlapping);
-      // | no std::views::count?
-
-   return std::ranges::distance(overlapping);
+      | std::views::filter(is_overlapping));
 }
 
 }
