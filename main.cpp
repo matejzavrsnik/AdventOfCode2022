@@ -1,6 +1,7 @@
 #include "puzzles/day1.h"
 #include "puzzles/day2.h"
 #include "puzzles/day3.h"
+#include "puzzles/day4.h"
 
 #include <iostream>
 
@@ -22,7 +23,11 @@ main ()
       << "  Prioritise rearrangements: " << prioritise_rearrangement("./res/day3_rucksack_items.txt") << std::endl
       << "  Find badges: " << find_badges("./res/day3_rucksack_items.txt") << std::endl
       << "  Bonus: " << bonus::prioritise_rearrangement("./res/day3_rucksack_items.txt") << std::endl
-      << "  Bonus 2: " << bonus::find_badges("./res/day3_rucksack_items.txt") << std::endl;
+      << "  Bonus 2: " << bonus::find_badges("./res/day3_rucksack_items.txt") << std::endl
+      << "Day 4: Camp Cleanup" << std::endl
+      << "  Fully contained count: " << fully_contained("./res/day4_assignment_list.txt") << std::endl
+      << "  Overlapping count: " << overlapping("./res/day4_assignment_list.txt") << std::endl
+      << "  Bonus: " << bonus::overlapping("./res/day4_assignment_list.txt") << std::endl;
 
    return 0;
 }
