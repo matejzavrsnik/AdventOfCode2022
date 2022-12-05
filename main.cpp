@@ -2,6 +2,7 @@
 #include "puzzles/day2.h"
 #include "puzzles/day3.h"
 #include "puzzles/day4.h"
+#include "puzzles/day5.h"
 
 #include <iostream>
 
@@ -27,7 +28,10 @@ main ()
       << "Day 4: Camp Cleanup" << std::endl
       << "  Fully contained count: " << fully_contained("./res/day4_assignment_list.txt") << std::endl
       << "  Overlapping count: " << overlapping("./res/day4_assignment_list.txt") << std::endl
-      << "  Bonus: " << bonus::overlapping("./res/day4_assignment_list.txt") << std::endl;
+      << "  Bonus: " << bonus::overlapping("./res/day4_assignment_list.txt") << std::endl
+      << "Day 5: Supply Stacks" << std::endl
+      << "  CrateMover9000: " << crates_on_top_cratemover9000("./res/day5_crane_plan.txt") << std::endl
+      << "  CrateMover9001: " << crates_on_top_cratemover9001("./res/day5_crane_plan.txt") << std::endl;
 
    return 0;
 }
