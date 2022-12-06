@@ -10,10 +10,16 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RESOURCE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/res)
 
 # Copy resources
-file(GLOB RESOURCE_INPUT_FILES "./res/*")
-file(COPY ${RESOURCE_INPUT_FILES} DESTINATION ${CMAKE_RESOURCE_OUTPUT_DIRECTORY})
+file(GLOB RESOURCE_INPUT_FILES "adventofcode2022/input/*")
+file(COPY ${RESOURCE_INPUT_FILES} DESTINATION ${CMAKE_RESOURCE_OUTPUT_DIRECTORY}/adventofcode2022 )
+file(GLOB RESOURCE_INPUT_FILES "adventofcode2021/input/*")
+file(COPY ${RESOURCE_INPUT_FILES} DESTINATION ${CMAKE_RESOURCE_OUTPUT_DIRECTORY}/adventofcode2021 )
 
 # additional include directories
 include_directories(3rdparty/mzlib/include)
 
-add_executable (adventofcode2022 main.cpp)
+add_executable (adventofcode2022
+   main.cpp
+   adventofcode2021/run.cpp
+   adventofcode2022/run.cpp
+   )

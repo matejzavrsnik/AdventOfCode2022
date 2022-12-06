@@ -5,13 +5,17 @@
 #include <string>
 #include <queue>
 
-long elf_with_most_calories(std::string input_file)
+namespace adventofcode2022::day1
 {
-   const auto food_calories = mzlib::read_file_lines (input_file);
+
+long
+part1 (std::string input_file)
+{
+   const auto food_calories = mzlib::read_file_lines(input_file);
 
    long max_calories = 0, tally_calories = 0;
 
-   for(auto food_calorie : food_calories)
+   for (auto food_calorie: food_calories)
    {
       if (food_calorie.empty())
       {
@@ -26,14 +30,15 @@ long elf_with_most_calories(std::string input_file)
    return max_calories;
 }
 
-long top_three_elves_calories(std::string input_file)
+long
+part2 (std::string input_file)
 {
-   const auto food_calories = mzlib::read_file_lines (input_file);
+   const auto food_calories = mzlib::read_file_lines(input_file);
 
    long tally_calories = 0;
    std::priority_queue<long> top;
 
-   for(auto food_calorie : food_calories)
+   for (auto food_calorie: food_calories)
    {
       if (food_calorie.empty())
       {
@@ -47,9 +52,14 @@ long top_three_elves_calories(std::string input_file)
    }
 
    long top_three = 0;
-   top_three += top.top(); top.pop();
-   top_three += top.top(); top.pop();
-   top_three += top.top(); top.pop();
+   top_three += top.top();
+   top.pop();
+   top_three += top.top();
+   top.pop();
+   top_three += top.top();
+   top.pop();
 
    return top_three;
+}
+
 }
