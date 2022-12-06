@@ -16,7 +16,9 @@ file(GLOB RESOURCE_INPUT_FILES "adventofcode2021/input/*")
 file(COPY ${RESOURCE_INPUT_FILES} DESTINATION ${CMAKE_RESOURCE_OUTPUT_DIRECTORY}/adventofcode2021 )
 
 # additional include directories
-include_directories(3rdparty/mzlib/include)
+include_directories(
+   3rdparty/mzlib/include
+)
 
 add_executable (adventofcode2022
    main.cpp
