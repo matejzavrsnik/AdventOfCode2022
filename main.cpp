@@ -3,6 +3,7 @@
 #include "puzzles/day3.h"
 #include "puzzles/day4.h"
 #include "puzzles/day5.h"
+#include "puzzles/day6.h"
 
 #include <iostream>
 
@@ -31,7 +32,10 @@ main ()
       << "  Bonus: " << bonus::overlapping("./res/day4_assignment_list.txt") << std::endl
       << "Day 5: Supply Stacks" << std::endl
       << "  CrateMover9000: " << crates_on_top_cratemover9000("./res/day5_crane_plan.txt") << std::endl
-      << "  CrateMover9001: " << crates_on_top_cratemover9001("./res/day5_crane_plan.txt") << std::endl;
+      << "  CrateMover9001: " << crates_on_top_cratemover9001("./res/day5_crane_plan.txt") << std::endl
+      << "Day 6: Tuning Trouble" << std::endl
+      << "  Window sized 4: " << start_packet_marker("./res/day6_signal_recording.txt") << std::endl
+      << "  Window sized 14: " << start_message_marker("./res/day6_signal_recording.txt") << std::endl;
 
    return 0;
 }
