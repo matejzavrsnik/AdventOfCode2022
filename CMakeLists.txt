@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.24)
 set(CMAKE_VERBOSE_MAKEFILE ON)
-project (adventofcode2022)
+project (recreational)
 set (CMAKE_CXX_STANDARD 23)
 
 
@@ -45,12 +45,12 @@ file(GLOB TEST_FILES
    adventofcode2022/tests/*
    )
 
-add_executable (adventofcode2022
+add_executable (recreational
    main.cpp
    ${TEST_FILES}
    )
 
 # Link with libraries
-target_link_libraries(adventofcode2022
+target_link_libraries(recreational
    CONAN_PKG::gtest # defined in root CMakeLists.txt
 )
