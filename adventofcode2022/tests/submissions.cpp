@@ -116,6 +116,11 @@ TEST(adventofcode2022, day8_part1)
    ASSERT_EQ(0, day8::part1("./res/adventofcode2022/day8.txt"));
 }
 
+TEST(adventofcode2022, day8_part2)
+{
+   ASSERT_EQ(0, day8::part2("./res/adventofcode2022/day8.txt"));
+}
+
 /*
  *       TEMPLATE
  */
