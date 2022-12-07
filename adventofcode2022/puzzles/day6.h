@@ -7,7 +7,7 @@ namespace adventofcode2022::day6
 {
 
 // part 1 solution
-long
+inline long
 part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file)[0];
@@ -28,7 +28,7 @@ part1 (std::string input_file)
 }
 
 // part 2 solution
-long
+inline long
 part2 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file)[0];
@@ -63,7 +63,7 @@ remove_just_one (
       window.erase(found);
 }
 
-bool
+inline bool
 is_marker (const std::multiset<char>& window)
 {
    return std::adjacent_find(
@@ -82,7 +82,7 @@ is_marker (const std::multiset<char>& window)
 // Price before: O(m) * O(nlogn) to insert all window chars + m instantiations of set.
 // So for larger windows this version should be faster unless searching is way slower than inserting, but I don't see
 // why it would be since to insert into a set it needs to search first.
-long
+inline long
 part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file)[0];

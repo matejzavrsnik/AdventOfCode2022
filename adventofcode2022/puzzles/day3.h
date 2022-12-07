@@ -10,7 +10,7 @@
 namespace adventofcode2022::day3
 {
 
-long
+inline long
 prioritise (char item)
 {
    // Lowercase item types a through z have priorities 1 through 26.
@@ -23,7 +23,7 @@ prioritise (char item)
 }
 
 // my first attempt that worked; see below for refactor
-long
+inline long
 part1 (std::string input_file)
 {
    auto rucksacks_content = mzlib::read_file_lines(input_file);
@@ -55,7 +55,7 @@ part1 (std::string input_file)
 }
 
 // my first attempt
-long
+inline long
 part2 (std::string input_file)
 {
    auto rucksacks_content = mzlib::read_file_lines(input_file);
@@ -93,7 +93,7 @@ namespace bonus
 {
 
 // refactored version
-long
+inline long
 part2 (std::string input_file)
 {
    auto rucksacks_content = mzlib::read_file_lines(input_file);
@@ -130,7 +130,7 @@ part2 (std::string input_file)
 }
 
 // not sure why it didn't occur to me earlier that this is an operation over sets
-long
+inline long
 part1 (std::string input_file)
 {
    auto rucksacks_content = mzlib::read_file_lines(input_file);

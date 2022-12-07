@@ -1,10 +1,11 @@
-#include "adventofcode2021/run.h"
-#include "adventofcode2022/run.h"
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 int
-main ()
+main (int argc, char **argv)
 {
-   adventofcode2021::run();
-   adventofcode2022::run();
-   return 0;
+   ::testing::InitGoogleTest(&argc, argv);
+   ::testing::InitGoogleMock(&argc, argv);
+
+   return RUN_ALL_TESTS();
 }

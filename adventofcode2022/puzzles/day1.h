@@ -8,7 +8,7 @@
 namespace adventofcode2022::day1
 {
 
-long
+inline long
 part1 (std::string input_file)
 {
    const auto food_calories = mzlib::read_file_lines(input_file);
@@ -30,7 +30,7 @@ part1 (std::string input_file)
    return max_calories;
 }
 
-long
+inline long
 part2 (std::string input_file)
 {
    const auto food_calories = mzlib::read_file_lines(input_file);

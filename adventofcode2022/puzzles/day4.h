@@ -36,7 +36,7 @@ bool
 is_overlapping (assignment_pairs assignments);
 
 // part 1 solution
-long
+inline long
 part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
@@ -54,7 +54,7 @@ part1 (std::string input_file)
 }
 
 // part 2 solution
-long
+inline long
 part2 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
@@ -75,7 +75,7 @@ namespace bonus
 {
 
 // try ranges
-long
+inline long
 part2 (std::string input_file)
 {
    return std::ranges::distance(
@@ -86,7 +86,7 @@ part2 (std::string input_file)
 }
 
 // convert the line in file into pair of pairs. format: 41-42,40-40
-assignment_pairs
+inline assignment_pairs
 convert (std::string s)
 {
    auto elfs = mzlib::split(s, ",");
@@ -97,7 +97,7 @@ convert (std::string s)
       {std::stoi(assignment2[0].data()), std::stoi(assignment2[1].data())}};
 }
 
-bool
+inline bool
 one_inside_other (
    std::pair<int, int> one,
    std::pair<int, int> other
@@ -106,14 +106,14 @@ one_inside_other (
    return one.first <= other.first && one.second >= other.second;
 }
 
-bool
+inline bool
 is_fully_contained (assignment_pairs assignments)
 {
    return one_inside_other(assignments.first, assignments.second)
       || one_inside_other(assignments.second, assignments.first);
 }
 
-bool
+inline bool
 one_overlaps_other (
    std::pair<int, int> one,
    std::pair<int, int> other
@@ -122,7 +122,7 @@ one_overlaps_other (
    return one.second >= other.first && one.first <= other.second;
 }
 
-bool
+inline bool
 is_overlapping (assignment_pairs assignments)
 {
    return one_overlaps_other(assignments.first, assignments.second)

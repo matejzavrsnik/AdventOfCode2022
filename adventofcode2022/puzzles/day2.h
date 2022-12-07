@@ -13,7 +13,7 @@ namespace adventofcode2022::day2
 // A, X - rock (1)
 // B, Y - paper (2)
 // C, Z - scissors (3)
-long
+inline long
 part1 (std::string input_file)
 {
    auto strategy_guide = mzlib::read_file_lines(input_file);
@@ -53,7 +53,7 @@ part1 (std::string input_file)
 // A, rock (1)      X - lose
 // B, paper (2)     Y - draw
 // C, scissors (3)  Z - win
-long
+inline long
 part2 (std::string input_file)
 {
    auto strategy_guide = mzlib::read_file_lines(input_file);
@@ -97,7 +97,7 @@ namespace bonus
 {
 
 // trying to make this a one-liner at the expense of everything else. For the bonus.
-long
+inline long
 part2 (std::string input_file)
 {
    auto strategy_guide = mzlib::read_file_lines(input_file);
@@ -120,7 +120,7 @@ part2 (std::string input_file)
 
 // A version that uses emojis instead of letters :)
 // I can afford to do that because my original code didn't imply relationships between symbols.
-long
+inline long
 part2v2 (std::string input_file)
 {
    auto strategy_guide = mzlib::read_file_lines(input_file);

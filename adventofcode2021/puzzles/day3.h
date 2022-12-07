@@ -11,7 +11,7 @@ std::string calc_g_rate (std::vector<std::string> v);
 std::string calc_e_rate (std::vector<std::string> v);
 int bin_string_to_int (std::string s);
 
-long
+inline long
 part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
@@ -24,7 +24,7 @@ part1 (std::string input_file)
    return i_g_rate*i_e_rate;
 }
 
-long
+inline long
 part2 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
@@ -32,7 +32,7 @@ part2 (std::string input_file)
    return 0;
 }
 
-std::vector<int>
+inline std::vector<int>
 sum_bits (std::vector<std::string>& v)
 {
    std::vector<int> count;
@@ -46,7 +46,7 @@ sum_bits (std::vector<std::string>& v)
    return count;
 }
 
-std::string
+inline std::string
 press_to_binary (
    int size,
    const std::vector<int>& count,
@@ -66,7 +66,7 @@ press_to_binary (
    return rate;
 }
 
-std::string
+inline std::string
 calc_g_rate (std::vector<std::string> v)
 {
    std::vector<int> count = sum_bits(v);
@@ -76,7 +76,7 @@ calc_g_rate (std::vector<std::string> v)
    return rate;
 }
 
-std::string
+inline std::string
 calc_e_rate (std::vector<std::string> v)
 {
    std::vector<int> count = sum_bits(v);
@@ -86,7 +86,7 @@ calc_e_rate (std::vector<std::string> v)
    return rate;
 }
 
-int
+inline int
 bin_string_to_int (std::string s)
 {
    int result = 0;
@@ -100,7 +100,7 @@ bin_string_to_int (std::string s)
 namespace bonus
 {
 
-long
+inline long
 part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file)[0];
@@ -108,7 +108,7 @@ part1 (std::string input_file)
    return 0;
 }
 
-long
+inline long
 part2 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file)[0];

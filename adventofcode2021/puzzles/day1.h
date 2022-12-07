@@ -8,7 +8,7 @@
 namespace adventofcode2021::day1
 {
 
-long
+inline long
 part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
@@ -26,7 +26,7 @@ part1 (std::string input_file)
    return count;
 }
 
-long
+inline long
 part2 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
@@ -54,7 +54,7 @@ part2 (std::string input_file)
 namespace bonus
 {
 
-long
+inline long
 part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file)[0];
@@ -62,7 +62,7 @@ part1 (std::string input_file)
    return 0;
 }
 
-long
+inline long
 part2 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file)[0];

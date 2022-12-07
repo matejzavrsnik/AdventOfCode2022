@@ -38,7 +38,7 @@ std::string
 get_top_crates (std::vector<std::vector<char>> crate_stacks);
 
 // part 1 solution
-std::string
+inline std::string
 part1 (std::string input_file)
 {
    const auto input = mzlib::read_file_lines(input_file);
@@ -54,7 +54,7 @@ part1 (std::string input_file)
 }
 
 // part 2 solution
-std::string
+inline std::string
 part2 (std::string input_file)
 {
    const auto input = mzlib::read_file_lines(input_file);
@@ -69,7 +69,7 @@ part2 (std::string input_file)
    return top_crates;
 }
 
-std::vector<std::vector<char>>
+inline std::vector<std::vector<char>>
 read_crate_stacks (const std::vector<std::string>& input)
 {
    std::vector<std::vector<char>> crate_stacks;
@@ -92,7 +92,7 @@ read_crate_stacks (const std::vector<std::string>& input)
    return crate_stacks;
 }
 
-std::vector<step>
+inline std::vector<step>
 read_steps (const std::vector<std::string> input)
 {
    std::vector<step> steps;
@@ -116,7 +116,7 @@ read_steps (const std::vector<std::string> input)
    return steps;
 }
 
-void
+inline void
 use_cratemover9000 (
    const step one_step,
    std::vector<std::vector<char>>& crate_stacks
@@ -133,7 +133,7 @@ use_cratemover9000 (
    }
 }
 
-void
+inline void
 use_cratemover9001 (
    const step one_step,
    std::vector<std::vector<char>>& crate_stacks
@@ -149,7 +149,7 @@ use_cratemover9001 (
       from_stack.pop_back();
 }
 
-std::string
+inline std::string
 get_top_crates (std::vector<std::vector<char>> crate_stacks)
 {
    std::string s;
