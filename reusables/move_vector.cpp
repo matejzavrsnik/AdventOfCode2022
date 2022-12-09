@@ -21,3 +21,5 @@ TEST(reusables, move_vector)
    ASSERT_EQ(2, move(pos, mzlib::direction::s)[0]);
    ASSERT_EQ(1, move(pos, mzlib::direction::s)[1]);
 }
+
+

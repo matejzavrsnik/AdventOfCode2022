@@ -41,7 +41,7 @@ include_directories(
    )
 
 file(GLOB TEST_FILES
-   reusables/*.cpp
+   reusables/*
    adventofcode2021/tests/*
    adventofcode2022/tests/*
    )
