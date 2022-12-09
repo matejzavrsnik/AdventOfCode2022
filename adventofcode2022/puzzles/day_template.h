@@ -34,11 +34,12 @@ part2 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
 
+   /*
    std::vector<std::pair<char, int>> TARGET;
    mzlib::copy_modify(input, TARGET, [](auto e){
-      auto s = mzlib::split(e, " ");
-      return std::make_pair(s[0][0], std::stoi(s[1].data()));
+      return CONVERSION;
    });
+    */
 
    return -1;
 }

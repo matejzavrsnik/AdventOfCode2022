@@ -1,4 +1,4 @@
-#include "dump.h"
+#include "grabbag.h"
 
 #include "nature/vector.h"
 
@@ -10,32 +10,16 @@
 TEST(reusables, dump_move_cartesian)
 {
    mzlib::coordinates2d pos{1,1};
+   ASSERT_EQ(mzlib::coordinates2d({2,1}), move_cartesian(pos, mzlib::direction::e));
+   ASSERT_EQ(mzlib::coordinates2d({0,1}), move_cartesian(pos, mzlib::direction::w));
+   ASSERT_EQ(mzlib::coordinates2d({1,2}), move_cartesian(pos, mzlib::direction::n));
+   ASSERT_EQ(mzlib::coordinates2d({1,0}), move_cartesian(pos, mzlib::direction::s));
+   ASSERT_EQ(mzlib::coordinates2d({2,2}), move_cartesian(pos, mzlib::direction::ne));
+   ASSERT_EQ(mzlib::coordinates2d({0,2}), move_cartesian(pos, mzlib::direction::nw));
+   ASSERT_EQ(mzlib::coordinates2d({2,0}), move_cartesian(pos, mzlib::direction::se));
+   ASSERT_EQ(mzlib::coordinates2d({0,0}), move_cartesian(pos, mzlib::direction::sw));
 
-   ASSERT_EQ(2, move_cartesian(pos, mzlib::direction::e)[0]);
-   ASSERT_EQ(1, move_cartesian(pos, mzlib::direction::e)[1]);
-
-   ASSERT_EQ(0, move_cartesian(pos, mzlib::direction::w)[0]);
-   ASSERT_EQ(1, move_cartesian(pos, mzlib::direction::w)[1]);
-
-   ASSERT_EQ(1, move_cartesian(pos, mzlib::direction::n)[0]);
-   ASSERT_EQ(2, move_cartesian(pos, mzlib::direction::n)[1]);
-
-   ASSERT_EQ(1, move_cartesian(pos, mzlib::direction::s)[0]);
-   ASSERT_EQ(0, move_cartesian(pos, mzlib::direction::s)[1]);
-
-
-   ASSERT_EQ(2, move_cartesian(pos, mzlib::direction::ne)[0]);
-   ASSERT_EQ(2, move_cartesian(pos, mzlib::direction::ne)[1]);
-
-   ASSERT_EQ(0, move_cartesian(pos, mzlib::direction::nw)[0]);
-   ASSERT_EQ(2, move_cartesian(pos, mzlib::direction::nw)[1]);
-
-   ASSERT_EQ(2, move_cartesian(pos, mzlib::direction::se)[0]);
-   ASSERT_EQ(0, move_cartesian(pos, mzlib::direction::se)[1]);
-
-   ASSERT_EQ(0, move_cartesian(pos, mzlib::direction::sw)[0]);
-   ASSERT_EQ(0, move_cartesian(pos, mzlib::direction::sw)[1]);
-
+   ASSERT_EQ(pos, move_cartesian(pos, mzlib::direction::centre));
 }
 
 TEST(adventofcode2022_methods, day9_get_direction_cartesian)
@@ -68,10 +52,24 @@ TEST(adventofcode2022_methods, day9_are_touching)
    ASSERT_TRUE(are_touching(pos, {2,1}));
    ASSERT_TRUE(are_touching(pos, {2,2}));
 
-   ASSERT_FALSE(are_touching(pos, {3,1}));
-   ASSERT_FALSE(are_touching(pos, {3,2}));
-   ASSERT_FALSE(are_touching(pos, {1,3}));
    ASSERT_FALSE(are_touching(pos, {-1,3}));
+   ASSERT_FALSE(are_touching(pos, {0,3}));
+   ASSERT_FALSE(are_touching(pos, {1,3}));
+   ASSERT_FALSE(are_touching(pos, {2,3}));
+   ASSERT_FALSE(are_touching(pos, {3,3}));
+
+   ASSERT_FALSE(are_touching(pos, {-1,2}));
+   ASSERT_FALSE(are_touching(pos, {3,2}));
+
+   ASSERT_FALSE(are_touching(pos, {-1,1}));
+   ASSERT_FALSE(are_touching(pos, {3,1}));
+
+   ASSERT_FALSE(are_touching(pos, {-1,0}));
+   ASSERT_FALSE(are_touching(pos, {3,0}));
+
+   ASSERT_FALSE(are_touching(pos, {-1,-1}));
+   ASSERT_FALSE(are_touching(pos, {0,-1}));
    ASSERT_FALSE(are_touching(pos, {1,-1}));
    ASSERT_FALSE(are_touching(pos, {2,-1}));
+   ASSERT_FALSE(are_touching(pos, {3,-1}));
 }

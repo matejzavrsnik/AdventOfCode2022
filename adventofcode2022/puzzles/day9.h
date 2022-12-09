@@ -6,7 +6,7 @@
 #include "iterators/copy_modify.h"
 #include "nature/vector.h"
 #include "abstract/direction.h"
-#include "../../reusables/dump.h"
+#include "../../reusables/grabbag.h"
 
 namespace adventofcode2022::day9
 {
@@ -18,7 +18,7 @@ namespace adventofcode2022::day9
 mzlib::direction
 get_direction(char dir);
 
-std::set<std::pair<int, int>>
+std::set<mzlib::coordinates2d>
 get_visited (std::vector<std::pair<char, int>>& directions, int rope_length);
 
 /*
@@ -36,7 +36,7 @@ part1 (std::string input_file)
       return std::make_pair(s[0][0], std::stoi(s[1].data()));
    });
 
-   std::set<std::pair<int, int>> visited = get_visited(directions, 2);
+   std::set<mzlib::coordinates2d> visited = get_visited(directions, 2);
 
    return visited.size();
 }
@@ -52,7 +52,7 @@ part2 (std::string input_file)
       return std::make_pair(s[0][0], std::stoi(s[1].data()));
    });
 
-   std::set<std::pair<int, int>> visited = get_visited(directions, 10);
+   std::set<mzlib::coordinates2d> visited = get_visited(directions, 10);
 
    return visited.size();
 }
@@ -73,12 +73,12 @@ inline mzlib::direction get_direction(char dir)
    std::terminate();
 }
 
-inline std::set<std::pair<int, int>>
+inline std::set<mzlib::coordinates2d>
 get_visited (std::vector<std::pair<char, int>>& directions, int rope_length)
 {
-   std::set<std::pair<int, int>> visited;
+   std::set<mzlib::coordinates2d> visited;
    std::vector<mzlib::coordinates2d> knots(rope_length, {0,0});
-   visited.insert({knots.back()[0], knots.back()[1]});
+   visited.insert(knots.back());
    for(auto& [c_dir, steps] : directions)
    {
       auto dir_h = get_direction(c_dir);
@@ -93,7 +93,7 @@ get_visited (std::vector<std::pair<char, int>>& directions, int rope_length)
                knots[i_knot+1] = move_cartesian(knots[i_knot+1], dir_t);
             }
          }
-         visited.insert({knots.back()[0], knots.back()[1]});
+         visited.insert(knots.back());
       }
    }
    return visited;
