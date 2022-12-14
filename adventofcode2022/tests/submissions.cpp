@@ -9,6 +9,9 @@
 #include "../puzzles/day7.h"
 #include "../puzzles/day8.h"
 #include "../puzzles/day9.h"
+#include "../puzzles/day10.h"
+#include "../puzzles/day11.h"
+#include "../puzzles/day12.h"
 
 using namespace adventofcode2022;
 
@@ -130,6 +133,43 @@ TEST(adventofcode2022, day9_part1)
 TEST(adventofcode2022, day9_part2)
 {
    ASSERT_EQ(2691, day9::part2("./res/adventofcode2022/day9.txt"));
+}
+
+TEST(adventofcode2022, day10_part1)
+{
+   ASSERT_EQ(15120, day10::part1("./res/adventofcode2022/day10.txt"));
+}
+
+TEST(adventofcode2022, day10_part2)
+{
+   auto screen = day10::part2("./res/adventofcode2022/day10.txt");
+   ASSERT_EQ(6, screen.size());
+   ASSERT_EQ("###  #  # ###    ## ###  ###  #     ##  ", screen[0]);
+   ASSERT_EQ("#  # # #  #  #    # #  # #  # #    #  # ", screen[1]);
+   ASSERT_EQ("#  # ##   #  #    # ###  #  # #    #  # ", screen[2]);
+   ASSERT_EQ("###  # #  ###     # #  # ###  #    #### ", screen[3]);
+   ASSERT_EQ("# #  # #  #    #  # #  # #    #    #  # ", screen[4]);
+   ASSERT_EQ("#  # #  # #     ##  ###  #    #### #  # ", screen[5]);
+}
+
+TEST(adventofcode2022, day11_part1)
+{
+   ASSERT_EQ(69918, day11::part1("./res/adventofcode2022/day11.txt"));
+}
+
+TEST(adventofcode2022, day11_part2)
+{
+   ASSERT_EQ(0, day11::part2("./res/adventofcode2022/day11.txt"));
+}
+
+TEST(adventofcode2022, day12_part1)
+{
+   ASSERT_EQ(472, day12::part1("./res/adventofcode2022/day12.txt"));
+}
+
+TEST(adventofcode2022, day12_part2)
+{
+   ASSERT_EQ(465, day12::part2("./res/adventofcode2022/day12.txt"));
 }
 
 /*
