@@ -1,18 +1,24 @@
 #pragma once
 
 #include <abstract/direction.h>
-#include "nature/vector.h"
-#include "nature/screen_rectangle.h"
-#include "laws/screen_rectangles.h"
-
+#include <nature/vector.h>
+#include <nature/screen_rectangle.h>
+#include <laws/screen_rectangles.h>
 #include <lang/concepts.h>
+
 #include <algorithm>
 #include <iterator>
 #include <map>
+#include <set>
 #include <iomanip>
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
+#include <utility>
+#include <numeric>
+#include <ranges>
+#include <deque>
+
 
 template<class VectorT>
 VectorT move_cartesian(VectorT c, const mzlib::direction d)
@@ -179,4 +185,36 @@ inline std::vector<cell> filter_are_in(
       if(container.contains(c))
          filtered.push_back(c);
    return filtered;
+}
+
+inline
+long manhattan_distance(const mzlib::coordinates2d& a, const mzlib::coordinates2d& b)
+{
+   return abs(a[0]-b[0])+abs(a[1]-b[1]);
+}
+
+inline std::pair<int, int> get_interval_extremes(std::vector<std::pair<int, int>> intervals)
+{
+   auto min = std::min_element(
+      intervals.begin(), intervals.end(),
+      [](auto a, auto b){
+         return a.first < b.first;
+      });
+   auto max = std::max_element(
+      intervals.begin(), intervals.end(),
+      [](auto a, auto b){
+         return a.second < b.second;
+      });
+   return {min->first, max->second};
+}
+
+template<class T>
+bool inside_any(
+   const std::vector<std::pair<T, T>>& intervals,
+   const T& value)
+{
+   for (const auto& c: intervals)
+      if (value >= c.first && value <= c.second)
+         return true;
+   return false;
 }

@@ -12,6 +12,7 @@
 #include "../puzzles/day10.h"
 #include "../puzzles/day11.h"
 #include "../puzzles/day12.h"
+#include "../puzzles/day15.h"
 
 using namespace adventofcode2022;
 
@@ -170,6 +171,16 @@ TEST(adventofcode2022, day12_part1)
 TEST(adventofcode2022, day12_part2)
 {
    ASSERT_EQ(465, day12::part2("./res/adventofcode2022/day12.txt"));
+}
+
+TEST(adventofcode2022, day15_part1)
+{
+   ASSERT_EQ(4725496, day15::part1("./res/adventofcode2022/day15.txt"));
+}
+
+TEST(adventofcode2022, day15_part2)
+{
+   ASSERT_EQ(12051287042458, day15::part2("./res/adventofcode2022/day15.txt"));
 }
 
 /*

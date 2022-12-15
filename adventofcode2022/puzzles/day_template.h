@@ -3,16 +3,15 @@
 #include "filesystem/read_write_file.h"
 #include "string/split.h"
 #include "iterators/copy_modify.h"
-#include <numeric>
-#include <ranges>
-#include <algorithm>
-#include <deque>
+#include "../../reusables/grabbag.h"
+
+using namespace std;
 
 namespace adventofcode2022::dayX
 {
 
 /*
- *                 METHOD DECLARATIONS
+ *                 METHODS
  */
 
 /*
@@ -49,18 +48,3 @@ part2 (std::string input_file)
    return -1;
 }
 
-/*
- *                 METHOD DEFINITIONS
- */
-
-
-/*
- *                 EXTRA
- */
-
-namespace bonus
-{
-
-}
-
-}
