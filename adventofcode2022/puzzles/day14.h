@@ -7,7 +7,7 @@
 
 using namespace std;
 
-namespace adventofcode2022::dayX
+namespace adventofcode2022::day14
 {
 
 /*
@@ -23,12 +23,15 @@ part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
 
-   /*
-   TYPE converted;
+   vector<vector<mzlib::coordinates2d>> converted;
    mzlib::copy_modify(input, converted, [](const auto& e){
-      return CONVERSION;
+      auto numbers = mzlib::split(e, " ->,");
+      vector<mzlib::coordinates2d> v;
+      for(int n=0; n<numbers.size(); n+=2)
+         v.push_back({stoi(numbers[n].data()), stoi(numbers[n+1].data())});
+      return v;
    });
-    */
+
 
    return -1;
 }

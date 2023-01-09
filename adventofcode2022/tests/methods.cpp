@@ -5,6 +5,7 @@
 #include "../puzzles/day9.h"
 #include "../puzzles/day10.h"
 #include "../puzzles/day11.h"
+#include "../puzzles/day17.h"
 
 using namespace adventofcode2022;
 
@@ -170,6 +171,49 @@ TEST(adventofcode2022_methods, day11_sample_input_part2)
    int monkey_business = monkeys[0].inspections * monkeys[1].inspections;
 
    ASSERT_EQ(2713310158, monkey_business);
+}
+
+TEST(adventofcode2022_methods, iterate)
+{
+   mzlib::coordinates2d c{5,7};
+
+   ASSERT_TRUE(day17::iterate(c, {5,7}, {8,9}));
+   ASSERT_EQ(mzlib::coordinates2d({6,7}), c);
+
+   ASSERT_TRUE(day17::iterate(c, {5,7}, {8,9}));
+   ASSERT_EQ(mzlib::coordinates2d({7,7}), c);
+
+   ASSERT_TRUE(day17::iterate(c, {5,7}, {8,9}));
+   ASSERT_EQ(mzlib::coordinates2d({5,8}), c);
+
+   ASSERT_TRUE(day17::iterate(c, {5,7}, {8,9}));
+   ASSERT_EQ(mzlib::coordinates2d({6,8}), c);
+
+   ASSERT_TRUE(day17::iterate(c, {5,7}, {8,9}));
+   ASSERT_EQ(mzlib::coordinates2d({7,8}), c);
+
+   ASSERT_FALSE(day17::iterate(c, {5,7}, {8,9}));
+   ASSERT_EQ(mzlib::coordinates2d({7,8}), c);
+}
+
+TEST(adventofcode2022_methods, add_drawing)
+{
+
+   auto canvas = day17::mnv::construct(40, 7, 0);
+
+   const mzlib::nested_vector::type<int> drawing = {
+      {0,1,0},
+      {1,1,1},
+      {0,1,0},
+   };
+
+   day17::apply_drawing(canvas, drawing, {2,7});
+
+   ASSERT_EQ(std::vector<int>({0,0,0,0,0,0,0}), canvas[6]);
+   ASSERT_EQ(std::vector<int>({0,0,0,1,0,0,0}), canvas[7]);
+   ASSERT_EQ(std::vector<int>({0,0,1,1,1,0,0}), canvas[8]);
+   ASSERT_EQ(std::vector<int>({0,0,0,1,0,0,0}), canvas[9]);
+   ASSERT_EQ(std::vector<int>({0,0,0,0,0,0,0}), canvas[10]);
 }
 
 /*

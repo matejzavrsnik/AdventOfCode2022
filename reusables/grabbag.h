@@ -90,15 +90,14 @@ void print(const Container& c){
 }
 
 template<class Container>
-void print_field_nodelim(const Container& field, std::map<int,std::string> subst){
-   std::cout << std::setfill('.') << std::setw(2);
+void print_field(const Container& field, std::map<int,std::string> substitutions={}, int align=2){
    for (const auto& row : field)
    {
       for (const auto& el: row)
       {
-         if (subst.contains(el))
-            std::cout << std::setfill(' ') << std::setw(4) << subst[el];
-         else std::cout << std::setfill(' ') << std::setw(4) << el;
+         if (substitutions.contains(el))
+            std::cout << std::setfill(' ') << std::setw(align) << substitutions[el];
+         else std::cout << std::setfill(' ') << std::setw(align) << el;
       }
       std::cout << std::endl;
    }
