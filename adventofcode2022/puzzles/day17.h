@@ -6,6 +6,9 @@
 #include "tools/nested_vector.h"
 #include "iterators/circular_next.h"
 #include "../../reusables/grabbag.h"
+#include "../../reusables/move_screen.h"
+#include "../../reusables/move_if_not_blocked.h"
+#include "../../reusables/apply_drawing.h"
 
 using namespace std;
 
@@ -16,9 +19,7 @@ namespace adventofcode2022::day17
  *                 METHODS
  */
 
-using mnvt = mzlib::nested_vector::type<int>;
-namespace mnv = mzlib::nested_vector;
-using mc2d = mzlib::coordinates2d;
+
 
 const mnvt rock_m = {
    {1,1,1,1}
@@ -52,74 +53,10 @@ const vector rocks = {
    rock_d
 };
 
-// return: did it advance the coordinate? To be able to tell when to stop.
-inline bool iterate(mc2d& coordinate, const mc2d& from, const mc2d& to)
-{
-   if(coordinate[1] == to[1]-1 && coordinate[0] == to[0]-1)
-      return false;
-
-   if(++coordinate[0] >= to[0])
-   {
-      coordinate[0] = from[0];
-      ++coordinate[1];
-   }
-
-   return true;
-}
 
 
 
-inline bool is_in(
-   const mnvt& canvas,
-   const mnvt& drawing,
-   const mc2d& coor)
-{
-   return coor[0]>=0
-      && coor[1]>=0
-      && mnv::width(canvas) >= coor[0] + mnv::width(drawing)
-      && mnv::height(canvas) >= coor[1] + mnv::height(drawing);
-}
 
-enum class drawing_op
-{
-   add,
-   subtract
-};
-
-inline bool apply_drawing(
-   mnvt& canvas,
-   const mnvt& drawing,
-   const mc2d& coor,
-   const drawing_op operation = drawing_op::add
-   )
-{
-   // todo: if drawing too big, draw what fits and ignore the rest. currently I crash instead.
-   mc2d drawing_pixel{0,0};
-   const mc2d drawing_size = mnv::size(drawing);
-   do
-   {
-      auto canvas_pixel = drawing_pixel+coor;
-      const auto pixel_value = mnv::access(drawing, drawing_pixel);
-      if (operation == drawing_op::add)
-         mnv::access(canvas, canvas_pixel) += pixel_value;
-      else if (operation == drawing_op::subtract)
-         mnv::access(canvas, canvas_pixel) -= pixel_value;
-   }
-   while(iterate(drawing_pixel, {0,0}, drawing_size));
-
-   return true;
-}
-
-inline bool move_drawing(
-   mnvt& canvas,
-   const mnvt& drawing,
-   const mc2d& coor_from,
-   const mc2d& coor_to
-)
-{
-   return apply_drawing(canvas, drawing, coor_from, drawing_op::subtract)
-      && apply_drawing(canvas, drawing, coor_to, drawing_op::add);
-}
 
 inline mc2d coordinates_after_push(
    char jet,
@@ -141,37 +78,7 @@ inline mc2d coordinates_after_push(
 }
 
 
-inline bool anything_overlaps(const mnvt& chamber)
-{
-   for(const auto& row : chamber)
-      for(const auto& cell : row)
-         if(cell > 1)
-            return true;
-   return false;
-}
 
-// return: new coordinates of the stone
-inline mc2d move_if_not_blocked(
-   mnvt& chamber,
-   const mnvt& rock,
-   const mc2d& from_coor,
-   const mc2d& to_coor
-   )
-{
-   if (is_in(chamber, rock, to_coor))
-   {
-      move_drawing(chamber, rock, from_coor, to_coor);
-      // jet push can make it overlap with another stone
-      if (anything_overlaps(chamber))
-         // in that case move back
-         move_drawing(chamber, rock, to_coor, from_coor);
-      else
-         // if not, this is new coordinates
-         return to_coor;
-   }
-   // couldn't move
-   return from_coor;
-}
 
 inline int get_highest_rock(const mnvt& chamber)
 {

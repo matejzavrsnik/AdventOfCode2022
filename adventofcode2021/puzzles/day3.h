@@ -1,6 +1,8 @@
 #pragma once
 
 #include "filesystem/read_write_file.h"
+#include "../../reusables/grabbag.h"
+#include "../../reusables/binary_string_to_int.h"
 
 namespace adventofcode2021::day3
 {
@@ -9,7 +11,6 @@ std::string press_to_binary (int size, const std::vector<int>& count, char commo
 std::vector<int> sum_bits (std::vector<std::string>& v);
 std::string calc_g_rate (std::vector<std::string> v);
 std::string calc_e_rate (std::vector<std::string> v);
-int bin_string_to_int (std::string s);
 
 inline long
 part1 (std::string input_file)
@@ -18,8 +19,8 @@ part1 (std::string input_file)
 
    auto g_rate = calc_g_rate(input);
    auto e_rate = calc_e_rate(input);
-   auto i_g_rate = bin_string_to_int(g_rate);
-   auto i_e_rate = bin_string_to_int(e_rate);
+   auto i_g_rate = binary_string_to_int(g_rate);
+   auto i_e_rate = binary_string_to_int(e_rate);
 
    return i_g_rate*i_e_rate;
 }
@@ -84,17 +85,6 @@ calc_e_rate (std::vector<std::string> v)
    std::string rate = press_to_binary(v.size(), count, '0', '1', '1');
 
    return rate;
-}
-
-inline int
-bin_string_to_int (std::string s)
-{
-   int result = 0;
-   for(int bit_value = 1, i=s.size()-1; i>=0; --i, bit_value *= 2)
-      if (s[i] == '1')
-         result += bit_value;
-
-   return result;
 }
 
 namespace bonus

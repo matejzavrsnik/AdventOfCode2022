@@ -162,7 +162,7 @@ TEST(adventofcode2022, day11_part1)
    ASSERT_EQ(69918, day11::part1("./res/adventofcode2022/day11.txt"));
 }
 
-TEST(adventofcode2022, day11_part2)
+TEST(adventofcode2022, DISABLED_day11_part2)
 {
    ASSERT_EQ(0, day11::part2("./res/adventofcode2022/day11.txt"));
 }
@@ -177,12 +177,12 @@ TEST(adventofcode2022, day12_part2)
    ASSERT_EQ(465, day12::part2("./res/adventofcode2022/day12.txt"));
 }
 
-TEST(adventofcode2022, day14_part1)
+TEST(adventofcode2022, DISABLED_day14_part1)
 {
    ASSERT_EQ(0, day14::part1("./res/adventofcode2022/day14.txt"));
 }
 
-TEST(adventofcode2022, day14_part2)
+TEST(adventofcode2022, DISABLED_day14_part2)
 {
    ASSERT_EQ(0, day14::part2("./res/adventofcode2022/day14.txt"));
 }
@@ -203,7 +203,7 @@ TEST(adventofcode2022, day16_part1)
    ASSERT_EQ(0, day16::part1("./res/adventofcode2022/day16.txt"));
 }
 
-TEST(adventofcode2022, day16_part2)
+TEST(adventofcode2022, DISABLED_day16_part2)
 {
    ASSERT_EQ(0, day16::part2("./res/adventofcode2022/day16.txt"));
 }

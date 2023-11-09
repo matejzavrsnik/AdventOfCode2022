@@ -4,6 +4,9 @@
 #include "string/split.h"
 #include "iterators/copy_modify.h"
 #include "../../reusables/grabbag.h"
+#include "../../reusables/value_within_any_interval.h"
+#include "../../reusables/get_interval_extremes.h"
+#include "../../reusables/manhattan_distance.h"
 #include <numeric>
 #include <ranges>
 #include <algorithm>
@@ -76,7 +79,7 @@ part1 (std::string input_file)
 
    int count = 0;
    for(int i=min; i<=max;++i)
-      if(inside_any(covered, i) && !beacons_on_this_row.contains(i))
+      if(value_within_any_interval(covered, i) && !beacons_on_this_row.contains(i))
          ++count;
 
    // incorrect guesses: 6'349'685 too high, 4'725'497 too high

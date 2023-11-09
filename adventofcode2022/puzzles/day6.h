@@ -1,7 +1,10 @@
 #pragma once
 
 #include "filesystem/read_write_file.h"
+#include "../../reusables/grabbag.h"
+#include "../../reusables/remove_just_one.h"
 #include <set>
+
 
 namespace adventofcode2022::day6
 {
@@ -51,17 +54,7 @@ part2 (std::string input_file)
 namespace bonus
 {
 
-template <class Type>
-void
-remove_just_one (
-   std::multiset<Type>& window,
-   const Type& element
-)
-{
-   const auto found = std::find(window.begin(), window.end(), element);
-   if (found != window.end())
-      window.erase(found);
-}
+
 
 inline bool
 is_marker (const std::multiset<char>& window)
@@ -78,7 +71,7 @@ is_marker (const std::multiset<char>& window)
 // multiset::erase erases all elements that are equal to argument and I just wanted one to be deleted to make it a
 // running window.
 // rewrote so that I now find first such element in set and then delete it through an iterator.
-// Price: O(m) to iterate signal * O(n+2*logn)) to search&insert&remove + 1 instantiation of set
+// Price: O(m) to move_to_next_pixel signal * O(n+2*logn)) to search&insert&remove + 1 instantiation of set
 // Price before: O(m) * O(nlogn) to insert all window chars + m instantiations of set.
 // So for larger windows this version should be faster unless searching is way slower than inserting, but I don't see
 // why it would be since to insert into a set it needs to search first.

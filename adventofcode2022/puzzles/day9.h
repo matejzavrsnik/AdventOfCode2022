@@ -7,6 +7,10 @@
 #include "nature/vector.h"
 #include "abstract/direction.h"
 #include "../../reusables/grabbag.h"
+#include "../../reusables/move_cartesian.h"
+#include "../../reusables/get_direction_cartesian.h"
+#include "../../reusables/are_touching.h"
+#include "../../reusables/translate_to_direction.h"
 
 namespace adventofcode2022::day9
 {
@@ -15,8 +19,6 @@ namespace adventofcode2022::day9
  *                 METHOD DECLARATIONS
  */
 
-mzlib::direction
-get_direction(char dir);
 
 std::set<mzlib::coordinates2d>
 get_visited (std::vector<std::pair<char, int>>& directions, int rope_length);
@@ -61,17 +63,7 @@ part2 (std::string input_file)
  *                 METHOD DEFINITIONS
  */
 
-inline mzlib::direction get_direction(char dir)
-{
-   switch(dir)
-   {
-   case 'L': return mzlib::direction::w; break;
-   case 'R': return mzlib::direction::e; break;
-   case 'U': return mzlib::direction::n; break;
-   case 'D': return mzlib::direction::s; break;
-   }
-   std::terminate();
-}
+
 
 inline std::set<mzlib::coordinates2d>
 get_visited (std::vector<std::pair<char, int>>& directions, int rope_length)
@@ -81,7 +73,7 @@ get_visited (std::vector<std::pair<char, int>>& directions, int rope_length)
    visited.insert(knots.back());
    for(auto& [c_dir, steps] : directions)
    {
-      auto dir_h = get_direction(c_dir);
+      auto dir_h = translate_to_direction(c_dir);
       for(int step=0; step<steps; ++step)
       {
          knots[0] = move_cartesian(knots[0], dir_h);
@@ -90,7 +82,7 @@ get_visited (std::vector<std::pair<char, int>>& directions, int rope_length)
             if (!are_touching(knots[i_knot], knots[i_knot+1]))
             {
                auto dir_t = get_direction_cartesian(knots[i_knot+1], knots[i_knot]);
-               knots[i_knot+1] = move_cartesian(knots[i_knot+1], dir_t);
+               knots[i_knot+1] = move_cartesian(knots[i_knot + 1], dir_t);
             }
          }
          visited.insert(knots.back());
