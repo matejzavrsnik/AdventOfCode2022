@@ -100,7 +100,7 @@ part1 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
 
-   auto chamber = mzlib::nested_vector::construct(1, 7, 0);
+   auto chamber = mzlib::grid::construct(1, 7, 0);
    auto jet_it = input[0].begin();
 
    auto rock_it = rocks.begin();
@@ -111,7 +111,7 @@ part1 (std::string input_file)
       auto needed_height = highest_rock+1+3+mnv::height(*rock_it);
       if(needed_height > mnv::height(chamber))
       {
-         mzlib::nested_vector::add_top(chamber, needed_height-mnv::height(chamber)-1, 0);
+         mzlib::grid::add_top(chamber, needed_height-mnv::height(chamber)-1, 0);
       }
 
       mc2d rock_coor{2, static_cast<long>(mnv::height(chamber)-highest_rock-3-mnv::height(*rock_it))};
@@ -165,7 +165,7 @@ part2 (std::string input_file)
 {
    auto input = mzlib::read_file_lines(input_file);
 
-   auto chamber = mzlib::nested_vector::construct(1, 7, 0);
+   auto chamber = mzlib::grid::construct(1, 7, 0);
    auto jet_it = input[0].begin();
 
    auto rock_it = rocks.begin();
@@ -181,7 +181,7 @@ part2 (std::string input_file)
       auto needed_height = highest_rock+1+3+mnv::height(*rock_it);
       if(needed_height > mnv::height(chamber))
       {
-         mzlib::nested_vector::add_top(chamber, needed_height-mnv::height(chamber)-1, 0);
+         mzlib::grid::add_top(chamber, needed_height-mnv::height(chamber)-1, 0);
       }
 
       mc2d rock_coor{2, static_cast<long>(mnv::height(chamber)-highest_rock-3-mnv::height(*rock_it))};

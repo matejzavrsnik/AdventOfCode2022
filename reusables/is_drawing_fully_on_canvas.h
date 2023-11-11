@@ -37,8 +37,8 @@ inline bool is_drawing_fully_on_canvas(
 {
    return coor[0]>=0
       && coor[1]>=0
-      && mzlib::nested_vector::width(canvas) >= coor[0] + mzlib::nested_vector::width(drawing)
-      && mzlib::nested_vector::height(canvas) >= coor[1] + mzlib::nested_vector::height(drawing);
+      && mzlib::grid::width(canvas) >= coor[0] + mzlib::grid::width(drawing)
+      && mzlib::grid::height(canvas) >= coor[1] + mzlib::grid::height(drawing);
 }
 
 #endif //RECREATIONAL_REUSABLES_GRABBAG_H_IS_DRAWING_FULLY_ON_CANVAS_H

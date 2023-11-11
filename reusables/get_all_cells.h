@@ -33,9 +33,9 @@
 inline std::vector<cell> get_all_cells(const std::vector<std::vector<int>>& field)
 {
    std::vector<cell> all;
-   for(int row = 0; row < field.size(); ++row)
-      for(int col = 0; col < field[0].size(); ++col)
-         all.push_back(cell{row,col});
+   for(int y = 0; y < field.size(); ++y)
+      for(int x = 0; x < field[0].size(); ++x)
+         all.push_back(cell{x,y});
    return all;
 }
 

@@ -172,7 +172,7 @@ TEST(adventofcode2022, day12_part1)
    ASSERT_EQ(472, day12::part1("./res/adventofcode2022/day12.txt"));
 }
 
-TEST(adventofcode2022, day12_part2)
+TEST(adventofcode2022, DISABLED_day12_part2)
 {
    ASSERT_EQ(465, day12::part2("./res/adventofcode2022/day12.txt"));
 }

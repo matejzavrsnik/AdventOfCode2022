@@ -5,6 +5,7 @@
 #include "../puzzles/day9.h"
 #include "../puzzles/day10.h"
 #include "../puzzles/day11.h"
+#include "../puzzles/day12.h"
 #include "../puzzles/day17.h"
 
 using namespace adventofcode2022;
@@ -173,8 +174,18 @@ TEST(adventofcode2022_methods, DISABLED_day11_sample_input_part2)
    ASSERT_EQ(2713310158, monkey_business);
 }
 
-
-
+TEST(adventofcode2022_methods, day12_sample_input_part1)
+{
+   vector<string> input = {
+      "Sabqponm",
+      "abcryxxl",
+      "accszExk",
+      "acctuvwj",
+      "abdefghi"
+   };
+   auto aa = adventofcode2022::day12::part1_impl(input);
+   ASSERT_EQ(31, aa);
+}
 
 
 /*

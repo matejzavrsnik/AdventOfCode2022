@@ -12,38 +12,77 @@
 #include "get_all_cells.h"
 
 inline
-std::vector<cell> get_allowed_destination_cells(
-   cell f,
+std::vector<cell> all_cells_allowed(
+   const std::vector<std::vector<int>>& field,
    const std::vector<cell>& n,
-   const std::vector<std::vector<int>>& field)
+   cell f
+   )
 {
    std::vector<cell> viable;
    for(auto nn : n)
       // here could be condition
       viable.push_back(nn);
    return viable;
+}
+
+
+
+
+
+
+
+
+
+inline
+bool destination_at_most_one_larger(
+   cell from,
+   cell to,
+   const std::vector<std::vector<int>>& field)
+{
+   return
+      mzlib::grid::access(field, to) - 1 <=
+      mzlib::grid::access(field, from);
 }
 
 inline
-std::vector<cell> get_allowed_source_cells(
-   cell f,
-   const std::vector<cell>& n,
-   const std::vector<std::vector<int>>& field)
+std::vector<cell> allowed_transition_to(
+   const std::vector<std::vector<int>>& field,
+   const std::vector<cell>& candidate_destinations,
+   cell from,
+   typeof(destination_at_most_one_larger) allowed_transition
+)
 {
-   std::vector<cell> viable;
-   for(auto nn : n)
-      // here could be condition
-      viable.push_back(nn);
-   return viable;
+   std::vector<cell> allowed;
+   for(auto to : candidate_destinations)
+      if (allowed_transition(from, to, field))
+         allowed.push_back(to);
+   return allowed;
 }
 
-template<class ViableNextStepInvokable>
+
+
+inline
+std::vector<cell>
+allowed_transition_from (
+   const std::vector<std::vector<int>>& field,
+   const std::vector<cell>& candidate_sources,
+   cell to,
+   typeof(destination_at_most_one_larger) allowed_transition
+)
+{
+   std::vector<cell> allowed;
+   for(auto from : candidate_sources)
+      if (allowed_transition(from, to, field))
+         allowed.push_back(from);
+   return allowed;
+}
+
+inline
 std::vector<std::vector<int>>
-shortest_path_bfs (
+single_source_shortest_path_bfs (
    std::vector<std::vector<int>>& field,
    const cell& coor_start,
-   ViableNextStepInvokable get_allowed_source_cells_fun = get_allowed_source_cells,
-   ViableNextStepInvokable get_allowed_destination_cells_fun = get_allowed_destination_cells
+   typeof(destination_at_most_one_larger) allowed_transition = destination_at_most_one_larger
 )
 {
    std::vector<std::vector<int>> steps = field;
@@ -57,29 +96,34 @@ shortest_path_bfs (
    undiscovered_cells.erase(coor_start);
 
    bool problem_shrank = false;
-   while(!undiscovered_cells.empty())
+   while(!undiscovered_cells.empty() || !frontier_cells.empty())
    {
       cell_set next_frontier;
       problem_shrank = false;
+
       for(auto frontier_cell : frontier_cells) {
          //cout << "frontier_cell: " << frontier_cell << endl;
          auto neighbours = get_neighbour_cells(field, frontier_cell);
 
          // from discovered_neigbours neighbours I want direction
          auto discovered_neigbours = cells_are_in_container_filter(neighbours, discovered_cells);
-         auto possible_source = get_allowed_source_cells_fun(frontier_cell, discovered_neigbours, field);
+
+         auto possible_source = allowed_transition_from(field, discovered_neigbours, frontier_cell, destination_at_most_one_larger);
+
          //cout << "discovered_neigbours: ";
          //print(discovered_neigbours);
          //cout << endl;
          if(possible_source.size()>0)
          {
             auto min_neighbour = *min(possible_source.begin(), possible_source.end());
-            auto min_steps = steps[min_neighbour[0]][min_neighbour[1]];
-            steps[frontier_cell[0]][frontier_cell[1]] = min_steps + 1;
+            auto min_steps = mzlib::grid::access(steps, min_neighbour); //steps[min_neighbour[0]][min_neighbour[1]];
+            mzlib::grid::access(steps, frontier_cell) = min_steps + 1;
+            //steps[frontier_cell[0]][frontier_cell[1]] = min_steps + 1;
          }
          else
          {
-            steps[frontier_cell[0]][frontier_cell[1]] = 0;
+            mzlib::grid::access(steps, frontier_cell) = 0;
+            //steps[frontier_cell[0]][frontier_cell[1]] = 0;
          }
 
          // frontier_cell is now discovered_neigbours
@@ -90,7 +134,7 @@ shortest_path_bfs (
          //cout << "undiscovered: ";
          //print(undiscovered);
          //cout << endl;
-         auto possible_destinations = get_allowed_destination_cells_fun(frontier_cell, undiscovered, field);
+         auto possible_destinations = allowed_transition_to(field, undiscovered, frontier_cell, destination_at_most_one_larger);
          //cout << "1 step: ";
          //print(possible_destinations);
          //cout << endl;
@@ -106,10 +150,10 @@ shortest_path_bfs (
 
       if (!problem_shrank)
          break; // none of the frontier cell_set were successful in progressing
-
+//print_field(steps, {{2147483647, "?"}}, 3);
       frontier_cells = next_frontier;
    }
-
+   //print_field(steps, {{2147483647, "?"}}, 3);
    return steps;
 }
 

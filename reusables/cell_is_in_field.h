@@ -35,8 +35,8 @@ inline bool cell_is_in_field(
    const cell& c
 )
 {
-   if(c[0] < 0 || c[0] > field.size()-1) return false;
-   if(c[1] < 0 || c[1] > field[0].size()-1) return false;
+   if(c[0] < 0 || c[0] > field[0].size()-1) return false;
+   if(c[1] < 0 || c[1] > field.size()-1) return false;
    return true;
 }
 

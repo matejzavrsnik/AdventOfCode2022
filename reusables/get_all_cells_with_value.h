@@ -33,10 +33,10 @@
 inline std::vector<cell> get_all_cells_with_value(const std::vector<std::vector<int>>& field, int value)
 {
    std::vector<cell> all_of_value;
-   for(int row = 0; row < field.size(); ++row)
-      for(int col = 0; col < field[0].size(); ++col)
-         if(field[row][col] == value)
-            all_of_value.push_back(cell{row,col});
+   for(int y = 0; y < field.size(); ++y)
+      for(int x = 0; x < field[0].size(); ++x)
+         if(mzlib::grid::access(field, cell{x,y}) == value)
+            all_of_value.push_back(cell{x,y});
    //cout << all_of_value.size() << endl;
    return all_of_value;
 }

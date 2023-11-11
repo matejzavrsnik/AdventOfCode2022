@@ -45,6 +45,19 @@ void print_field(const Container& field, std::map<int,std::string> substitutions
       }
       std::cout << std::endl;
    }
+   std::cout << std::endl;
+}
+
+template<class Container>
+void print_cells(const Container& cells)
+{
+   std::cout << "[";
+   for (auto c: cells)
+   {
+      print(c);
+      std::cout << ",";
+   }
+   std::cout << "]" << std::endl;
 }
 
 
@@ -58,8 +71,8 @@ inline std::unordered_set<T> to_unordered_set(const std::vector<T>& v)
 using cell = mzlib::coordinates2d;
 using assignment_pairs = std::pair<std::pair<int, int>, std::pair<int, int>>;
 using cell_set = std::unordered_set<cell>;
-using mnvt = mzlib::nested_vector::type<int>;
-namespace mnv = mzlib::nested_vector;
+using mnvt = mzlib::grid::type<int>;
+namespace mnv = mzlib::grid;
 using mc2d = mzlib::coordinates2d;
 
 

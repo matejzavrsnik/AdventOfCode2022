@@ -34,7 +34,8 @@ inline int& access_cell(
    std::vector<std::vector<int>>& field,
    const cell& c)
 {
-   return field[c[0]][c[1]];
+   return mzlib::grid::access(field, c);
+   //return field[c[0]][c[1]];
 }
 
 #endif //RECREATIONAL_REUSABLES_GRABBAG_H_ACCESS_CELL_H

@@ -12,7 +12,7 @@ TEST(reusables, apply_drawing)
 
    auto canvas = mnv::construct(40, 7, 0);
 
-   const mzlib::nested_vector::type<int> drawing = {
+   const mzlib::grid::type<int> drawing = {
       {0,1,0},
       {1,1,1},
       {0,1,0},
