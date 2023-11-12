@@ -7,8 +7,8 @@
 #include "iterators/circular_next.h"
 #include "../../reusables/grabbag.h"
 #include "../../reusables/move_screen.h"
-#include "../../reusables/move_unless.h"
-#include "../../reusables/apply_drawing.h"
+#include "grid/move_unless.h"
+#include "grid/apply_drawing.h"
 
 using namespace std;
 
@@ -117,17 +117,17 @@ part1 (std::string input_file)
       mzlib::grid::cell rock_coor{2, static_cast<long>(mzlib::grid::height(chamber)-highest_rock-3-mzlib::grid::height(*rock_it))};
       bool rock_fell = true;
 
-      apply_drawing(chamber, *rock_it, rock_coor);
+      mzlib::grid::apply_drawing(chamber, *rock_it, rock_coor);
 
       while(rock_fell)
       {
          // jet push
          auto pushed_coor = coordinates_after_push(*jet_it, chamber, *rock_it, rock_coor);
-         rock_coor = move_unless(chamber, *rock_it, rock_coor, pushed_coor, mzlib::greater_than(1));
+         rock_coor = mzlib::grid::move_unless(chamber, *rock_it, rock_coor, pushed_coor, mzlib::greater_than(1));
 
          // fall
          auto fallen_coor = move_screen(rock_coor, mzlib::direction::s);
-         rock_coor = move_unless(chamber, *rock_it, rock_coor, fallen_coor, mzlib::greater_than(1));
+         rock_coor = mzlib::grid::move_unless(chamber, *rock_it, rock_coor, fallen_coor, mzlib::greater_than(1));
          rock_fell = rock_coor == fallen_coor;
 
          mzlib::circular_next_iterator(jet_it, input[0].begin(), input[0].end());
@@ -187,7 +187,7 @@ part2 (std::string input_file)
       mzlib::grid::cell rock_coor{2, static_cast<long>(mzlib::grid::height(chamber)-highest_rock-3-mzlib::grid::height(*rock_it))};
       bool rock_fell = true;
 
-      apply_drawing(chamber, *rock_it, rock_coor);
+      mzlib::grid::apply_drawing(chamber, *rock_it, rock_coor);
       //cout << endl;
       //print_field(chamber, {{0, "."},{1, "#"}}, 1);
 
@@ -196,14 +196,14 @@ part2 (std::string input_file)
          // jet push
          //cout << endl << "Jet: " << *jet_it << " (" << std::distance(input[0].begin(), jet_it)+1 << "th jet in pattern " << input[0] << ")";
          auto pushed_coor = coordinates_after_push(*jet_it, chamber, *rock_it, rock_coor);
-         rock_coor = move_unless(chamber, *rock_it, rock_coor, pushed_coor, mzlib::greater_than(1));
+         rock_coor = mzlib::grid::move_unless(chamber, *rock_it, rock_coor, pushed_coor, mzlib::greater_than(1));
 
          //cout << endl;
          //print_field(chamber, {{0, "."},{1, "#"}}, 1);
 
          // fall
          auto fallen_coor = move_screen(rock_coor, mzlib::direction::s);
-         rock_coor = move_unless(chamber, *rock_it, rock_coor, fallen_coor, mzlib::greater_than(1));
+         rock_coor = mzlib::grid::move_unless(chamber, *rock_it, rock_coor, fallen_coor, mzlib::greater_than(1));
          rock_fell = rock_coor == fallen_coor;
 
          //cout << endl << "Fall" << endl;
