@@ -33,18 +33,18 @@
 // return: did it advance the coordinate? To be able to tell when to stop.
 inline
 bool
-move_to_next_pixel(
-   mzlib::grid::cell& coordinate,
+move_to_next_cell(
+   mzlib::grid::cell& c,
    const mzlib::grid::cell& from,
    const mzlib::grid::cell& to)
 {
-   if(coordinate[1] == to[1]-1 && coordinate[0] == to[0]-1)
+   if(c[1] == to[1]-1 && c[0] == to[0]-1)
       return false;
 
-   if(++coordinate[0] >= to[0])
+   if(++c[0] >= to[0])
    {
-      coordinate[0] = from[0];
-      ++coordinate[1];
+      c[0] = from[0];
+      ++c[1];
    }
 
    return true;

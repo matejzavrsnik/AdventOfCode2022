@@ -6,7 +6,7 @@
 #define RECREATIONAL_REUSABLES_GRABBAG_H_MOVE_IF_NOT_BLOCKED_H
 
 #include "grabbag.h"
-#include "anything_overlaps.h"
+#include "exists_in.h"
 #include "move_drawing.h"
 #include "is_drawing_fully_on_canvas.h"
 
@@ -24,7 +24,7 @@ move_if_not_blocked(
    {
       move_drawing(chamber, rock, from_coor, to_coor);
       // jet push can make it overlap with another stone
-      if (anything_overlaps(chamber))
+      if (exists_in<int>(chamber, [] (const int& cell_value) { return cell_value > 1; }))
          // in that case move back
          move_drawing(chamber, rock, to_coor, from_coor);
       else

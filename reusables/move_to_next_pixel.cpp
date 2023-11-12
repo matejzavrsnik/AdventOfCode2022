@@ -11,22 +11,22 @@ TEST(reusables, iterate)
 {
    mzlib::grid::cell c{5,7};
 
-   ASSERT_TRUE(move_to_next_pixel(c, {5,7}, {8,9}));
+   ASSERT_TRUE(move_to_next_cell(c, {5, 7}, {8, 9}));
    ASSERT_EQ(mzlib::grid::cell({6,7}), c);
 
-   ASSERT_TRUE(move_to_next_pixel(c, {5,7}, {8,9}));
+   ASSERT_TRUE(move_to_next_cell(c, {5, 7}, {8, 9}));
    ASSERT_EQ(mzlib::grid::cell({7,7}), c);
 
-   ASSERT_TRUE(move_to_next_pixel(c, {5,7}, {8,9}));
+   ASSERT_TRUE(move_to_next_cell(c, {5, 7}, {8, 9}));
    ASSERT_EQ(mzlib::grid::cell({5,8}), c);
 
-   ASSERT_TRUE(move_to_next_pixel(c, {5,7}, {8,9}));
+   ASSERT_TRUE(move_to_next_cell(c, {5, 7}, {8, 9}));
    ASSERT_EQ(mzlib::grid::cell({6,8}), c);
 
-   ASSERT_TRUE(move_to_next_pixel(c, {5,7}, {8,9}));
+   ASSERT_TRUE(move_to_next_cell(c, {5, 7}, {8, 9}));
    ASSERT_EQ(mzlib::grid::cell({7,8}), c);
 
-   ASSERT_FALSE(move_to_next_pixel(c, {5,7}, {8,9}));
+   ASSERT_FALSE(move_to_next_cell(c, {5, 7}, {8, 9}));
    ASSERT_EQ(mzlib::grid::cell({7,8}), c);
 }
 

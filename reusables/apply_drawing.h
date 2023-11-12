@@ -30,7 +30,7 @@ apply_drawing(
       else if (operation == drawing_operation::subtract)
          mzlib::grid::access(canvas, canvas_pixel) -= pixel_value;
    }
-   while(move_to_next_pixel(drawing_pixel, {0, 0}, drawing_size));
+   while(move_to_next_cell(drawing_pixel, {0, 0}, drawing_size));
 
    return true;
 }

@@ -7,14 +7,15 @@
 
 #include "tools/grid.h"
 
-inline
+template<typename T, typename Predicate>
 bool
-anything_overlaps(
-   const mzlib::grid::type<int>& chamber)
+exists_in(
+   const mzlib::grid::type<T>& g,
+   Predicate pred)
 {
-   for(const auto& row : chamber)
-      for(const auto& cell : row)
-         if(cell > 1)
+   for(const auto& row : g)
+      for(const auto& cell_value : row)
+         if(pred(cell_value))
             return true;
    return false;
 }

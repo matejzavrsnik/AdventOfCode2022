@@ -71,7 +71,7 @@ is_marker (const std::multiset<char>& window)
 // multiset::erase erases all elements that are equal to argument and I just wanted one to be deleted to make it a
 // running window.
 // rewrote so that I now find first such element in set and then delete it through an iterator.
-// Price: O(m) to move_to_next_pixel signal * O(n+2*logn)) to search&insert&remove + 1 instantiation of set
+// Price: O(m) to move_to_next_cell signal * O(n+2*logn)) to search&insert&remove + 1 instantiation of set
 // Price before: O(m) * O(nlogn) to insert all window chars + m instantiations of set.
 // So for larger windows this version should be faster unless searching is way slower than inserting, but I don't see
 // why it would be since to insert into a set it needs to search first.
