@@ -24,8 +24,8 @@
 #include <abstract/direction.h>
 
 // touching or not is same in cartesian and screen coordinates
-template<class T>
-bool are_touching(mzlib::vector2_t<T> a, mzlib::vector2_t<T> b)
+inline
+bool are_touching(const mzlib::grid::cell& a, const mzlib::grid::cell& b)
 {
    auto diff = a - b;
    return abs(diff[0]) <= 1 && abs(diff[1]) <= 1;

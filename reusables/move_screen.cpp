@@ -16,55 +16,55 @@ TEST(reusables, move_screen)
    // 0 . . .
    // 1 . o .
    // 2 . . .
-   mzlib::coordinates2d pos{1,1};
+   const mzlib::grid::cell pos{1,1};
 
    //   0 1 2
    // 0 . . .
    // 1 . o m
    // 2 . . .
-   ASSERT_EQ(mzlib::coordinates2d({2,1}), move_screen(pos, mzlib::direction::e));
+   ASSERT_EQ(mzlib::grid::cell({2,1}), move_screen(pos, mzlib::direction::e));
 
    //   0 1 2
    // 0 . . .
    // 1 m o .
    // 2 . . .
-   ASSERT_EQ(mzlib::coordinates2d({0,1}), move_screen(pos, mzlib::direction::w));
+   ASSERT_EQ(mzlib::grid::cell({0,1}), move_screen(pos, mzlib::direction::w));
 
    //   0 1 2
    // 0 . m .
    // 1 . o .
    // 2 . . .
-   ASSERT_EQ(mzlib::coordinates2d({1,0}), move_screen(pos, mzlib::direction::n));
+   ASSERT_EQ(mzlib::grid::cell({1,0}), move_screen(pos, mzlib::direction::n));
 
    //   0 1 2
    // 0 . . .
    // 1 . o .
    // 2 . m .
-   ASSERT_EQ(mzlib::coordinates2d({1,2}), move_screen(pos, mzlib::direction::s));
+   ASSERT_EQ(mzlib::grid::cell({1,2}), move_screen(pos, mzlib::direction::s));
 
    //   0 1 2
    // 0 . . m
    // 1 . o .
    // 2 . . .
-   ASSERT_EQ(mzlib::coordinates2d({2,0}), move_screen(pos, mzlib::direction::ne));
+   ASSERT_EQ(mzlib::grid::cell({2,0}), move_screen(pos, mzlib::direction::ne));
 
    //   0 1 2
    // 0 m . .
    // 1 . o .
    // 2 . . .
-   ASSERT_EQ(mzlib::coordinates2d({0,0}), move_screen(pos, mzlib::direction::nw));
+   ASSERT_EQ(mzlib::grid::cell({0,0}), move_screen(pos, mzlib::direction::nw));
 
    //   0 1 2
    // 0 . . .
    // 1 . o .
    // 2 . . m
-   ASSERT_EQ(mzlib::coordinates2d({2,2}), move_screen(pos, mzlib::direction::se));
+   ASSERT_EQ(mzlib::grid::cell({2,2}), move_screen(pos, mzlib::direction::se));
 
    //   0 1 2
    // 0 . . .
    // 1 . o .
    // 2 m . .
-   ASSERT_EQ(mzlib::coordinates2d({0,2}), move_screen(pos, mzlib::direction::sw));
+   ASSERT_EQ(mzlib::grid::cell({0,2}), move_screen(pos, mzlib::direction::sw));
 
    //   0 1 2
    // 0 . . .

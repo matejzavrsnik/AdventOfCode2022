@@ -12,21 +12,21 @@
 inline bool apply_drawing(
    mzlib::grid::type<int>& canvas,
    const mzlib::grid::type<int>& drawing,
-   const mc2d& coor,
+   const mzlib::grid::cell& coor,
    const drawing_operation operation = drawing_operation::add
 )
 {
    // todo: if drawing too big, draw what fits and ignore the rest. currently I crash instead.
-   mc2d drawing_pixel{0,0};
-   const mc2d drawing_size = mnv::size(drawing);
+   mzlib::grid::cell drawing_pixel{0,0};
+   const mzlib::grid::cell drawing_size = mzlib::grid::size(drawing);
    do
    {
       auto canvas_pixel = drawing_pixel+coor;
-      const auto pixel_value = mnv::access(drawing, drawing_pixel);
+      const auto pixel_value = mzlib::grid::access(drawing, drawing_pixel);
       if (operation == drawing_operation::add)
-         mnv::access(canvas, canvas_pixel) += pixel_value;
+         mzlib::grid::access(canvas, canvas_pixel) += pixel_value;
       else if (operation == drawing_operation::subtract)
-         mnv::access(canvas, canvas_pixel) -= pixel_value;
+         mzlib::grid::access(canvas, canvas_pixel) -= pixel_value;
    }
    while(move_to_next_pixel(drawing_pixel, {0, 0}, drawing_size));
 

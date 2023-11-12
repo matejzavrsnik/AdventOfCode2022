@@ -8,6 +8,7 @@
 
 #include <nature/vector.h>
 #include <abstract/direction.h>
+#include "tools/grid.h"
 
 // cartesian: like coordinate system
 //
@@ -19,20 +20,20 @@
 // east = x -> increase
 // north = y -> increase
 
-template<class T>
-mzlib::vector2_t<T> move_cartesian(mzlib::vector2_t<T> c, const mzlib::direction d)
+inline
+mzlib::grid::cell move_cartesian(mzlib::grid::cell c, const mzlib::direction d)
 {
    switch (d)
    {
-   case mzlib::direction::n: c += mzlib::vector2_t<T>{0,1}; break;
-   case mzlib::direction::s: c += mzlib::vector2_t<T>{0,-1}; break;
-   case mzlib::direction::e: c += mzlib::vector2_t<T>{1,0}; break;
-   case mzlib::direction::w: c += mzlib::vector2_t<T>{-1,0}; break;
+   case mzlib::direction::n: c += mzlib::vector2_t<long>{0,1}; break;
+   case mzlib::direction::s: c += mzlib::vector2_t<long>{0,-1}; break;
+   case mzlib::direction::e: c += mzlib::vector2_t<long>{1,0}; break;
+   case mzlib::direction::w: c += mzlib::vector2_t<long>{-1,0}; break;
 
-   case mzlib::direction::ne: c += mzlib::vector2_t<T>{1,1}; break;
-   case mzlib::direction::nw: c += mzlib::vector2_t<T>{-1,1}; break;
-   case mzlib::direction::se: c += mzlib::vector2_t<T>{1,-1}; break;
-   case mzlib::direction::sw: c += mzlib::vector2_t<T>{-1,-1}; break;
+   case mzlib::direction::ne: c += mzlib::vector2_t<long>{1,1}; break;
+   case mzlib::direction::nw: c += mzlib::vector2_t<long>{-1,1}; break;
+   case mzlib::direction::se: c += mzlib::vector2_t<long>{1,-1}; break;
+   case mzlib::direction::sw: c += mzlib::vector2_t<long>{-1,-1}; break;
    case mzlib::direction::centre: break;
    }
    return c;

@@ -22,9 +22,10 @@
 #include <nature/screen_rectangle.h>
 #include <nature/vector.h>
 #include <abstract/direction.h>
+#include "tools/grid.h"
 
-template<class T>
-inline mzlib::direction get_direction_cartesian(mzlib::vector2_t<T> from, mzlib::vector2_t<T> to)
+inline
+mzlib::direction get_direction_cartesian(const mzlib::grid::cell& from, const mzlib::grid::cell& to)
 {
    auto dir_v = to-from;
 

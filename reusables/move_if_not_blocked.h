@@ -11,11 +11,11 @@
 #include "is_drawing_fully_on_canvas.h"
 
 // return: new coordinates of the stone
-inline mc2d move_if_not_blocked(
+inline mzlib::grid::cell move_if_not_blocked(
    mzlib::grid::type<int>& chamber,
    const mzlib::grid::type<int>& rock,
-   const mc2d& from_coor,
-   const mc2d& to_coor
+   const mzlib::grid::cell& from_coor,
+   const mzlib::grid::cell& to_coor
 )
 {
    if (is_drawing_fully_on_canvas(chamber, rock, to_coor))

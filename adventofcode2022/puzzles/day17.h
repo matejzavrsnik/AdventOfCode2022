@@ -58,13 +58,13 @@ const vector rocks = {
 
 
 
-inline mc2d coordinates_after_push(
+inline mzlib::grid::cell coordinates_after_push(
    char jet,
    const mzlib::grid::type<int>& chamber,
    const mzlib::grid::type<int>& rock,
-   const mc2d& coor)
+   const mzlib::grid::cell& coor)
 {
-   mc2d new_coor = coor;
+   mzlib::grid::cell new_coor = coor;
    switch(jet)
    {
    case '>':
@@ -108,13 +108,13 @@ part1 (std::string input_file)
    for(auto rock_count : std::views::iota(0, 2022))
    {
       // increase chamber to accomodate rock
-      auto needed_height = highest_rock+1+3+mnv::height(*rock_it);
-      if(needed_height > mnv::height(chamber))
+      auto needed_height = highest_rock+1+3+mzlib::grid::height(*rock_it);
+      if(needed_height > mzlib::grid::height(chamber))
       {
-         mzlib::grid::add_top(chamber, needed_height-mnv::height(chamber)-1, 0);
+         mzlib::grid::add_top(chamber, needed_height-mzlib::grid::height(chamber)-1, 0);
       }
 
-      mc2d rock_coor{2, static_cast<long>(mnv::height(chamber)-highest_rock-3-mnv::height(*rock_it))};
+      mzlib::grid::cell rock_coor{2, static_cast<long>(mzlib::grid::height(chamber)-highest_rock-3-mzlib::grid::height(*rock_it))};
       bool rock_fell = true;
 
       apply_drawing(chamber, *rock_it, rock_coor);
@@ -178,13 +178,13 @@ part2 (std::string input_file)
       //print_field(*rock_it, {{0, "."},{1, "#"}}, 1);
 
       // increase chamber to accomodate rock
-      auto needed_height = highest_rock+1+3+mnv::height(*rock_it);
-      if(needed_height > mnv::height(chamber))
+      auto needed_height = highest_rock+1+3+mzlib::grid::height(*rock_it);
+      if(needed_height > mzlib::grid::height(chamber))
       {
-         mzlib::grid::add_top(chamber, needed_height-mnv::height(chamber)-1, 0);
+         mzlib::grid::add_top(chamber, needed_height-mzlib::grid::height(chamber)-1, 0);
       }
 
-      mc2d rock_coor{2, static_cast<long>(mnv::height(chamber)-highest_rock-3-mnv::height(*rock_it))};
+      mzlib::grid::cell rock_coor{2, static_cast<long>(mzlib::grid::height(chamber)-highest_rock-3-mzlib::grid::height(*rock_it))};
       bool rock_fell = true;
 
       apply_drawing(chamber, *rock_it, rock_coor);

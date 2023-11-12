@@ -31,7 +31,7 @@
 #include <abstract/direction.h>
 
 // return: did it advance the coordinate? To be able to tell when to stop.
-inline bool move_to_next_pixel(mc2d& coordinate, const mc2d& from, const mc2d& to)
+inline bool move_to_next_pixel(mzlib::grid::cell& coordinate, const mzlib::grid::cell& from, const mzlib::grid::cell& to)
 {
    if(coordinate[1] == to[1]-1 && coordinate[0] == to[0]-1)
       return false;

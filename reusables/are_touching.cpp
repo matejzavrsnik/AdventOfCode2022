@@ -18,7 +18,7 @@ TEST(reusables, are_touching)
    //  1 . . o . .
    //  2 . . . . .
    //  3 . . . . .
-   mzlib::coordinates2d pos{1,1};
+   const mzlib::grid::cell pos{1,1};
 
    //   -1 0 1 2 3
    // -1 . . . . .

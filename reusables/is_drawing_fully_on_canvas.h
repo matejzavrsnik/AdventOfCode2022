@@ -33,7 +33,7 @@
 inline bool is_drawing_fully_on_canvas(
    const mzlib::grid::type<int>& canvas,
    const mzlib::grid::type<int>& drawing,
-   const mc2d& coor)
+   const mzlib::grid::cell& coor)
 {
    return coor[0]>=0
       && coor[1]>=0

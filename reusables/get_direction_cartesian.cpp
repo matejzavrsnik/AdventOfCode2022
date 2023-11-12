@@ -6,6 +6,7 @@
 #include <gtest/gtest.h>
 #include "nature/vector.h"
 #include "get_direction_cartesian.h"
+#include "tools/grid.h"
 
 TEST(reusables, get_direction_cartesian)
 {
@@ -13,7 +14,7 @@ TEST(reusables, get_direction_cartesian)
    // 1 . o .
    // 0 . . .
    //   0 1 2
-   mzlib::coordinates2d pos{1,1};
+   mzlib::grid::cell pos{1,1};
 
    // 2 . . .
    // 1 m o .

@@ -72,7 +72,7 @@ inline std::unordered_set<T> to_unordered_set(const std::vector<T>& v)
 using assignment_pairs = std::pair<std::pair<int, int>, std::pair<int, int>>;
 using cell_set = std::unordered_set<mzlib::grid::cell>;
 //using mnvt = mzlib::grid::type<int>;
-namespace mnv = mzlib::grid;
-using mc2d = mzlib::coordinates2d;
+//namespace mnv = mzlib::grid;
+//using mc2d = mzlib::coordinates2d;
 
 

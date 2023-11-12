@@ -12,8 +12,8 @@
 inline bool move_drawing(
    mzlib::grid::type<int>& canvas,
    const mzlib::grid::type<int>& drawing,
-   const mc2d& coor_from,
-   const mc2d& coor_to
+   const mzlib::grid::cell& coor_from,
+   const mzlib::grid::cell& coor_to
 )
 {
    return apply_drawing(canvas, drawing, coor_from, drawing_operation::subtract)
