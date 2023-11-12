@@ -29,7 +29,10 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline std::pair<int, int> get_interval_extremes(std::vector<std::pair<int, int>> intervals)
+inline
+std::pair<int, int>
+get_interval_extremes(
+   std::vector<std::pair<int, int>> intervals)
 {
    auto min = std::min_element(
       intervals.begin(), intervals.end(),

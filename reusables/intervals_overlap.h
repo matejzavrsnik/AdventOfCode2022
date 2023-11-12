@@ -8,7 +8,8 @@
 #include "grabbag.h"
 #include "interval_overlaps_the_other.h"
 
-inline bool
+inline
+bool
 intervals_overlap (
    std::pair<int, int> a,
    std::pair<int, int> b)

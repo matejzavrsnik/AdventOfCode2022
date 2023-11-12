@@ -29,10 +29,10 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-int binary_string_to_int (std::string s);
-
-inline int
-binary_string_to_int (std::string s)
+inline
+int
+binary_string_to_int (
+   std::string s)
 {
    int result = 0;
    for(int bit_value = 1, i=s.size()-1; i>=0; --i, bit_value *= 2)

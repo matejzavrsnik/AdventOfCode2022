@@ -9,7 +9,9 @@
 #include "move_to_next_pixel.h"
 #include "drawing_operation.h"
 
-inline bool apply_drawing(
+inline
+bool
+apply_drawing(
    mzlib::grid::type<int>& canvas,
    const mzlib::grid::type<int>& drawing,
    const mzlib::grid::cell& coor,

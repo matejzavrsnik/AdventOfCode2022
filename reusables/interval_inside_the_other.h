@@ -29,7 +29,8 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline bool
+inline
+bool
 interval_inside_the_other (
    std::pair<int, int> one,
    std::pair<int, int> other

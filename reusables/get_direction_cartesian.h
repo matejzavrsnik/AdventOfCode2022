@@ -25,7 +25,10 @@
 #include "tools/grid.h"
 
 inline
-mzlib::direction get_direction_cartesian(const mzlib::grid::cell& from, const mzlib::grid::cell& to)
+mzlib::direction
+get_direction_cartesian(
+   const mzlib::grid::cell& from,
+   const mzlib::grid::cell& to)
 {
    auto dir_v = to-from;
 

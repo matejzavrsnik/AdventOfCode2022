@@ -31,8 +31,10 @@
 #include <abstract/direction.h>
 
 // parse_pairs_of_numbers the line in file into pair of pairs. format: 41-42,40-40
-inline assignment_pairs
-parse_pairs_of_numbers (std::string s)
+inline
+assignment_pairs
+parse_pairs_of_numbers (
+   std::string s)
 {
    auto elfs = mzlib::split(s, ",");
    auto assignment1 = mzlib::split(elfs[0], "-");

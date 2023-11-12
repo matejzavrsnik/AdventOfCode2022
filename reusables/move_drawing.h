@@ -9,7 +9,9 @@
 #include "apply_drawing.h"
 #include "drawing_operation.h"
 
-inline bool move_drawing(
+inline
+bool
+move_drawing(
    mzlib::grid::type<int>& canvas,
    const mzlib::grid::type<int>& drawing,
    const mzlib::grid::cell& coor_from,

@@ -21,7 +21,10 @@
 // north = y -> decrease
 
 inline
-mzlib::grid::cell move_screen(mzlib::grid::cell c, const mzlib::direction d)
+mzlib::grid::cell
+move_screen(
+   mzlib::grid::cell c,
+   const mzlib::direction d)
 {
    switch (d)
    {

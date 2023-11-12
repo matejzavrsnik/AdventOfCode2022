@@ -21,7 +21,10 @@
 // north = y -> increase
 
 inline
-mzlib::grid::cell move_cartesian(mzlib::grid::cell c, const mzlib::direction d)
+mzlib::grid::cell
+move_cartesian(
+   mzlib::grid::cell c,
+   const mzlib::direction d)
 {
    switch (d)
    {

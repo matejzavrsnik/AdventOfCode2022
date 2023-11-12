@@ -30,7 +30,9 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline bool is_drawing_fully_on_canvas(
+inline
+bool
+is_drawing_fully_on_canvas(
    const mzlib::grid::type<int>& canvas,
    const mzlib::grid::type<int>& drawing,
    const mzlib::grid::cell& coor)

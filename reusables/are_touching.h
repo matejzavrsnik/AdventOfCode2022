@@ -25,7 +25,10 @@
 
 // touching or not is same in cartesian and screen coordinates
 inline
-bool are_touching(const mzlib::grid::cell& a, const mzlib::grid::cell& b)
+bool
+are_touching(
+   const mzlib::grid::cell& a,
+   const mzlib::grid::cell& b)
 {
    auto diff = a - b;
    return abs(diff[0]) <= 1 && abs(diff[1]) <= 1;

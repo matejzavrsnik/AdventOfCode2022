@@ -11,7 +11,9 @@
 #include "is_drawing_fully_on_canvas.h"
 
 // return: new coordinates of the stone
-inline mzlib::grid::cell move_if_not_blocked(
+inline
+mzlib::grid::cell
+move_if_not_blocked(
    mzlib::grid::type<int>& chamber,
    const mzlib::grid::type<int>& rock,
    const mzlib::grid::cell& from_coor,

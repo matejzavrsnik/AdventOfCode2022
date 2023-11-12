@@ -30,7 +30,10 @@
 #include <abstract/direction.h>
 
 inline
-long manhattan_distance(const mzlib::grid::cell& a, const mzlib::grid::cell& b)
+long
+manhattan_distance(
+   const mzlib::grid::cell& a,
+   const mzlib::grid::cell& b)
 {
    return abs(a[0]-b[0])+abs(a[1]-b[1]);
 }

@@ -8,7 +8,9 @@
 #include "grabbag.h"
 #include "cell_is_in_field.h"
 
-inline std::vector<mzlib::grid::cell> get_neighbour_cells(
+inline
+std::vector<mzlib::grid::cell>
+get_neighbour_cells(
    const mzlib::grid::type<int>& field,
    const mzlib::grid::cell& c
 )

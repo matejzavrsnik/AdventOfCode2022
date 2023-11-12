@@ -30,7 +30,9 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline bool cell_is_in_field(
+inline
+bool
+cell_is_in_field(
    const mzlib::grid::type<int>& field,
    const mzlib::grid::cell& c
 )

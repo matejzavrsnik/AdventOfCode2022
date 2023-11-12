@@ -29,7 +29,9 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline void set_all_cells_to_value(
+inline
+void
+set_all_cells_to_value(
    mzlib::grid::type<int>& field,
    int value)
 {

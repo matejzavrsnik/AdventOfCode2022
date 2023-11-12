@@ -34,4 +34,5 @@ enum class drawing_operation
    add,
    subtract
 };
+
 #endif //RECREATIONAL_REUSABLES_GRABBAG_H_DRAWING_OPERATION_H

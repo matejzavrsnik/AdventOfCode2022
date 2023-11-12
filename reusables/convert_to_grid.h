@@ -10,7 +10,9 @@
 #include "shortest_path_bfs.h"
 
 template<typename T>
-mzlib::grid::type<T> convert_to_grid(std::vector<std::string> vector_of_strings)
+mzlib::grid::type<T>
+convert_to_grid(
+   std::vector<std::string> vector_of_strings)
 {
    mzlib::grid::type<T> grid;
    for(auto line : vector_of_strings)

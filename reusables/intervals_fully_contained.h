@@ -8,7 +8,8 @@
 #include "grabbag.h"
 #include "interval_inside_the_other.h"
 
-inline bool
+inline
+bool
 intervals_fully_contained (
    std::pair<int, int> a,
    std::pair<int, int> b)

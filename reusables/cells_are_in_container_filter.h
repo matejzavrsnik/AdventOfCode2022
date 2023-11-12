@@ -29,7 +29,9 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline std::vector<mzlib::grid::cell> cells_are_in_container_filter(
+inline
+std::vector<mzlib::grid::cell>
+cells_are_in_container_filter(
    const std::vector<mzlib::grid::cell>& cells,
    const std::unordered_set<mzlib::grid::cell>& container)
 {

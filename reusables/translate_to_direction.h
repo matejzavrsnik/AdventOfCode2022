@@ -29,7 +29,9 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline mzlib::direction translate_to_direction(char dir)
+inline
+mzlib::direction
+translate_to_direction(char dir)
 {
    switch(dir)
    {

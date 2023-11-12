@@ -30,7 +30,8 @@
 #include <abstract/direction.h>
 
 template<class T>
-bool value_within_any_interval(
+bool
+value_within_any_interval(
    const std::vector<std::pair<T, T>>& intervals,
    const T& value)
 {

@@ -30,7 +30,10 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline std::vector<mzlib::grid::cell> get_all_cells(const mzlib::grid::type<int>& field)
+inline
+std::vector<mzlib::grid::cell>
+get_all_cells(
+   const mzlib::grid::type<int>& field)
 {
    std::vector<mzlib::grid::cell> all;
    for(int y = 0; y < field.size(); ++y)

@@ -11,7 +11,8 @@ concept back_insertable =
    };
 
 template<back_insertable Container>
-Container sets_intersection_plural (
+Container
+sets_intersection_plural (
    const Container& intersection,
    const Container& container
 )
@@ -24,7 +25,8 @@ Container sets_intersection_plural (
 }
 
 template<back_insertable Container, back_insertable... Containers>
-Container sets_intersection_plural(
+Container
+sets_intersection_plural(
    const Container& intersection,
    const Container& container,
    const Containers&... additional)
@@ -39,7 +41,8 @@ Container sets_intersection_plural(
 }
 
 template <class Container>
-Container sets_intersection_plural (
+Container
+sets_intersection_plural (
    const Container& intersection,
    const Container& container
 )
@@ -54,7 +57,8 @@ Container sets_intersection_plural (
 }
 
 template<class Container, class... Containers>
-Container sets_intersection_plural(
+Container
+sets_intersection_plural(
    const Container& intersection,
    const Container& container,
    const Containers&... additional)

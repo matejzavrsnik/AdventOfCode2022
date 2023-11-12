@@ -7,7 +7,10 @@
 
 #include "tools/grid.h"
 
-inline bool anything_overlaps(const mzlib::grid::type<int>& chamber)
+inline
+bool
+anything_overlaps(
+   const mzlib::grid::type<int>& chamber)
 {
    for(const auto& row : chamber)
       for(const auto& cell : row)
