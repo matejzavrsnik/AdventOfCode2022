@@ -31,8 +31,8 @@
 #include <abstract/direction.h>
 
 inline bool is_drawing_fully_on_canvas(
-   const mnvt& canvas,
-   const mnvt& drawing,
+   const mzlib::grid::type<int>& canvas,
+   const mzlib::grid::type<int>& drawing,
    const mc2d& coor)
 {
    return coor[0]>=0

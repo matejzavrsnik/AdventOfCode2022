@@ -30,7 +30,7 @@
 #include <abstract/direction.h>
 
 inline void set_all_cells_to_value(
-   std::vector<std::vector<int>>& field,
+   mzlib::grid::type<int>& field,
    int value)
 {
    for(int row = 0; row < field.size(); ++row)

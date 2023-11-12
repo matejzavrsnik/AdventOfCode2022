@@ -21,26 +21,26 @@ namespace adventofcode2022::day17
 
 
 
-const mnvt rock_m = {
+const mzlib::grid::type<int> rock_m = {
    {1,1,1,1}
 };
-const mnvt rock_p = {
+const mzlib::grid::type<int> rock_p = {
    {0,1,0},
    {1,1,1},
    {0,1,0},
 };
-const mnvt rock_l = {
+const mzlib::grid::type<int> rock_l = {
    {0,0,1},
    {0,0,1},
    {1,1,1},
 };
-const mnvt rock_i = {
+const mzlib::grid::type<int> rock_i = {
    {1},
    {1},
    {1},
    {1},
 };
-const mnvt rock_d = {
+const mzlib::grid::type<int> rock_d = {
    {1,1},
    {1,1},
 };
@@ -60,8 +60,8 @@ const vector rocks = {
 
 inline mc2d coordinates_after_push(
    char jet,
-   const mnvt& chamber,
-   const mnvt& rock,
+   const mzlib::grid::type<int>& chamber,
+   const mzlib::grid::type<int>& rock,
    const mc2d& coor)
 {
    mc2d new_coor = coor;
@@ -80,7 +80,7 @@ inline mc2d coordinates_after_push(
 
 
 
-inline int get_highest_rock(const mnvt& chamber)
+inline int get_highest_rock(const mzlib::grid::type<int>& chamber)
 {
    for (int row = 0; row < chamber.size(); row++)
       for (int col = 0; col < chamber[0].size(); col++)

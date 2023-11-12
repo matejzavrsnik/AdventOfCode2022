@@ -10,8 +10,8 @@
 #include "drawing_operation.h"
 
 inline bool move_drawing(
-   mnvt& canvas,
-   const mnvt& drawing,
+   mzlib::grid::type<int>& canvas,
+   const mzlib::grid::type<int>& drawing,
    const mc2d& coor_from,
    const mc2d& coor_to
 )

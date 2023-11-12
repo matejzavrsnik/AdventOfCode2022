@@ -12,13 +12,13 @@
 #include "get_all_cells.h"
 
 inline
-std::vector<cell> all_cells_allowed(
-   const std::vector<std::vector<int>>& field,
-   const std::vector<cell>& n,
-   cell f
+std::vector<mzlib::grid::cell> all_cells_allowed(
+   const mzlib::grid::type<int>& field,
+   const std::vector<mzlib::grid::cell>& n,
+   mzlib::grid::cell f
    )
 {
-   std::vector<cell> viable;
+   std::vector<mzlib::grid::cell> viable;
    for(auto nn : n)
       // here could be condition
       viable.push_back(nn);
@@ -35,9 +35,9 @@ std::vector<cell> all_cells_allowed(
 
 inline
 bool destination_at_most_one_larger(
-   cell from,
-   cell to,
-   const std::vector<std::vector<int>>& field)
+   mzlib::grid::cell from,
+   mzlib::grid::cell to,
+   const mzlib::grid::type<int>& field)
 {
    return
       mzlib::grid::access(field, to) - 1 <=
@@ -45,14 +45,14 @@ bool destination_at_most_one_larger(
 }
 
 inline
-std::vector<cell> allowed_transition_to(
-   const std::vector<std::vector<int>>& field,
-   const std::vector<cell>& candidate_destinations,
-   cell from,
+std::vector<mzlib::grid::cell> allowed_transition_to(
+   const mzlib::grid::type<int>& field,
+   const std::vector<mzlib::grid::cell>& candidate_destinations,
+   mzlib::grid::cell from,
    typeof(destination_at_most_one_larger) allowed_transition
 )
 {
-   std::vector<cell> allowed;
+   std::vector<mzlib::grid::cell> allowed;
    for(auto to : candidate_destinations)
       if (allowed_transition(from, to, field))
          allowed.push_back(to);
@@ -62,15 +62,15 @@ std::vector<cell> allowed_transition_to(
 
 
 inline
-std::vector<cell>
+std::vector<mzlib::grid::cell>
 allowed_transition_from (
-   const std::vector<std::vector<int>>& field,
-   const std::vector<cell>& candidate_sources,
-   cell to,
+   const mzlib::grid::type<int>& field,
+   const std::vector<mzlib::grid::cell>& candidate_sources,
+   mzlib::grid::cell to,
    typeof(destination_at_most_one_larger) allowed_transition
 )
 {
-   std::vector<cell> allowed;
+   std::vector<mzlib::grid::cell> allowed;
    for(auto from : candidate_sources)
       if (allowed_transition(from, to, field))
          allowed.push_back(from);
@@ -78,14 +78,14 @@ allowed_transition_from (
 }
 
 inline
-std::vector<std::vector<int>>
+mzlib::grid::type<int>
 single_source_shortest_path_bfs (
-   std::vector<std::vector<int>>& field,
-   const cell& coor_start,
+   mzlib::grid::type<int>& field,
+   const mzlib::grid::cell& coor_start,
    typeof(destination_at_most_one_larger) allowed_transition = destination_at_most_one_larger
 )
 {
-   std::vector<std::vector<int>> steps = field;
+   mzlib::grid::type<int> steps = field;
    set_all_cells_to_value(steps, std::numeric_limits<int>::max());
 
    cell_set discovered_cells; // discovered

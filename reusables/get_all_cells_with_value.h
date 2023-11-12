@@ -30,13 +30,13 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline std::vector<cell> get_all_cells_with_value(const std::vector<std::vector<int>>& field, int value)
+inline std::vector<mzlib::grid::cell> get_all_cells_with_value(const mzlib::grid::type<int>& field, int value)
 {
-   std::vector<cell> all_of_value;
+   std::vector<mzlib::grid::cell> all_of_value;
    for(int y = 0; y < field.size(); ++y)
       for(int x = 0; x < field[0].size(); ++x)
-         if(mzlib::grid::access(field, cell{x,y}) == value)
-            all_of_value.push_back(cell{x,y});
+         if(mzlib::grid::access(field, mzlib::grid::cell{x,y}) == value)
+            all_of_value.push_back(mzlib::grid::cell{x,y});
    //cout << all_of_value.size() << endl;
    return all_of_value;
 }

@@ -6,7 +6,6 @@
 #include "nature/vector.h"
 #include "../../reusables/grabbag.h"
 #include "../../reusables/shortest_path_bfs.h"
-#include "../../reusables/access_cell.h"
 #include "../../reusables/get_all_cells_with_value.h"
 #include <numeric>
 #include <ranges>
@@ -26,7 +25,7 @@ namespace adventofcode2022::day12
 
 
 inline
-bool ok_to_go(cell from, cell to, const vector<vector<int>>& field)
+bool ok_to_go(mzlib::grid::cell from, mzlib::grid::cell to, const vector<vector<int>>& field)
 {
    return (
       mzlib::grid::access(field, to)-1 <=
@@ -35,13 +34,13 @@ bool ok_to_go(cell from, cell to, const vector<vector<int>>& field)
 }
 
 inline
-vector<cell> get_viable_dest(
+vector<mzlib::grid::cell> get_viable_dest(
    const vector<vector<int>>& field,
-   const vector<cell>& n,
-   cell f
+   const vector<mzlib::grid::cell>& n,
+   mzlib::grid::cell f
    )
 {
-   vector<cell> viable;
+   vector<mzlib::grid::cell> viable;
    for(auto nn : n)
       if (ok_to_go(f, nn, field))
          viable.push_back(nn);
@@ -49,13 +48,13 @@ vector<cell> get_viable_dest(
 }
 
 inline
-vector<cell> get_viable_src(
+vector<mzlib::grid::cell> get_viable_src(
    const vector<vector<int>>& field,
-   const vector<cell>& n,
-   cell f
+   const vector<mzlib::grid::cell>& n,
+   mzlib::grid::cell f
    )
 {
-   vector<cell> viable;
+   vector<mzlib::grid::cell> viable;
    for(auto nn : n)
       if (ok_to_go(nn, f, field))
          viable.push_back(nn);
@@ -66,7 +65,7 @@ template<class ViableNextStepInvokable>
 std::vector<std::vector<int>>
 single_source_shortest_path_bfs (
    std::vector<std::vector<int>>& field,
-   const cell& coor_start,
+   const mzlib::grid::cell& coor_start,
    ViableNextStepInvokable allowed_transition,
    ViableNextStepInvokable get_allowed_destination_cells_fun
 )
@@ -166,7 +165,7 @@ part1_impl(std::vector<std::string> input)
 
    auto steps = single_source_shortest_path_bfs(field, coor_start, get_viable_src, get_viable_dest);
 
-   return access_cell(steps, coor_end);
+   return mzlib::grid::access(steps, coor_end);
 }
 
 inline long
@@ -195,8 +194,8 @@ part2 (std::string input_file)
 
    auto coor_start = get_all_cells_with_value(field, 'S')[0];
    auto coor_end = get_all_cells_with_value(field, 'E')[0];
-   access_cell(field, coor_start) = 'a';
-   access_cell(field, coor_end) = 'z';
+   mzlib::grid::access(field, coor_start) = 'a';
+   mzlib::grid::access(field, coor_end) = 'z';
 
    auto steps = single_source_shortest_path_bfs(field, coor_end, get_viable_dest, get_viable_src);
 print_field(steps, {{2147483647, "?"}}, 3);
@@ -204,12 +203,12 @@ print_field(steps, {{2147483647, "?"}}, 3);
 
    int min = numeric_limits<int>::max();
    for(auto an_a : all_as) {
-      auto path = access_cell(steps, an_a);
+      auto path = mzlib::grid::access(steps, an_a);
       if (path < min)
          min = path;
    }
 
-   return access_cell(field, coor_end);
+   return mzlib::grid::access(field, coor_end);
 }
 
 /*

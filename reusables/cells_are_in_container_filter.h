@@ -29,11 +29,11 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline std::vector<cell> cells_are_in_container_filter(
-   const std::vector<cell>& cells,
-   const std::unordered_set<cell>& container)
+inline std::vector<mzlib::grid::cell> cells_are_in_container_filter(
+   const std::vector<mzlib::grid::cell>& cells,
+   const std::unordered_set<mzlib::grid::cell>& container)
 {
-   std::vector<cell> filtered;
+   std::vector<mzlib::grid::cell> filtered;
    for(auto c : cells)
       if(container.contains(c))
          filtered.push_back(c);

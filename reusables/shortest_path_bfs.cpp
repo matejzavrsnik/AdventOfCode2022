@@ -14,7 +14,7 @@ TEST(reusables, single_source_shortest_path_bfs)
       "acctuvwj",
       "abdefghi"
    });
-   cell start{0, 0};
+   mzlib::grid::cell start{0, 0};
 
    auto steps_to_get_there = single_source_shortest_path_bfs(
       grid, start, destination_at_most_one_larger

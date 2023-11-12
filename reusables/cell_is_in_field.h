@@ -31,8 +31,8 @@
 #include <abstract/direction.h>
 
 inline bool cell_is_in_field(
-   const std::vector<std::vector<int>>& field,
-   const cell& c
+   const mzlib::grid::type<int>& field,
+   const mzlib::grid::cell& c
 )
 {
    if(c[0] < 0 || c[0] > field[0].size()-1) return false;

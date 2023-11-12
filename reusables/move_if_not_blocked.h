@@ -12,8 +12,8 @@
 
 // return: new coordinates of the stone
 inline mc2d move_if_not_blocked(
-   mnvt& chamber,
-   const mnvt& rock,
+   mzlib::grid::type<int>& chamber,
+   const mzlib::grid::type<int>& rock,
    const mc2d& from_coor,
    const mc2d& to_coor
 )

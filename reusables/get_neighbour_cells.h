@@ -8,16 +8,16 @@
 #include "grabbag.h"
 #include "cell_is_in_field.h"
 
-inline std::vector<mzlib::coordinates2d> get_neighbour_cells(
-   const std::vector<std::vector<int>>& field,
-   const cell& c
+inline std::vector<mzlib::grid::cell> get_neighbour_cells(
+   const mzlib::grid::type<int>& field,
+   const mzlib::grid::cell& c
 )
 {
-   std::vector<cell> v{
-      cell{c[0]+1, c[1]},
-      cell{c[0]-1, c[1]},
-      cell{c[0], c[1]+1},
-      cell{c[0], c[1]-1}
+   std::vector<mzlib::grid::cell> v{
+      mzlib::grid::cell{c[0]+1, c[1]},
+      mzlib::grid::cell{c[0]-1, c[1]},
+      mzlib::grid::cell{c[0], c[1]+1},
+      mzlib::grid::cell{c[0], c[1]-1}
    };
    std::vector<mzlib::coordinates2d> r;
    for(auto it = v.begin(); it!=v.end(); ++it)
