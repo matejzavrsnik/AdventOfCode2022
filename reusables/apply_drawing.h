@@ -9,12 +9,12 @@
 #include "move_to_next_pixel.h"
 #include "drawing_operation.h"
 
-inline
+template<typename T>
 bool
 apply_drawing(
-   mzlib::grid::type<int>& canvas,
-   const mzlib::grid::type<int>& drawing,
-   const mzlib::grid::cell& coor,
+   mzlib::grid::type<T>& grid,
+   const mzlib::grid::type<T>& drawing,
+   const mzlib::grid::cell& c,
    const drawing_operation operation = drawing_operation::add
 )
 {
@@ -23,12 +23,12 @@ apply_drawing(
    const mzlib::grid::cell drawing_size = mzlib::grid::size(drawing);
    do
    {
-      auto canvas_pixel = drawing_pixel+coor;
+      auto canvas_pixel = drawing_pixel+c;
       const auto pixel_value = mzlib::grid::access(drawing, drawing_pixel);
       if (operation == drawing_operation::add)
-         mzlib::grid::access(canvas, canvas_pixel) += pixel_value;
+         mzlib::grid::access(grid, canvas_pixel) += pixel_value;
       else if (operation == drawing_operation::subtract)
-         mzlib::grid::access(canvas, canvas_pixel) -= pixel_value;
+         mzlib::grid::access(grid, canvas_pixel) -= pixel_value;
    }
    while(move_to_next_cell(drawing_pixel, {0, 0}, drawing_size));
 

@@ -9,7 +9,6 @@
 
 TEST(reusables, apply_drawing)
 {
-
    auto canvas = mzlib::grid::construct(40, 7, 0);
 
    const mzlib::grid::type<int> drawing = {

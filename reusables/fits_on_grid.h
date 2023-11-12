@@ -30,17 +30,16 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline
+template<typename T>
 bool
-is_drawing_fully_on_canvas(
-   const mzlib::grid::type<int>& canvas,
-   const mzlib::grid::type<int>& drawing,
-   const mzlib::grid::cell& coor)
+fits_on_grid(
+   const mzlib::grid::type<T>& grid,
+   const mzlib::grid::type<T>& drawing,
+   const mzlib::grid::cell& c)
 {
-   return coor[0]>=0
-      && coor[1]>=0
-      && mzlib::grid::width(canvas) >= coor[0] + mzlib::grid::width(drawing)
-      && mzlib::grid::height(canvas) >= coor[1] + mzlib::grid::height(drawing);
+   return c[0]>=0 && c[1]>=0
+      && mzlib::grid::width(grid) >= c[0] + mzlib::grid::width(drawing)
+      && mzlib::grid::height(grid) >= c[1] + mzlib::grid::height(drawing);
 }
 
 #endif //RECREATIONAL_REUSABLES_GRABBAG_H_IS_DRAWING_FULLY_ON_CANVAS_H

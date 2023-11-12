@@ -33,33 +33,25 @@ void print(const Container& c){
    std::cout << "]";
 }
 
-template<class Container>
-void print_field(const Container& field, std::map<int,std::string> substitutions={}, int align=2){
-   for (const auto& row : field)
+template<class T>
+void print_grid(
+   const mzlib::grid::type<T>& grid,
+   std::map<int,std::string> substitutions={},
+   int align=2,
+   std::ostream& stream = std::cout)
+{
+   for (const auto& row : grid)
    {
       for (const auto& el: row)
       {
          if (substitutions.contains(el))
-            std::cout << std::setfill(' ') << std::setw(align) << substitutions[el];
-         else std::cout << std::setfill(' ') << std::setw(align) << el;
+            stream << std::setfill(' ') << std::setw(align) << substitutions[el];
+         else stream << std::setfill(' ') << std::setw(align) << el;
       }
-      std::cout << std::endl;
+      stream << std::endl;
    }
-   std::cout << std::endl;
+   stream << std::endl;
 }
-
-template<class Container>
-void print_cells(const Container& cells)
-{
-   std::cout << "[";
-   for (auto c: cells)
-   {
-      print(c);
-      std::cout << ",";
-   }
-   std::cout << "]" << std::endl;
-}
-
 
 // to mzlib converters
 template<class T>

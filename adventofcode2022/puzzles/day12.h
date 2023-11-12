@@ -198,7 +198,7 @@ part2 (std::string input_file)
    mzlib::grid::access(field, coor_end) = 'z';
 
    auto steps = single_source_shortest_path_bfs(field, coor_end, get_viable_dest, get_viable_src);
-print_field(steps, {{2147483647, "?"}}, 3);
+//print_field(steps, {{2147483647, "?"}}, 3);
    auto all_as = get_all_cells_with_value(field, 'a');
 
    int min = numeric_limits<int>::max();
