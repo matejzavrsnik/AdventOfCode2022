@@ -22,7 +22,7 @@
 #include <nature/screen_rectangle.h>
 #include <nature/vector.h>
 #include <abstract/direction.h>
-#include "tools/grid.h"
+#include "grid/grid.h"
 
 inline
 mzlib::direction

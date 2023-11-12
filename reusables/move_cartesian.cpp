@@ -6,7 +6,7 @@
 #include <gtest/gtest.h>
 #include "nature/vector.h"
 #include "move_cartesian.h"
-#include "tools/grid.h"
+#include "grid/grid.h"
 
 TEST(reusables, move_cartesian)
 {

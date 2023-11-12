@@ -8,7 +8,7 @@
 
 #include <nature/vector.h>
 #include <abstract/direction.h>
-#include <tools/grid.h>
+#include <grid/grid.h>
 
 // screen: like pixels on screen
 //

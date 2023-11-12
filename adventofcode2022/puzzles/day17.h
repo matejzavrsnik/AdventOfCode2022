@@ -3,7 +3,7 @@
 #include "filesystem/read_write_file.h"
 #include "string/split.h"
 #include "iterators/copy_modify.h"
-#include "tools/grid.h"
+#include "grid/grid.h"
 #include "iterators/circular_next.h"
 #include "../../reusables/grabbag.h"
 #include "../../reusables/move_screen.h"

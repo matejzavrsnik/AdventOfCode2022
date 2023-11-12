@@ -6,7 +6,7 @@
 #include <gtest/gtest.h>
 #include "nature/vector.h"
 #include "get_direction_cartesian.h"
-#include "tools/grid.h"
+#include "grid/grid.h"
 
 TEST(reusables, get_direction_cartesian)
 {

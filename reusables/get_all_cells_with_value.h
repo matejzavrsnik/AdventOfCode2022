@@ -7,7 +7,7 @@
 
 #include "move_screen.h"
 #include "iterators/circular_next.h"
-#include "tools/grid.h"
+#include "grid/grid.h"
 #include "iterators/copy_modify.h"
 #include "filesystem/read_write_file.h"
 #include "grabbag.h"

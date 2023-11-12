@@ -5,7 +5,7 @@
 #ifndef RECREATIONAL_REUSABLES_GRABBAG_H_ANYTHING_OVERLAPS_H
 #define RECREATIONAL_REUSABLES_GRABBAG_H_ANYTHING_OVERLAPS_H
 
-#include "tools/grid.h"
+#include "grid/grid.h"
 
 template<typename T, typename Predicate>
 bool
