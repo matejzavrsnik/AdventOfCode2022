@@ -15,7 +15,7 @@ What I learned doing Advent of Code and how to be better next time.
 - Resist the urge to align code nicely and similar wastes of time. This isn't about beauty.
 - Prepare entire project structure in advance: the data file, the two functions for `part1` and `part2`, etc. That's easily 5 minutes in the morning.
 - If you have the function that will calculate the submission split into two, one can read file and other can work on data. That is useful when you want to make it work on custom data because you don't need to make it read a file to do it, or extract functionality on the spot and waste additional time.
-- Don't debug, print. Have print functions prepared for all possible data structures, because visualised values are the quickest way to debug.
+- Don't debug, print_container_template. Have print_container_template functions prepared for all possible data structures, because visualised values are the quickest way to debug.
 - There is no one way to do Advent of Code. You can do it for speed and engage with leaderboards, to learn some language better, to pass time, to get ideas for expanding your utilities library, to practice coding, etc. And once you decide what you want out of AoC, you don't need to stick to it. It's not work. And there's nothing to prove because nobody cares how well you did or did not do :)
 - The goal is to solve the specific challenge, not in general. For example, hard-coding challenge specifics is a common shortcut.
 - When extracting reusable code, make a copy, move that, and leave original where it was. You don't want to be refactoring all past AoC code whenever you want to improve reusable code.

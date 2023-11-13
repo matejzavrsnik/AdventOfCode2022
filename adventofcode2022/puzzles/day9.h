@@ -9,7 +9,7 @@
 #include "../../reusables/grabbag.h"
 #include "../../reusables/move_cartesian.h"
 #include "../../reusables/get_direction_cartesian.h"
-#include "../../reusables/are_touching.h"
+#include "grid/are_touching.h"
 #include "../../reusables/translate_to_direction.h"
 
 namespace adventofcode2022::day9
@@ -79,7 +79,7 @@ get_visited (std::vector<std::pair<char, int>>& directions, int rope_length)
          knots[0] = move_cartesian(knots[0], dir_h);
          for(int i_knot=0; i_knot<knots.size()-1; ++i_knot)
          {
-            if (!are_touching(knots[i_knot], knots[i_knot+1]))
+            if (!mzlib::grid::are_touching(knots[i_knot], knots[i_knot+1]))
             {
                auto dir_t = get_direction_cartesian(knots[i_knot+1], knots[i_knot]);
                knots[i_knot+1] = move_cartesian(knots[i_knot + 1], dir_t);

@@ -11,81 +11,88 @@
 #include "set_all_cells_to_value.h"
 #include "get_all_cells.h"
 
-inline
-std::vector<mzlib::grid::cell>
-all_cells_allowed(
-   const mzlib::grid::type<int>& field,
-   const std::vector<mzlib::grid::cell>& n,
-   mzlib::grid::cell f)
+template<typename T>
+bool
+all_cells_allowed (
+   const mzlib::grid::type<T>& grid,
+   const mzlib::grid::cell& from,
+   const mzlib::grid::cell& to
+)
 {
-   std::vector<mzlib::grid::cell> viable;
-   for(auto nn : n)
-      // here could be condition
-      viable.push_back(nn);
-   return viable;
+   return true;
 }
 
+template<typename T>
+using allowed_transition_fun_t = decltype(all_cells_allowed<T>);
 
-inline
+template<typename T>
 bool
-destination_at_most_one_larger(
-   mzlib::grid::cell from,
-   mzlib::grid::cell to,
-   const mzlib::grid::type<int>& field)
+destination_at_most_one_larger (
+   const mzlib::grid::type<T>& grid,
+   const mzlib::grid::cell& from,
+   const mzlib::grid::cell& to
+)
 {
    return
-      mzlib::grid::access(field, to) - 1 <=
-      mzlib::grid::access(field, from);
+      mzlib::grid::access(grid, to) - 1 <=
+      mzlib::grid::access(grid, from);
 }
 
-inline
+namespace internal
+{
+
+template<typename T>
 std::vector<mzlib::grid::cell>
-allowed_transition_to(
-   const mzlib::grid::type<int>& field,
+allowed_transition_to (
+   const mzlib::grid::type<T>& grid,
    const std::vector<mzlib::grid::cell>& candidate_destinations,
-   mzlib::grid::cell from,
-   typeof(destination_at_most_one_larger) allowed_transition)
+   const mzlib::grid::cell& from,
+   allowed_transition_fun_t<T> allowed_transition
+)
 {
    std::vector<mzlib::grid::cell> allowed;
-   for(auto to : candidate_destinations)
-      if (allowed_transition(from, to, field))
+   for (auto to: candidate_destinations)
+      if (allowed_transition(grid, from, to))
          allowed.push_back(to);
    return allowed;
 }
 
-
-
-inline
+template<typename T>
 std::vector<mzlib::grid::cell>
 allowed_transition_from (
-   const mzlib::grid::type<int>& field,
+   const mzlib::grid::type<T>& grid,
    const std::vector<mzlib::grid::cell>& candidate_sources,
-   mzlib::grid::cell to,
-   typeof(destination_at_most_one_larger) allowed_transition)
+   const mzlib::grid::cell& to,
+   allowed_transition_fun_t<T> allowed_transition
+)
 {
    std::vector<mzlib::grid::cell> allowed;
-   for(auto from : candidate_sources)
-      if (allowed_transition(from, to, field))
+   for (auto from: candidate_sources)
+      if (allowed_transition(grid, from, to))
          allowed.push_back(from);
    return allowed;
 }
 
-inline
-mzlib::grid::type<int>
+}
+
+template<typename T>
+mzlib::grid::type<long>
 single_source_shortest_path_bfs (
-   mzlib::grid::type<int>& field,
-   const mzlib::grid::cell& coor_start,
-   typeof(destination_at_most_one_larger) allowed_transition = destination_at_most_one_larger)
+   const mzlib::grid::type<T>& grid,
+   const mzlib::grid::cell& start,
+   allowed_transition_fun_t<T> allowed_transition)
 {
-   mzlib::grid::type<int> steps = field;
-   set_all_cells_to_value(steps, std::numeric_limits<int>::max());
+   mzlib::grid::type<long> steps = mzlib::grid::construct<long>(mzlib::grid::size(grid));
+   set_all_cells_to_value(steps, std::numeric_limits<long>::max());
 
    cell_set discovered_cells; // discovered
-   cell_set undiscovered_cells = to_unordered_set(get_all_cells(field)); // undiscovered
+   auto all_cells = get_all_cells(grid);
+   print_container(all_cells);
+   cell_set undiscovered_cells = to_unordered_set(all_cells); // undiscovered
    cell_set frontier_cells; // frontier_cells
 
-   frontier_cells.insert(coor_start);
-   undiscovered_cells.erase(coor_start);
+   frontier_cells.insert(start);
+   undiscovered_cells.erase(start);
 
    bool problem_shrank = false;
    while(!undiscovered_cells.empty() || !frontier_cells.empty())
@@ -94,16 +101,16 @@ single_source_shortest_path_bfs (
       problem_shrank = false;
 
       for(auto frontier_cell : frontier_cells) {
-         //cout << "frontier_cell: " << frontier_cell << endl;
-         auto neighbours = get_neighbour_cells(field, frontier_cell);
+std::cout << "frontier_cell: " << frontier_cell << std::endl;
+         auto neighbours = get_neighbour_cells(grid, frontier_cell);
 
          // from discovered_neigbours neighbours I want direction
          auto discovered_neigbours = cells_are_in_container_filter(neighbours, discovered_cells);
 
-         auto possible_source = allowed_transition_from(field, discovered_neigbours, frontier_cell, destination_at_most_one_larger);
+         auto possible_source = internal::allowed_transition_from(grid, discovered_neigbours, frontier_cell, allowed_transition);
 
          //cout << "discovered_neigbours: ";
-         //print(discovered_neigbours);
+         //print_container_template(discovered_neigbours);
          //cout << endl;
          if(possible_source.size()>0)
          {
@@ -124,11 +131,11 @@ single_source_shortest_path_bfs (
          // undiscovered neighbours move to new frontier_cells
          auto undiscovered = cells_are_in_container_filter(neighbours, undiscovered_cells);
          //cout << "undiscovered: ";
-         //print(undiscovered);
+         //print_container_template(undiscovered);
          //cout << endl;
-         auto possible_destinations = allowed_transition_to(field, undiscovered, frontier_cell, destination_at_most_one_larger);
+         auto possible_destinations = internal::allowed_transition_to(grid, undiscovered, frontier_cell, allowed_transition);
          //cout << "1 step: ";
-         //print(possible_destinations);
+         //print_container_template(possible_destinations);
          //cout << endl;
          for(auto possible_destination : possible_destinations)
          {

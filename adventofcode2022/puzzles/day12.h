@@ -96,7 +96,7 @@ single_source_shortest_path_bfs (
          auto possible_source = allowed_transition(field, discovered_neigbours, frontier_cell);
 
          //cout << "discovered_neigbours: ";
-         //print(discovered_neigbours);
+         //print_container_template(discovered_neigbours);
          //cout << endl;
          if(possible_source.size()>0)
          {
@@ -117,11 +117,11 @@ single_source_shortest_path_bfs (
          // undiscovered neighbours move to new frontier_cells
          auto undiscovered = cells_are_in_container_filter(neighbours, undiscovered_cells);
          //cout << "undiscovered: ";
-         //print(undiscovered);
+         //print_container_template(undiscovered);
          //cout << endl;
          auto possible_destinations = get_allowed_destination_cells_fun(field, undiscovered, frontier_cell);
          //cout << "1 step: ";
-         //print(possible_destinations);
+         //print_container_template(possible_destinations);
          //cout << endl;
          for(auto possible_destination : possible_destinations)
          {

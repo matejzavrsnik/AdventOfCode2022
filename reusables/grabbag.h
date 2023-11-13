@@ -25,20 +25,20 @@
 #include "iterators/circular_next.h"
 #include "move_screen.h"
 
-
 template<class Container>
-void print(const Container& c){
+void print_container(const Container& c){
    std::cout << "[";
    for (const auto& e: c) std::cout << e << ",";
-   std::cout << "]";
+   std::cout << "]" << std::endl;
 }
 
-template<class T>
-void print_grid(
+template<typename T>
+void print(
    const mzlib::grid::type<T>& grid,
-   std::map<int,std::string> substitutions={},
-   int align=2,
-   std::ostream& stream = std::cout)
+   std::map<T,std::string> substitutions= {},
+   int align= 2,
+   std::ostream& stream = std::cout
+)
 {
    for (const auto& row : grid)
    {

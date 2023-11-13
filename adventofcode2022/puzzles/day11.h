@@ -120,7 +120,7 @@ do_rounds (vector<monkey> monkeys, long rounds, bool divide=true)
       for(auto& monkey : monkeys)
       {
          //cout << "  turn: monkey " << monkey.debug_name << " with items ";
-         //print(monkey.items); cout << endl;
+         //print_container_template(monkey.items); cout << endl;
          while(!monkey.items.empty())
          {
             Number item = monkey.inspect_next_item();
@@ -136,19 +136,19 @@ do_rounds (vector<monkey> monkeys, long rounds, bool divide=true)
             {
                //cout << "        yes: throw to " << monkey.if_true << endl;
                //cout << "          monkey " << monkey.if_true << " had: ";
-               //print(monkeys[monkey.if_true].items); cout << endl;
+               //print_container_template(monkeys[monkey.if_true].items); cout << endl;
                monkeys[monkey.if_true].items.push_back(item);
                //cout << "          now it has:   ";
-               //print(monkeys[monkey.if_true].items); cout << endl;
+               //print_container_template(monkeys[monkey.if_true].items); cout << endl;
             }
             else
             {
                //cout << "        no: throw to " << monkey.if_false << endl;
                //cout << "          monkey " << monkey.if_false << " had: ";
-               //print(monkeys[monkey.if_false].items); cout << endl;
+               //print_container_template(monkeys[monkey.if_false].items); cout << endl;
                monkeys[monkey.if_false].items.push_back(item);
                //cout << "          now it has:   ";
-               //print(monkeys[monkey.if_false].items); cout << endl;
+               //print_container_template(monkeys[monkey.if_false].items); cout << endl;
             }
          }
       }

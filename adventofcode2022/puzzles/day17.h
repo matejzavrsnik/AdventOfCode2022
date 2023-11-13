@@ -219,7 +219,7 @@ part2 (std::string input_file)
       mzlib::circular_next_iterator(rock_it, rocks.begin(), rocks.end());
    }
 
-   print(highest_rocks_diff);
+   print_container(highest_rocks_diff);
 
    // 3233 too high, 3442 too high, 3212 not correct, 2958 is not correct
    return highest_rock;

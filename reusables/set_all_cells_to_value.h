@@ -29,11 +29,11 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline
+template<typename T>
 void
 set_all_cells_to_value(
-   mzlib::grid::type<int>& field,
-   int value)
+   mzlib::grid::type<T>& field,
+   T value)
 {
    for(int row = 0; row < field.size(); ++row)
       for(int col = 0; col < field[0].size(); ++col)
