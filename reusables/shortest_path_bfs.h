@@ -10,6 +10,7 @@
 #include "get_neighbour_cells.h"
 #include "set_all_cells_to_value.h"
 #include "get_all_cells.h"
+#include "tools/print_iterables.h"
 
 template<typename T>
 bool
@@ -87,7 +88,6 @@ single_source_shortest_path_bfs (
 
    cell_set discovered_cells; // discovered
    auto all_cells = get_all_cells(grid);
-   print_container(all_cells);
    cell_set undiscovered_cells = to_unordered_set(all_cells); // undiscovered
    cell_set frontier_cells; // frontier_cells
 
@@ -101,7 +101,7 @@ single_source_shortest_path_bfs (
       problem_shrank = false;
 
       for(auto frontier_cell : frontier_cells) {
-std::cout << "frontier_cell: " << frontier_cell << std::endl;
+
          auto neighbours = get_neighbour_cells(grid, frontier_cell);
 
          // from discovered_neigbours neighbours I want direction

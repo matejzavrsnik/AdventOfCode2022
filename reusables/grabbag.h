@@ -25,12 +25,6 @@
 #include "iterators/circular_next.h"
 #include "move_screen.h"
 
-template<class Container>
-void print_container(const Container& c){
-   std::cout << "[";
-   for (const auto& e: c) std::cout << e << ",";
-   std::cout << "]" << std::endl;
-}
 
 template<typename T>
 void print(

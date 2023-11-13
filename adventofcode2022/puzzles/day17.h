@@ -19,7 +19,12 @@ namespace adventofcode2022::day17
  *                 METHODS
  */
 
-
+template<class Container>
+void print_container(const Container& c){
+   std::cout << "[";
+   for (const auto& e: c) std::cout << e << ",";
+   std::cout << "]" << std::endl;
+}
 
 const mzlib::grid::type<int> rock_m = {
    {1,1,1,1}

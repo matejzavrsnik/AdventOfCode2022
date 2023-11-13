@@ -1,10 +1,8 @@
 #include "grabbag.h"
 
-#include "binary_string_to_int.h"
-
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-
+#include "binary_string_to_int.h"
 
 TEST(reusables, binary_string_to_int)
 {
