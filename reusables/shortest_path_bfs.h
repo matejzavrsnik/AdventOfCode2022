@@ -5,12 +5,12 @@
 #ifndef RECREATIONAL_REUSABLES_GRABBAG_H_SHORTEST_PATH_H
 #define RECREATIONAL_REUSABLES_GRABBAG_H_SHORTEST_PATH_H
 
-#include "grabbag.h"
+//#include "grabbag.h"
 #include "cells_are_in_container_filter.h"
 #include "get_neighbour_cells.h"
 #include "set_all_cells_to_value.h"
 #include "get_all_cells.h"
-#include "tools/print_iterables.h"
+#include "printers/print_iterables.h"
 
 template<typename T>
 bool
@@ -83,13 +83,14 @@ single_source_shortest_path_bfs (
    const mzlib::grid::cell& start,
    allowed_transition_fun_t<T> allowed_transition)
 {
-   mzlib::grid::type<long> steps = mzlib::grid::construct<long>(mzlib::grid::size(grid));
-   set_all_cells_to_value(steps, std::numeric_limits<long>::max());
+   mzlib::grid::type<long> steps = mzlib::grid::construct<long>(
+      mzlib::grid::size(grid),
+      std::numeric_limits<long>::max());
 
-   cell_set discovered_cells; // discovered
+   std::unordered_set<mzlib::grid::cell> discovered_cells;
    auto all_cells = get_all_cells(grid);
-   cell_set undiscovered_cells = to_unordered_set(all_cells); // undiscovered
-   cell_set frontier_cells; // frontier_cells
+   std::unordered_set<mzlib::grid::cell> undiscovered_cells = to_unordered_set(all_cells);
+   std::unordered_set<mzlib::grid::cell> frontier_cells;
 
    frontier_cells.insert(start);
    undiscovered_cells.erase(start);
@@ -97,26 +98,22 @@ single_source_shortest_path_bfs (
    bool problem_shrank = false;
    while(!undiscovered_cells.empty() || !frontier_cells.empty())
    {
-      cell_set next_frontier;
+      std::unordered_set<mzlib::grid::cell> next_frontier;
       problem_shrank = false;
+      for(auto frontier_cell : frontier_cells)
+      {
+         auto all_neighbours_of_cell = get_neighbouring_cells(grid, frontier_cell);
+         auto discovered_neigbours = cells_are_in_container_filter(all_neighbours_of_cell, discovered_cells);
 
-      for(auto frontier_cell : frontier_cells) {
+         auto possible_sources = internal::allowed_transition_from(grid, discovered_neigbours, frontier_cell, allowed_transition);
 
-         auto neighbours = get_neighbour_cells(grid, frontier_cell);
-
-         // from discovered_neigbours neighbours I want direction
-         auto discovered_neigbours = cells_are_in_container_filter(neighbours, discovered_cells);
-
-         auto possible_source = internal::allowed_transition_from(grid, discovered_neigbours, frontier_cell, allowed_transition);
-
-         //cout << "discovered_neigbours: ";
-         //print_container_template(discovered_neigbours);
-         //cout << endl;
-         if(possible_source.size()>0)
+         if(possible_sources.size()>0)
          {
-            auto min_neighbour = *min(possible_source.begin(), possible_source.end());
-            auto min_steps = mzlib::grid::access(steps, min_neighbour); //steps[min_neighbour[0]][min_neighbour[1]];
-            mzlib::grid::access(steps, frontier_cell) = min_steps + 1;
+            // doesn't matter which, because in this algo all transitions cost 1
+            auto source_cell = *possible_sources.begin();
+            auto steps_to_get_this_far = mzlib::grid::access(steps, source_cell); //steps[source_cell[0]][source_cell[1]];
+            mzlib::grid::access(steps, frontier_cell) = steps_to_get_this_far + 1;
+
             //steps[frontier_cell[0]][frontier_cell[1]] = min_steps + 1;
          }
          else
@@ -128,8 +125,8 @@ single_source_shortest_path_bfs (
          // frontier_cell is now discovered_neigbours
          discovered_cells.insert(frontier_cell);
 
-         // undiscovered neighbours move to new frontier_cells
-         auto undiscovered = cells_are_in_container_filter(neighbours, undiscovered_cells);
+         // undiscovered all_neighbours_of_cell move to new frontier_cells
+         auto undiscovered = cells_are_in_container_filter(all_neighbours_of_cell, undiscovered_cells);
          //cout << "undiscovered: ";
          //print_container_template(undiscovered);
          //cout << endl;

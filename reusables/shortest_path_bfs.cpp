@@ -34,7 +34,7 @@ TEST(reusables, single_source_shortest_path_bfs__demo)
    ASSERT_EQ(31, mzlib::grid::access(steps_to_get_there, {5,2}));
 }
 
-TEST(reusables, single_source_shortest_path_bfs__custom_criterium)
+TEST(reusables, single_source_shortest_path_bfs__demo_with_custom_criterium)
 {
    // let's say I want to get from a to b, but can't cross into x.
    auto grid = mzlib::grid::convert_to_grid<int>({
@@ -53,7 +53,7 @@ TEST(reusables, single_source_shortest_path_bfs__custom_criterium)
       }
    );
 
-   print(steps_to_get_there, {{9223372036854775807, "?"}}, 4);
+   //mzlib::print(steps_to_get_there, {.align=4, .substitutions={{9223372036854775807, "?"}}});
 
    // shortest path to every cell in this grid
    auto max = std::numeric_limits<long>::max();

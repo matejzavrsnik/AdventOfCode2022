@@ -25,28 +25,6 @@
 #include "iterators/circular_next.h"
 #include "move_screen.h"
 
-
-template<typename T>
-void print(
-   const mzlib::grid::type<T>& grid,
-   std::map<T,std::string> substitutions= {},
-   int align= 2,
-   std::ostream& stream = std::cout
-)
-{
-   for (const auto& row : grid)
-   {
-      for (const auto& el: row)
-      {
-         if (substitutions.contains(el))
-            stream << std::setfill(' ') << std::setw(align) << substitutions[el];
-         else stream << std::setfill(' ') << std::setw(align) << el;
-      }
-      stream << std::endl;
-   }
-   stream << std::endl;
-}
-
 // to mzlib converters
 template<class T>
 inline std::unordered_set<T> to_unordered_set(const std::vector<T>& v)
@@ -55,7 +33,7 @@ inline std::unordered_set<T> to_unordered_set(const std::vector<T>& v)
 }
 
 using assignment_pairs = std::pair<std::pair<int, int>, std::pair<int, int>>;
-using cell_set = std::unordered_set<mzlib::grid::cell>;
+
 
 
 

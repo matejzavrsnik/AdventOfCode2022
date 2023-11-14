@@ -73,9 +73,9 @@ single_source_shortest_path_bfs (
    std::vector<std::vector<int>> steps = field;
    set_all_cells_to_value(steps, std::numeric_limits<int>::max());
 
-   cell_set discovered_cells; // discovered
-   cell_set undiscovered_cells = to_unordered_set(get_all_cells(field)); // undiscovered
-   cell_set frontier_cells; // frontier_cells
+   std::unordered_set<mzlib::grid::cell> discovered_cells; // discovered
+   std::unordered_set<mzlib::grid::cell> undiscovered_cells = to_unordered_set(get_all_cells(field)); // undiscovered
+   std::unordered_set<mzlib::grid::cell> frontier_cells; // frontier_cells
 
    frontier_cells.insert(coor_start);
    undiscovered_cells.erase(coor_start);
@@ -83,12 +83,12 @@ single_source_shortest_path_bfs (
    bool problem_shrank = false;
    while(!undiscovered_cells.empty() || !frontier_cells.empty())
    {
-      cell_set next_frontier;
+      std::unordered_set<mzlib::grid::cell> next_frontier;
       problem_shrank = false;
 
       for(auto frontier_cell : frontier_cells) {
          //cout << "frontier_cell: " << frontier_cell << endl;
-         auto neighbours = get_neighbour_cells(field, frontier_cell);
+         auto neighbours = get_neighbouring_cells(field, frontier_cell);
 
          // from discovered_neigbours neighbours I want direction
          auto discovered_neigbours = cells_are_in_container_filter(neighbours, discovered_cells);

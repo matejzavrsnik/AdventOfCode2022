@@ -10,7 +10,7 @@
 
 inline
 std::vector<mzlib::grid::cell>
-get_neighbour_cells(
+get_neighbouring_cells(
    const mzlib::grid::type<int>& field,
    const mzlib::grid::cell& c
 )
