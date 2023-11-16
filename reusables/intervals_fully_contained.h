@@ -5,7 +5,6 @@
 #ifndef RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_FULLY_CONTAINED_H
 #define RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_FULLY_CONTAINED_H
 
-#include "grabbag.h"
 #include "interval_inside_the_other.h"
 
 inline

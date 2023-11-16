@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <ranges>
 
-#include "../../reusables/grabbag.h"
 #include "../../reusables/intervals_overlap.h"
 #include "../../reusables/intervals_fully_contained.h"
 #include "../../reusables/parse_pairs_of_numbers.h"
@@ -16,7 +15,7 @@
 namespace adventofcode2022::day4
 {
 
-
+using assignment_pairs = std::pair<std::pair<int, int>, std::pair<int, int>>;
 inline bool
 is_overlapping (assignment_pairs assignments)
 {

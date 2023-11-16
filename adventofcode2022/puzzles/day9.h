@@ -6,7 +6,6 @@
 #include "iterators/copy_modify.h"
 #include "nature/vector.h"
 #include "abstract/direction.h"
-#include "../../reusables/grabbag.h"
 #include "../../reusables/move_cartesian.h"
 #include "../../reusables/get_direction_cartesian.h"
 #include "grid/are_touching.h"

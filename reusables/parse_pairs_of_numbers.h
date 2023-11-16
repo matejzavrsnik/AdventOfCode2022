@@ -10,7 +10,6 @@
 #include "grid/grid.h"
 #include "iterators/copy_modify.h"
 #include "filesystem/read_write_file.h"
-#include "grabbag.h"
 #include <deque>
 #include <ranges>
 #include <numeric>
@@ -32,7 +31,7 @@
 
 // parse_pairs_of_numbers the line in file into pair of pairs. format: 41-42,40-40
 inline
-assignment_pairs
+std::pair<std::pair<int, int>, std::pair<int, int>>
 parse_pairs_of_numbers (
    std::string s)
 {

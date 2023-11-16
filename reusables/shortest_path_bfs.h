@@ -5,12 +5,12 @@
 #ifndef RECREATIONAL_REUSABLES_GRABBAG_H_SHORTEST_PATH_H
 #define RECREATIONAL_REUSABLES_GRABBAG_H_SHORTEST_PATH_H
 
-//#include "grabbag.h"
 #include "cells_are_in_container_filter.h"
 #include "get_neighbour_cells.h"
 #include "set_all_cells_to_value.h"
 #include "get_all_cells.h"
 #include "printers/print_iterables.h"
+#include <tools/converters.h>
 
 template<typename T>
 bool
@@ -89,7 +89,7 @@ single_source_shortest_path_bfs (
 
    std::unordered_set<mzlib::grid::cell> discovered_cells;
    auto all_cells = get_all_cells(grid);
-   std::unordered_set<mzlib::grid::cell> undiscovered_cells = to_unordered_set(all_cells);
+   std::unordered_set<mzlib::grid::cell> undiscovered_cells = mzlib::to_unordered_set(all_cells);
    std::unordered_set<mzlib::grid::cell> frontier_cells;
 
    frontier_cells.insert(start);

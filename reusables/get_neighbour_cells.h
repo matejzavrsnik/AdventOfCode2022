@@ -5,7 +5,6 @@
 #ifndef RECREATIONAL_REUSABLES_GRABBAG_H_GET_NEIGHBOUR_CELLS_H
 #define RECREATIONAL_REUSABLES_GRABBAG_H_GET_NEIGHBOUR_CELLS_H
 
-#include "grabbag.h"
 #include "cell_is_in_field.h"
 
 inline

@@ -1,5 +1,3 @@
-#include "grabbag.h"
-
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "binary_string_to_int.h"

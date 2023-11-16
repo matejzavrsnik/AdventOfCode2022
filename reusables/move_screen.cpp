@@ -7,7 +7,6 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include "nature/vector.h"
-#include "grabbag.h"
 #include "move_screen.h"
 
 TEST(reusables, move_screen)

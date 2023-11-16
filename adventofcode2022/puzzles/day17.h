@@ -5,7 +5,6 @@
 #include "iterators/copy_modify.h"
 #include "grid/grid.h"
 #include "iterators/circular_next.h"
-#include "../../reusables/grabbag.h"
 #include "../../reusables/move_screen.h"
 #include "grid/move_unless.h"
 #include "grid/apply_drawing.h"

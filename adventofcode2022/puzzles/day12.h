@@ -4,7 +4,6 @@
 #include "string/split.h"
 #include "iterators/copy_modify.h"
 #include "nature/vector.h"
-#include "../../reusables/grabbag.h"
 #include "../../reusables/shortest_path_bfs.h"
 #include "../../reusables/get_all_cells_with_value.h"
 #include <numeric>
@@ -13,6 +12,7 @@
 #include <deque>
 #include <unordered_set>
 #include <unordered_map>
+#include "tools/converters.h"
 
 using namespace std;
 
@@ -74,7 +74,7 @@ single_source_shortest_path_bfs (
    set_all_cells_to_value(steps, std::numeric_limits<int>::max());
 
    std::unordered_set<mzlib::grid::cell> discovered_cells; // discovered
-   std::unordered_set<mzlib::grid::cell> undiscovered_cells = to_unordered_set(get_all_cells(field)); // undiscovered
+   std::unordered_set<mzlib::grid::cell> undiscovered_cells = mzlib::to_unordered_set(get_all_cells(field)); // undiscovered
    std::unordered_set<mzlib::grid::cell> frontier_cells; // frontier_cells
 
    frontier_cells.insert(coor_start);

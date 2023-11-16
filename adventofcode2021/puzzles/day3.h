@@ -1,7 +1,6 @@
 #pragma once
 
 #include "filesystem/read_write_file.h"
-#include "../../reusables/grabbag.h"
 #include "../../reusables/binary_string_to_int.h"
 
 namespace adventofcode2021::day3

@@ -5,7 +5,6 @@
 #ifndef RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_OVERLAP_H
 #define RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_OVERLAP_H
 
-#include "grabbag.h"
 #include "interval_overlaps_the_other.h"
 
 inline
