@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../reusables/sets_intersection_plural.h"
+#include "tools/sets_intersection.h"
 #include "filesystem/read_write_file.h"
 #include <numeric>
 #include <set>

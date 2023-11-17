@@ -1,20 +1,22 @@
 //
-// Created by matej on 09/11/23.
+// Copyright (c) 2023 Matej Zavrsnik
+//
+// Web:  matejzavrsnik.com
+// Mail: matejzavrsnik@gmail.com
 //
 
-#ifndef RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_FULLY_CONTAINED_H
-#define RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_FULLY_CONTAINED_H
+#pragma once
 
 #include "interval_inside_the_other.h"
 
-inline
+template<typename T>
 bool
 intervals_fully_contained (
-   std::pair<int, int> a,
-   std::pair<int, int> b)
+   const std::pair<T, T>& a,
+   const std::pair<T, T>& b)
 {
    return interval_inside_the_other(a, b)
       || interval_inside_the_other(b, a);
 }
 
-#endif //RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_FULLY_CONTAINED_H
+

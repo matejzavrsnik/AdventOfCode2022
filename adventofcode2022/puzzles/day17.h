@@ -5,7 +5,7 @@
 #include "iterators/copy_modify.h"
 #include "grid/grid.h"
 #include "iterators/circular_next.h"
-#include "../../reusables/move_screen.h"
+#include "grid/move_screen.h"
 #include "grid/move_unless.h"
 #include "grid/apply_drawing.h"
 
@@ -72,10 +72,10 @@ inline mzlib::grid::cell coordinates_after_push(
    switch(jet)
    {
    case '>':
-      new_coor = move_screen(coor, mzlib::direction::e);
+      new_coor = mzlib::grid::move_screen(coor, mzlib::direction::e);
       break;
    case '<':
-      new_coor = move_screen(coor, mzlib::direction::w);
+      new_coor = mzlib::grid::move_screen(coor, mzlib::direction::w);
       break;
    }
    return new_coor;
@@ -130,7 +130,7 @@ part1 (std::string input_file)
          rock_coor = mzlib::grid::move_unless(chamber, *rock_it, rock_coor, pushed_coor, mzlib::greater_than(1));
 
          // fall
-         auto fallen_coor = move_screen(rock_coor, mzlib::direction::s);
+         auto fallen_coor = mzlib::grid::move_screen(rock_coor, mzlib::direction::s);
          rock_coor = mzlib::grid::move_unless(chamber, *rock_it, rock_coor, fallen_coor, mzlib::greater_than(1));
          rock_fell = rock_coor == fallen_coor;
 
@@ -206,7 +206,7 @@ part2 (std::string input_file)
          //print_field(chamber, {{0, "."},{1, "#"}}, 1);
 
          // fall
-         auto fallen_coor = move_screen(rock_coor, mzlib::direction::s);
+         auto fallen_coor = mzlib::grid::move_screen(rock_coor, mzlib::direction::s);
          rock_coor = mzlib::grid::move_unless(chamber, *rock_it, rock_coor, fallen_coor, mzlib::greater_than(1));
          rock_fell = rock_coor == fallen_coor;
 

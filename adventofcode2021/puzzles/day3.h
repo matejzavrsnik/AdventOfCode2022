@@ -1,7 +1,7 @@
 #pragma once
 
 #include "filesystem/read_write_file.h"
-#include "../../reusables/binary_string_to_int.h"
+#include "tools/binary_string_to_int.h"
 
 namespace adventofcode2021::day3
 {
@@ -18,8 +18,8 @@ part1 (std::string input_file)
 
    auto g_rate = calc_g_rate(input);
    auto e_rate = calc_e_rate(input);
-   auto i_g_rate = binary_string_to_int(g_rate);
-   auto i_e_rate = binary_string_to_int(e_rate);
+   auto i_g_rate = mzlib::binary_string_to_int(g_rate);
+   auto i_e_rate = mzlib::binary_string_to_int(e_rate);
 
    return i_g_rate*i_e_rate;
 }

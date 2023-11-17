@@ -1,20 +1,20 @@
 //
-// Created by matej on 09/11/23.
+// Copyright (c) 2023 Matej Zavrsnik
+//
+// Web:  matejzavrsnik.com
+// Mail: matejzavrsnik@gmail.com
 //
 
-#ifndef RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_OVERLAP_H
-#define RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_OVERLAP_H
+#pragma once
 
 #include "interval_overlaps_the_other.h"
 
-inline
+template<typename T>
 bool
 intervals_overlap (
-   std::pair<int, int> a,
-   std::pair<int, int> b)
+   const std::pair<T, T>& a,
+   const std::pair<T, T>& b)
 {
    return interval_overlaps_the_other(a, b)
       || interval_overlaps_the_other(b, a);
 }
-
-#endif //RECREATIONAL_REUSABLES_GRABBAG_H_INTERVALS_OVERLAP_H

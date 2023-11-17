@@ -4,8 +4,9 @@
 #include "string/split.h"
 #include "iterators/copy_modify.h"
 #include "nature/vector.h"
-#include "../../reusables/shortest_path_bfs.h"
-#include "../../reusables/get_all_cells_with_value.h"
+#include "grid/shortest_path_bfs.h"
+#include "grid/get_all_cells_with_value.h"
+#include "tools/sets_intersection.h"
 #include <numeric>
 #include <ranges>
 #include <algorithm>
@@ -13,6 +14,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include "tools/converters.h"
+#include "grid/set_all_to.h"
 
 using namespace std;
 
@@ -61,6 +63,19 @@ vector<mzlib::grid::cell> get_viable_src(
    return viable;
 }
 
+inline
+std::vector<mzlib::grid::cell>
+cells_are_in_container_filter(
+   const std::vector<mzlib::grid::cell>& cells,
+   const std::set<mzlib::grid::cell>& container)
+{
+   std::vector<mzlib::grid::cell> filtered;
+   for(auto c : cells)
+      if(container.contains(c))
+         filtered.push_back(c);
+   return filtered;
+}
+
 template<class ViableNextStepInvokable>
 std::vector<std::vector<int>>
 single_source_shortest_path_bfs (
@@ -71,11 +86,11 @@ single_source_shortest_path_bfs (
 )
 {
    std::vector<std::vector<int>> steps = field;
-   set_all_cells_to_value(steps, std::numeric_limits<int>::max());
+   mzlib::grid::set_all_to(steps, std::numeric_limits<int>::max());
 
-   std::unordered_set<mzlib::grid::cell> discovered_cells; // discovered
-   std::unordered_set<mzlib::grid::cell> undiscovered_cells = mzlib::to_unordered_set(get_all_cells(field)); // undiscovered
-   std::unordered_set<mzlib::grid::cell> frontier_cells; // frontier_cells
+   std::set<mzlib::grid::cell> discovered_cells; // discovered
+   std::set<mzlib::grid::cell> undiscovered_cells = mzlib::to<std::set>(mzlib::grid::get_all_cells(field)); // undiscovered
+   std::set<mzlib::grid::cell> frontier_cells; // frontier_cells
 
    frontier_cells.insert(coor_start);
    undiscovered_cells.erase(coor_start);
@@ -83,17 +98,17 @@ single_source_shortest_path_bfs (
    bool problem_shrank = false;
    while(!undiscovered_cells.empty() || !frontier_cells.empty())
    {
-      std::unordered_set<mzlib::grid::cell> next_frontier;
+      std::set<mzlib::grid::cell> next_frontier;
       problem_shrank = false;
 
       for(auto frontier_cell : frontier_cells) {
          //cout << "frontier_cell: " << frontier_cell << endl;
-         auto neighbours = get_neighbouring_cells(field, frontier_cell);
+         auto neighbours = mzlib::grid::get_neighbouring_cells(field, frontier_cell);
 
          // from discovered_neigbours neighbours I want direction
-         auto discovered_neigbours = cells_are_in_container_filter(neighbours, discovered_cells);
+         auto discovered_neigbours = sets_intersection(mzlib::to<std::set>(neighbours), discovered_cells);
 
-         auto possible_source = allowed_transition(field, discovered_neigbours, frontier_cell);
+         auto possible_source = allowed_transition(field, mzlib::to<vector>(discovered_neigbours), frontier_cell);
 
          //cout << "discovered_neigbours: ";
          //print_container_template(discovered_neigbours);
@@ -158,8 +173,8 @@ part1_impl(std::vector<std::string> input)
       field.push_back(row);
    }
 
-   auto coor_start = get_all_cells_with_value(field, 'S')[0];
-   auto coor_end = get_all_cells_with_value(field, 'E')[0];
+   auto coor_start = mzlib::grid::get_all_cells_with_value(field, 'S')[0];
+   auto coor_end = mzlib::grid::get_all_cells_with_value(field, 'E')[0];
    mzlib::grid::access(field, coor_start) = 'a';
    mzlib::grid::access(field, coor_end) = 'z';
 
@@ -192,14 +207,14 @@ part2 (std::string input_file)
       field.push_back(row);
    }
 
-   auto coor_start = get_all_cells_with_value(field, 'S')[0];
-   auto coor_end = get_all_cells_with_value(field, 'E')[0];
+   auto coor_start = mzlib::grid::get_all_cells_with_value(field, 'S')[0];
+   auto coor_end = mzlib::grid::get_all_cells_with_value(field, 'E')[0];
    mzlib::grid::access(field, coor_start) = 'a';
    mzlib::grid::access(field, coor_end) = 'z';
 
    auto steps = single_source_shortest_path_bfs(field, coor_end, get_viable_dest, get_viable_src);
 //print_field(steps, {{2147483647, "?"}}, 3);
-   auto all_as = get_all_cells_with_value(field, 'a');
+   auto all_as = mzlib::grid::get_all_cells_with_value(field, 'a');
 
    int min = numeric_limits<int>::max();
    for(auto an_a : all_as) {

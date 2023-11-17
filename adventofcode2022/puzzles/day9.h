@@ -6,10 +6,10 @@
 #include "iterators/copy_modify.h"
 #include "nature/vector.h"
 #include "abstract/direction.h"
-#include "../../reusables/move_cartesian.h"
-#include "../../reusables/get_direction_cartesian.h"
+#include "grid/move_cartesian.h"
+#include "grid/get_direction_cartesian.h"
 #include "grid/are_touching.h"
-#include "../../reusables/translate_to_direction.h"
+#include "abstract/translate_to_direction.h"
 
 namespace adventofcode2022::day9
 {
@@ -72,16 +72,16 @@ get_visited (std::vector<std::pair<char, int>>& directions, int rope_length)
    visited.insert(knots.back());
    for(auto& [c_dir, steps] : directions)
    {
-      auto dir_h = translate_to_direction(c_dir);
+      auto dir_h = mzlib::translate_to_direction(c_dir);
       for(int step=0; step<steps; ++step)
       {
-         knots[0] = move_cartesian(knots[0], dir_h);
+         knots[0] = mzlib::grid::move_cartesian(knots[0], dir_h);
          for(int i_knot=0; i_knot<knots.size()-1; ++i_knot)
          {
             if (!mzlib::grid::are_touching(knots[i_knot], knots[i_knot+1]))
             {
-               auto dir_t = get_direction_cartesian(knots[i_knot+1], knots[i_knot]);
-               knots[i_knot+1] = move_cartesian(knots[i_knot + 1], dir_t);
+               auto dir_t = mzlib::grid::get_direction_cartesian(knots[i_knot+1], knots[i_knot]);
+               knots[i_knot+1] = mzlib::grid::move_cartesian(knots[i_knot + 1], dir_t);
             }
          }
          visited.insert(knots.back());

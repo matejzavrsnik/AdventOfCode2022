@@ -1,11 +1,13 @@
 //
-// Created by matej on 09/11/23.
+// Copyright (c) 2023 Matej Zavrsnik
+//
+// Web:  matejzavrsnik.com
+// Mail: matejzavrsnik@gmail.com
 //
 
-#ifndef RECREATIONAL_REUSABLES_GRABBAG_H_GET_INTERVAL_EXTREMES_H
-#define RECREATIONAL_REUSABLES_GRABBAG_H_GET_INTERVAL_EXTREMES_H
+#pragma once
 
-#include "move_screen.h"
+#include "grid/move_screen.h"
 #include "iterators/circular_next.h"
 #include "grid/grid.h"
 #include "iterators/copy_modify.h"
@@ -29,10 +31,10 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline
-std::pair<int, int>
+template<typename T>
+std::pair<T, T>
 get_interval_extremes(
-   std::vector<std::pair<int, int>> intervals)
+   const std::vector<std::pair<T, T>>& intervals)
 {
    auto min = std::min_element(
       intervals.begin(), intervals.end(),
@@ -47,4 +49,4 @@ get_interval_extremes(
    return {min->first, max->second};
 }
 
-#endif //RECREATIONAL_REUSABLES_GRABBAG_H_GET_INTERVAL_EXTREMES_H
+

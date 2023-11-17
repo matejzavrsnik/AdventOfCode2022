@@ -1,7 +1,7 @@
 #pragma once
 
 #include "filesystem/read_write_file.h"
-#include "../../reusables/remove_just_one.h"
+#include "tools/remove_just_one.h"
 #include <set>
 
 
@@ -84,7 +84,7 @@ part1 (std::string input_file)
    std::multiset<char> window(input.begin(), cursor);
    while (!is_marker(window) && cursor != input.end())
    {
-      remove_just_one(window, *(cursor - window_size));
+      mzlib::remove_just_one(window, *(cursor - window_size));
       window.insert(*++cursor);
    }
 

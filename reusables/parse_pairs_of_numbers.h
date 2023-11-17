@@ -1,11 +1,13 @@
 //
-// Created by matej on 09/11/23.
+// Copyright (c) 2023 Matej Zavrsnik
+//
+// Web:  matejzavrsnik.com
+// Mail: matejzavrsnik@gmail.com
 //
 
-#ifndef RECREATIONAL_REUSABLES_GRABBAG_H_PARSE_PAIRS_OF_NUMBERS_H
-#define RECREATIONAL_REUSABLES_GRABBAG_H_PARSE_PAIRS_OF_NUMBERS_H
+#pragma once
 
-#include "move_screen.h"
+#include "grid/move_screen.h"
 #include "iterators/circular_next.h"
 #include "grid/grid.h"
 #include "iterators/copy_modify.h"
@@ -43,4 +45,3 @@ parse_pairs_of_numbers (
       {std::stoi(assignment2[0].data()), std::stoi(assignment2[1].data())}};
 }
 
-#endif //RECREATIONAL_REUSABLES_GRABBAG_H_PARSE_PAIRS_OF_NUMBERS_H

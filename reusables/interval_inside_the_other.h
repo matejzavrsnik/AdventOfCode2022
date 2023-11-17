@@ -1,11 +1,13 @@
 //
-// Created by matej on 09/11/23.
+// Copyright (c) 2023 Matej Zavrsnik
+//
+// Web:  matejzavrsnik.com
+// Mail: matejzavrsnik@gmail.com
 //
 
-#ifndef RECREATIONAL_REUSABLES_GRABBAG_H_INTERVAL_INSIDE_THE_OTHER_H
-#define RECREATIONAL_REUSABLES_GRABBAG_H_INTERVAL_INSIDE_THE_OTHER_H
+#pragma once
 
-#include "move_screen.h"
+#include "grid/move_screen.h"
 #include "iterators/circular_next.h"
 #include "grid/grid.h"
 #include "iterators/copy_modify.h"
@@ -29,14 +31,13 @@
 #include <nature/vector.h>
 #include <abstract/direction.h>
 
-inline
+template<typename T>
 bool
 interval_inside_the_other (
-   std::pair<int, int> one,
-   std::pair<int, int> other
+   const std::pair<T, T>& one,
+   const std::pair<T, T>& other
 )
 {
    return one.first <= other.first && one.second >= other.second;
 }
 
-#endif //RECREATIONAL_REUSABLES_GRABBAG_H_INTERVAL_INSIDE_THE_OTHER_H

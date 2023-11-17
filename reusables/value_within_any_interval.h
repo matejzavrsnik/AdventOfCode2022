@@ -1,11 +1,13 @@
 //
-// Created by matej on 09/11/23.
+// Copyright (c) 2023 Matej Zavrsnik
+//
+// Web:  matejzavrsnik.com
+// Mail: matejzavrsnik@gmail.com
 //
 
-#ifndef RECREATIONAL_REUSABLES_GRABBAG_H_VALUE_WITHIN_ANY_INTERVAL_H
-#define RECREATIONAL_REUSABLES_GRABBAG_H_VALUE_WITHIN_ANY_INTERVAL_H
+#pragma once
 
-#include "move_screen.h"
+#include "grid/move_screen.h"
 #include "iterators/circular_next.h"
 #include "grid/grid.h"
 #include "iterators/copy_modify.h"
@@ -41,4 +43,3 @@ value_within_any_interval(
    return false;
 }
 
-#endif //RECREATIONAL_REUSABLES_GRABBAG_H_VALUE_WITHIN_ANY_INTERVAL_H

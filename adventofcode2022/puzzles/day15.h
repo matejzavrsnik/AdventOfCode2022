@@ -5,7 +5,7 @@
 #include "iterators/copy_modify.h"
 #include "../../reusables/value_within_any_interval.h"
 #include "../../reusables/get_interval_extremes.h"
-#include "../../reusables/manhattan_distance.h"
+#include "grid/manhattan_distance.h"
 #include <numeric>
 #include <ranges>
 #include <algorithm>
@@ -37,7 +37,7 @@ ys_covered_by_sensors (
    for (const auto& s: sensors)
    {
       const auto& sensor_distance_on_y = abs(y_coor - s.coor[1]);
-      const auto& sensor_beacon_distance = manhattan_distance(s.coor, s.beacon);
+      const auto& sensor_beacon_distance = mzlib::grid::manhattan_distance(s.coor, s.beacon);
       const auto& count = sensor_beacon_distance - sensor_distance_on_y;
       if (count <= 0)
          continue;
