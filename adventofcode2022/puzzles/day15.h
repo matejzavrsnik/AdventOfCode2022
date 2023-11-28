@@ -3,9 +3,9 @@
 #include "filesystem/read_write_file.h"
 #include "string/split.h"
 #include "iterators/copy_modify.h"
-#include "../../reusables/value_within_any_interval.h"
-#include "../../reusables/get_interval_extremes.h"
 #include "grid/manhattan_distance.h"
+#include <interval/is_in.h>
+#include <interval/get_extremes.h>
 #include <numeric>
 #include <ranges>
 #include <algorithm>
@@ -69,7 +69,7 @@ part1 (std::string input_file)
    vector<pair<int,int>> covered;
    ys_covered_by_sensors(covered, sensors, given_row);
 
-   auto [min, max] = get_interval_extremes(covered);
+   auto [min, max] = mzlib::interval::get_extremes(covered);
 
    unordered_set<long> beacons_on_this_row;
    for(const auto& s : sensors)
@@ -78,7 +78,7 @@ part1 (std::string input_file)
 
    int count = 0;
    for(int i=min; i<=max;++i)
-      if(value_within_any_interval(covered, i) && !beacons_on_this_row.contains(i))
+      if(mzlib::interval::is_in(covered, i) && !beacons_on_this_row.contains(i))
          ++count;
 
    // incorrect guesses: 6'349'685 too high, 4'725'497 too high

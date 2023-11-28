@@ -51,9 +51,13 @@ add_executable (recreational
    ${TEST_FILES}
    )
 
+# First, tell CMake to find the package.
+# Conan will install the packages so that CMake can find it:
 find_package(GTest)
+find_package(range-v3)
 
 # Link with libraries
 target_link_libraries(recreational
    gtest::gtest
+   range-v3::range-v3
 )
