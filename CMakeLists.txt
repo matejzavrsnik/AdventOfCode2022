@@ -33,7 +33,8 @@ file(GLOB RESOURCE_INPUT_FILES "adventofcode2022/input/*")
 file(COPY ${RESOURCE_INPUT_FILES} DESTINATION ${CMAKE_RESOURCE_OUTPUT_DIRECTORY}/adventofcode2022 )
 file(GLOB RESOURCE_INPUT_FILES "adventofcode2021/input/*")
 file(COPY ${RESOURCE_INPUT_FILES} DESTINATION ${CMAKE_RESOURCE_OUTPUT_DIRECTORY}/adventofcode2021 )
-
+file(GLOB RESOURCE_INPUT_FILES "aoc23/*.txt")
+file(COPY ${RESOURCE_INPUT_FILES} DESTINATION ${CMAKE_RESOURCE_OUTPUT_DIRECTORY}/aoc23 )
 
 # additional include directories
 include_directories(
@@ -44,6 +45,7 @@ file(GLOB TEST_FILES
    reusables/*
    adventofcode2021/tests/*
    adventofcode2022/tests/*
+   aoc23/*.cpp
    )
 
 add_executable (recreational
