@@ -5,69 +5,79 @@
 namespace aoc23::d1
 {
 
-inline
-char get_first_digit(string line)
+inline char
+get_first_digit(string line)
 {
-   for(auto c : line)
-      if(isdigit(c))
-         return c;
-   throw mzlib::exception::not_found();
+   auto first_digit = line
+      | std::views::filter(isdigit)
+      | std::views::take(1);
+
+   return first_digit.front();
 }
 
-inline
-char get_last_digit(string line)
+inline char
+get_last_digit(string line)
 {
-   auto it = find_if(line.rbegin(), line.rend(), isdigit);
-   if(it != line.rend())
-      return *it;
-   throw mzlib::exception::not_found();
+   auto first_digit = line
+      | std::views::reverse
+      | std::views::filter(isdigit)
+      | std::views::take(1);
+
+   return first_digit.front();
 }
 
-map<string, char> digit_names()
+inline map<string, string>
+name_to_digit()
 {
-   static map<string, char> digit_names = {
-      {"zero", '0'},
-      {"one", '1'},
-      {"two", '2'},
-      {"three", '3'},
-      {"four", '4'},
-      {"five", '5'},
-      {"six", '6'},
-      {"seven", '7'},
-      {"eight", '8'},
-      {"nine", '9'}};
+   static map<string, string> digit_names = {
+      {"zero", "0"},
+      {"one", "1"},
+      {"two", "2"},
+      {"three", "3"},
+      {"four", "4"},
+      {"five", "5"},
+      {"six", "6"},
+      {"seven", "7"},
+      {"eight", "8"},
+      {"nine", "9"}};
 
    return digit_names;
 }
 
-inline
-bool string_is_prefix_of_any(string s, map<string, char> m)
+inline bool
+any_key_starts_with(map<string, string> m, string s)
 {
-   return std::any_of(m.begin(), m.end(), [&s](auto el){ return el.first.starts_with(s); });
+   auto such_keys = m
+      | std::views::keys
+      | std::views::filter([&s](string digit_name){ return digit_name.starts_with(s); });
+
+   return !such_keys.empty();
 }
 
-inline
-vec<char> get_all_digits_str(
+inline vec<string>
+get_all_digits_str(
    string line,
-   map<string, char> digit_names)
+   map<string, string> name_to_digit)
 {
-   vec<char> digits;
+   vec<string> digits;
 
    for(int i=0; i<line.size(); ++i)
    {
       if (isdigit(line[i]))
-         digits.push_back(line[i]);
+         digits.push_back(ctos(line[i]));
 
       // else try parse
-      string candidate;
+      string name_candidate;
       for (int j = i; j < line.size(); ++j)
       {
-         candidate += line[j];
-         if (digit_names.contains(candidate)) {
-            char digit = digit_names[candidate];
-            digits.push_back(digit);
+         name_candidate += line[j];
+         if (name_to_digit.contains(name_candidate))
+         {
+            digits.push_back(name_to_digit[name_candidate]);
+            continue;
          }
-         if (!string_is_prefix_of_any(candidate, digit_names)) {
+         if (!any_key_starts_with(name_to_digit, name_candidate))
+         {
             break;
          }
       }
@@ -77,12 +87,10 @@ vec<char> get_all_digits_str(
 }
 
 inline ll
-p1 (string input_file)
+p1 (vec<string> input)
 {
-   const auto lines = read_file_lines(input_file);
-
    ll calibration_number = 0;
-   for(auto line : lines)
+   for(auto line : input)
    {
       auto first = get_first_digit(line);
       auto last = get_last_digit(line);
@@ -98,20 +106,13 @@ p1 (string input_file)
    return calibration_number;
 }
 
-
-
-
-
-
 inline ll
-p2 (string input_file)
+p2 (vec<string> input)
 {
-   const auto lines = read_file_lines(input_file);
-
    ll calibration_number = 0;
-   for(auto line : lines)
+   for(auto line : input)
    {
-      auto digits = get_all_digits_str(line, digit_names());
+      auto digits = get_all_digits_str(line, name_to_digit());
 
       string str_number;
       str_number += digits[0];
@@ -120,7 +121,6 @@ p2 (string input_file)
 
       calibration_number += ll_number;
    }
-
 
    // Attempt with replace. Done that. It is incorrect in general case.
    // Consider: "twone"

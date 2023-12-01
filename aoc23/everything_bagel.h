@@ -10,6 +10,7 @@
 #include "printers/print_iterables.h"
 #include "printers/print_std_pair.h"
 #include "string/replace.h"
+#include "iterators/starts_with.h"
 
 // std lib includes
 #include <set>
@@ -21,6 +22,7 @@
 #include <vector>
 #include <utility>
 #include <algorithm>
+#include <ranges>
 
 // std lib aliases
 template<typename T> using uset = std::unordered_set<T>;
@@ -44,3 +46,11 @@ using usc = std::unordered_set<mzlib::grid::cell>;
 using mzlib::read_file_lines;
 using mzlib::print;
 using mzlib::string_replace;
+using mzlib::starts_with_c;
+
+// tools reusable in aoc23
+// future additions to my lib, perhaps
+
+// obnoxious!
+inline string ctos(char c) { return string(1, c); }
+
