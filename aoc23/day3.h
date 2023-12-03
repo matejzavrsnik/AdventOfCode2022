@@ -45,13 +45,9 @@ get_all_neighbours (
    const set<cell>& cells
 )
 {
-   set<cell> neighbours;
-   for(auto c : cells)
-      for(auto neighbour : grid::get_neighbouring_cells_star(engine, c))
-         if (!cells.contains(neighbour)) // it's not a neighbour if it's original cell
-            neighbours.insert(neighbour);
-
-   return neighbours;
+   return cells
+      | ranges::views::for_each([&](cell c){ return grid::get_neighbouring_cells_star(engine, c); })
+      | ranges::to<set<cell>>();
 }
 
 template<typename Criterium>
@@ -62,11 +58,11 @@ is_symbol_adjacent (
    Criterium symbol_definition
 )
 {
-   using namespace std::placeholders;
-   auto number_cells = get_all_cells_for_number(engine, c);
-   auto neighbours = get_all_neighbours(engine, number_cells);
-
-   return absl::c_any_of(neighbours, [&](cell c) { return symbol_definition(engine, c); });
+   set<cell> cells_for_number = get_all_cells_for_number(engine, c);
+   return ranges::any_of(
+      cells_for_number | ranges::views::for_each(
+         [&](cell i){ return grid::get_neighbouring_cells_star(engine, i); }),
+      [&](cell c) { return symbol_definition(engine, c); } );
 }
 
 template<typename CriteriumEvalFunction>
@@ -149,13 +145,20 @@ p2 (vec<string> input)
    }
    while(grid::move_to_next_cell(c, first_cell, last_cell));
 
-   // showdown!
-   ll result_sum=0;
-   for(auto [gear, numbers] : gears_to_numbers)
-      if(numbers.size() == 2)
-         result_sum += std::ranges::fold_left(numbers, 1, std::multiplies<>());
-
-   return result_sum;
+   // Showdown!
+   // Data structure: map<gear, set<int>> gears_to_numbers;
+   return ranges::fold_left(
+      gears_to_numbers
+         | ranges::views::values // only interested in numbers henceforth, not gears themselves
+         | ranges::views::filter( // consider only cases where two numbers are touching same gear
+            [](const auto& numbers) {
+               return numbers.size() == 2;
+            })
+         | ranges::views::transform( // substitute each pair with their product
+            [](const auto& numbers) {
+               return ranges::fold_left(numbers, 1, std::multiplies<>());
+            }),
+      0, std::plus<>()); // add up all the products done before
 }
 
 }
