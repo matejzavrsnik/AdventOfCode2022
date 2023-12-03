@@ -3,16 +3,32 @@
 
 #pragma once
 
+// my lib includes
 #include "filesystem/read_write_file.h"
 #include "grid/grid.h"
+#include "grid/convert_to_grid.h"
+#include "grid/move_to_next_cell.h"
+#include "grid/move_cartesian.h"
+#include "grid/is_in.h"
+#include "grid/get_neighbour_cells.h"
+#include "grid/get_all_cells.h"
 #include "lang/exceptions.h"
 #include "printers/print_generic.h"
 #include "printers/print_iterables.h"
 #include "printers/print_std_pair.h"
 #include "string/replace.h"
 #include "iterators/starts_with.h"
+#include "string/split.h"
+#include "string/trim.h"
 
-// std lib includes
+// abseil includes
+#include <absl/algorithm/container.h>
+#include <absl/utility/utility.h>
+
+// range-v3
+#include <range/v3/all.hpp>
+
+// stdlib includes
 #include <set>
 #include <unordered_set>
 #include <map>
@@ -38,19 +54,27 @@ using std::cout;
 using std::endl;
 using std::stoll;
 using std::find_if;
+using std::max;
+using std::optional;
+using std::nullopt;
 
 using ll = long long;
 
 // mzlib aliases
 using usc = std::unordered_set<mzlib::grid::cell>;
+template<typename T> using gridt = mzlib::grid::type<T>;
+using mzlib::grid::cell;
+namespace grid = mzlib::grid;
+using mzlib::direction;
 using mzlib::read_file_lines;
 using mzlib::print;
 using mzlib::string_replace;
 using mzlib::starts_with_c;
+using mzlib::split;
+using mzlib::trim;
 
 // tools reusable in aoc23
 // future additions to my lib, perhaps
 
 // obnoxious!
 inline string ctos(char c) { return string(1, c); }
-

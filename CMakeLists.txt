@@ -57,9 +57,11 @@ add_executable (recreational
 # Conan will install the packages so that CMake can find it:
 find_package(GTest)
 find_package(range-v3)
+find_package(absl)
 
 # Link with libraries
 target_link_libraries(recreational
    gtest::gtest
    range-v3::range-v3
+   abseil::abseil
 )

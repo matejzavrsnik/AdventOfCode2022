@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../everything_bagel.h"
+#include "everything_bagel.h"
 
 namespace aoc23::dX
 {
