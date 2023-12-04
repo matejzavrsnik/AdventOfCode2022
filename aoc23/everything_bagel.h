@@ -20,10 +20,14 @@
 #include "iterators/starts_with.h"
 #include "string/split.h"
 #include "string/trim.h"
+#include "laws/set_difference.h"
+#include "laws/set_intersection.h"
+#include "tools/sets_intersection.h"
 
 // abseil includes
 #include <absl/algorithm/container.h>
 #include <absl/utility/utility.h>
+#include <absl/strings/str_split.h>
 
 // range-v3
 #include <range/v3/all.hpp>
@@ -72,9 +76,17 @@ using mzlib::string_replace;
 using mzlib::starts_with_c;
 using mzlib::split;
 using mzlib::trim;
+using mzlib::sets_intersection;
 
 // tools reusable in aoc23
 // future additions to my lib, perhaps
 
 // obnoxious!
 inline string ctos(char c) { return string(1, c); }
+
+// common converters for transformations
+inline ll strview_to_ll(std::string_view s) { return stoll(s.data()); }
+inline ll str_to_ll(std::string s) { return stoll(s); }
+// common predicates
+template<long long Size>
+bool size_equals(const auto& c ) { return c.size() == Size; }

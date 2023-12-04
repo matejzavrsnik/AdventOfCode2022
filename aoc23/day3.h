@@ -60,8 +60,11 @@ is_symbol_adjacent (
 {
    set<cell> cells_for_number = get_all_cells_for_number(engine, c);
    return ranges::any_of(
-      cells_for_number | ranges::views::for_each(
-         [&](cell i){ return grid::get_neighbouring_cells_star(engine, i); }),
+      cells_for_number
+         | ranges::views::for_each(
+            [&](cell c){
+               return grid::get_neighbouring_cells_star(engine, c);
+            }),
       [&](cell c) { return symbol_definition(engine, c); } );
 }
 
@@ -146,7 +149,6 @@ p2 (vec<string> input)
    while(grid::move_to_next_cell(c, first_cell, last_cell));
 
    // Showdown!
-   // Data structure: map<gear, set<int>> gears_to_numbers;
    return ranges::fold_left(
       gears_to_numbers
          | ranges::views::values // only interested in numbers henceforth, not gears themselves

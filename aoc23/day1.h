@@ -6,7 +6,7 @@ namespace aoc23::d1
 {
 
 inline char
-get_first_digit(string line)
+get_first_digit(const string& line)
 {
    auto first_digit = line
       | std::views::filter(isdigit)
@@ -16,7 +16,7 @@ get_first_digit(string line)
 }
 
 inline char
-get_last_digit(string line)
+get_last_digit(const string& line)
 {
    auto first_digit = line
       | std::views::reverse
@@ -26,7 +26,7 @@ get_last_digit(string line)
    return first_digit.front();
 }
 
-inline map<string, string>
+inline const map<string, string>&
 name_to_digit()
 {
    static map<string, string> digit_names = {
@@ -45,19 +45,21 @@ name_to_digit()
 }
 
 inline bool
-any_key_starts_with(map<string, string> m, string s)
+any_key_starts_with(
+   const map<string, string>& m,
+   const string& s)
 {
    auto such_keys = m
       | std::views::keys
-      | std::views::filter([&s](string digit_name){ return digit_name.starts_with(s); });
+      | std::views::filter([&s](const string& digit_name){ return digit_name.starts_with(s); });
 
    return !such_keys.empty();
 }
 
 inline vec<string>
 get_all_digits_str(
-   string line,
-   map<string, string> name_to_digit)
+   const string& line,
+   const map<string, string>& name_to_digit)
 {
    vec<string> digits;
 
@@ -73,7 +75,7 @@ get_all_digits_str(
          name_candidate += line[j];
          if (name_to_digit.contains(name_candidate))
          {
-            digits.push_back(name_to_digit[name_candidate]);
+            digits.push_back(name_to_digit.at(name_candidate));
             continue;
          }
          if (!any_key_starts_with(name_to_digit, name_candidate))
@@ -110,7 +112,7 @@ inline ll
 p2 (vec<string> input)
 {
    ll calibration_number = 0;
-   for(auto line : input)
+   for(const auto& line : input)
    {
       auto digits = get_all_digits_str(line, name_to_digit());
 
