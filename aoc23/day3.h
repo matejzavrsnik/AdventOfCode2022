@@ -152,14 +152,8 @@ p2 (vec<string> input)
    return ranges::fold_left(
       gears_to_numbers
          | ranges::views::values // only interested in numbers henceforth, not gears themselves
-         | ranges::views::filter( // consider only cases where two numbers are touching same gear
-            [](const auto& numbers) {
-               return numbers.size() == 2;
-            })
-         | ranges::views::transform( // substitute each pair with their product
-            [](const auto& numbers) {
-               return ranges::fold_left(numbers, 1, std::multiplies<>());
-            }),
+         | ranges::views::filter(size_eq<2, set<ll>>) // consider only cases where two numbers are touching same gear
+         | ranges::views::transform(mul_all<set<ll>>), // substitute each pair with their product
       0, std::plus<>()); // add up all the products done before
 }
 

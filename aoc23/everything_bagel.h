@@ -81,12 +81,25 @@ using mzlib::sets_intersection;
 // tools reusable in aoc23
 // future additions to my lib, perhaps
 
+// common converters and predicated for range transformations, filtering, etc
+
+inline ll strv_to_ll(std::string_view s) { return stoll(s.data()); }
+
+inline ll str_to_ll(std::string s) { return stoll(s); }
+
+template<typename Collection>
+typename Collection::value_type
+mul_all(const Collection& c) {
+   return ranges::fold_left(c, 1, std::multiplies<>());
+}
+
+// collection size equals
+template<long long Size, typename Collection>
+bool
+size_eq(const Collection& c) {
+   return c.size() == Size;
+}
+
 // obnoxious!
 inline string ctos(char c) { return string(1, c); }
 
-// common converters for transformations
-inline ll strview_to_ll(std::string_view s) { return stoll(s.data()); }
-inline ll str_to_ll(std::string s) { return stoll(s); }
-// common predicates
-template<long long Size>
-bool size_equals(const auto& c ) { return c.size() == Size; }

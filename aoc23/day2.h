@@ -75,7 +75,7 @@ p2 (vec<string> input)
             minimum[colour_name] = max(minimum[colour_name], colour_count);
          }
       }
-      powersum += ::ranges::fold_left(minimum | std::views::values, 1, std::multiplies<>());
+      powersum += ranges::fold_left(minimum | std::views::values, 1, std::multiplies<>());
    }
 
    return powersum;

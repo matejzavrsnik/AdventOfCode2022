@@ -17,11 +17,11 @@ p1 (vec<string> input)
       auto having_str = split(card_numbers[1], " ");
 
       auto winning_set = winning_str
-         | ranges::views::transform(strview_to_ll)
+         | ranges::views::transform(strv_to_ll)
          | ranges::to<set<ll>>;
 
       auto having_set = having_str
-         | ranges::views::transform(strview_to_ll)
+         | ranges::views::transform(strv_to_ll)
          | ranges::to<set<ll>>;
 
       auto have_winning = ranges::distance(
@@ -49,11 +49,11 @@ p2 (vec<string> input)
       auto having_str = split(card_numbers[1], " ");
 
       auto winning_set = winning_str
-         | ranges::views::transform(strview_to_ll)
+         | ranges::views::transform(strv_to_ll)
          | ranges::to<set<ll>>;
 
       auto having_set = having_str
-         | ranges::views::transform(strview_to_ll)
+         | ranges::views::transform(strv_to_ll)
          | ranges::to<set<ll>>;
 
       auto have_winning = ranges::distance(
