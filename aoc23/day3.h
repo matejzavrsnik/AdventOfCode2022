@@ -5,7 +5,7 @@
 namespace aoc23::d3
 {
 
-inline pair<optional<ll>, cell>
+inline pair<opt<ll>, cell>
 read_number_starting_here (
    const gridt<char>& engine,
    cell c
@@ -18,7 +18,7 @@ read_number_starting_here (
       number += grid::access(engine, c);
       c = grid::move_cartesian(c, direction::e);
    }
-   auto result_number = number.empty() ? nullopt : optional(stoll(number));
+   auto result_number = number.empty() ? nullopt : opt(stoll(number));
    auto last_cell = grid::move_cartesian(c, direction::w);
    return {result_number, last_cell};
 }

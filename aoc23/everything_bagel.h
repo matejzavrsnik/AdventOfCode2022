@@ -13,6 +13,9 @@
 #include "grid/get_neighbour_cells.h"
 #include "grid/get_all_cells.h"
 #include "lang/exceptions.h"
+#include "lang/equal_to.h"
+#include "lang/less_than.h"
+#include "lang/greater_than.h"
 #include "printers/print_generic.h"
 #include "printers/print_iterables.h"
 #include "printers/print_std_pair.h"
@@ -23,11 +26,14 @@
 #include "laws/set_difference.h"
 #include "laws/set_intersection.h"
 #include "tools/sets_intersection.h"
+#include "tools/add_to_tally.h"
+#include "tools/sort_map_by_value.h"
 
 // abseil includes
 #include <absl/algorithm/container.h>
 #include <absl/utility/utility.h>
 #include <absl/strings/str_split.h>
+#include <absl/strings/str_replace.h>
 
 // range-v3
 #include <range/v3/all.hpp>
@@ -43,11 +49,14 @@
 #include <utility>
 #include <algorithm>
 #include <ranges>
+#include <limits>
 
 // std lib aliases
 template<typename T> using uset = std::unordered_set<T>;
+template<typename T> using mset = std::multiset<T>;
 template<typename T> using set = std::set<T>;
 template<typename T, typename U> using umap = std::unordered_map<T, U>;
+template<typename T, typename U> using mmap = std::multimap<T, U>;
 template<typename T, typename U> using map = std::map<T, U>;
 template<typename T> using vec = std::vector<T>;
 template<typename T, typename U> using pair = std::pair<T, U>;
@@ -59,10 +68,13 @@ using std::endl;
 using std::stoll;
 using std::find_if;
 using std::max;
-using std::optional;
+using std::min;
+template<typename T> using opt = std::optional<T>;
 using std::nullopt;
 
 using ll = long long;
+static ll max_ll = std::numeric_limits<long long>::max();
+static ll min_ll = std::numeric_limits<long long>::min();
 
 // mzlib aliases
 using usc = std::unordered_set<mzlib::grid::cell>;
@@ -77,6 +89,11 @@ using mzlib::starts_with_c;
 using mzlib::split;
 using mzlib::trim;
 using mzlib::sets_intersection;
+using mzlib::less_than;
+using mzlib::greater_than;
+using mzlib::equal_to;
+using mzlib::add_to_tally;
+using mzlib::sort_map_by_value;
 
 // tools reusable in aoc23
 // future additions to my lib, perhaps
@@ -102,4 +119,5 @@ size_eq(const Collection& c) {
 
 // obnoxious!
 inline string ctos(char c) { return string(1, c); }
+
 
