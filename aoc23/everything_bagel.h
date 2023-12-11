@@ -28,6 +28,9 @@
 #include "tools/sets_intersection.h"
 #include "tools/add_to_tally.h"
 #include "tools/sort_map_by_value.h"
+#include "iterators/find_subsequence.h"
+#include "iterators/repeated_ranges.h"
+#include "iterators/circular_next.h"
 
 // abseil includes
 #include <absl/algorithm/container.h>
@@ -68,7 +71,10 @@ using std::endl;
 using std::stoll;
 using std::find_if;
 using std::max;
+using std::max_element;
 using std::min;
+using std::min_element;
+using std::distance;
 template<typename T> using opt = std::optional<T>;
 using std::nullopt;
 
@@ -94,6 +100,9 @@ using mzlib::greater_than;
 using mzlib::equal_to;
 using mzlib::add_to_tally;
 using mzlib::sort_map_by_value;
+using mzlib::find_subsequence;
+using mzlib::repeated_sequences;
+using mzlib::circular_next_iterator;
 
 // tools reusable in aoc23
 // future additions to my lib, perhaps
