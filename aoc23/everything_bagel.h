@@ -75,6 +75,7 @@ using std::max_element;
 using std::min;
 using std::min_element;
 using std::distance;
+using std::accumulate;
 template<typename T> using opt = std::optional<T>;
 using std::nullopt;
 

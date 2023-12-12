@@ -61,6 +61,7 @@ find_repeated_pattern(
    return nullopt; // Should Never Happen™
 }
 
+//reuse note: wrote a more correct version on day 9
 template<typename Container>
 Container convert_to_differentials(const Container& c)
 {
