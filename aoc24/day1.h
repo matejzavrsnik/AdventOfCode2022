@@ -2,7 +2,7 @@
 
 #include "everything_bagel.h"
 
-namespace aoc23::d1
+namespace aoc24::d1
 {
 
 inline char
