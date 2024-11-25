@@ -133,3 +133,55 @@ size_eq(const Collection& c) {
 inline string ctos(char c) { return string(1, c); }
 
 
+inline char
+get_first_digit(const string& line)
+{
+   auto first_digit = line
+      | std::views::filter(isdigit)
+      | std::views::take(1);
+
+   return first_digit.front();
+}
+
+inline char
+get_last_digit(const string& line)
+{
+   auto first_digit = line
+      | std::views::reverse
+      | std::views::filter(isdigit)
+      | std::views::take(1);
+
+   return first_digit.front();
+}
+
+inline const map<string, string>&
+name_to_digit()
+{
+   static map<string, string> digit_names = {
+      {"zero", "0"},
+      {"one", "1"},
+      {"two", "2"},
+      {"three", "3"},
+      {"four", "4"},
+      {"five", "5"},
+      {"six", "6"},
+      {"seven", "7"},
+      {"eight", "8"},
+      {"nine", "9"}};
+
+   return digit_names;
+}
+
+inline bool
+any_key_starts_with(
+   const map<string, string>& m,
+   const string& s)
+{
+   auto such_keys = m
+      | std::views::keys
+      | std::views::filter([&s](const string& key) {
+         return key.starts_with(s);
+      });
+
+   return !such_keys.empty();
+}

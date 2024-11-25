@@ -1,15 +1,7 @@
 # build folders
-/cmake-build-debug/
-/cmake-build-debug-coverage/
-/cmake-build-minsizerel/
-/cmake-build-release/
-/cmake-build-relwithdebinfo/
 /build
-/dist
 
 # IDE
-/nbproject/private
-/nbproject/project.properties
 .idea/
 
 # Other
@@ -19,5 +11,8 @@
 *.original
 *.dia~
 *.backup
+
+# AoC puzzle inputs
+day*.input.txt
 
 
