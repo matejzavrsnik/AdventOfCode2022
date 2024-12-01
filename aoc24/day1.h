@@ -2,81 +2,38 @@
 
 #include "everything_bagel.h"
 
-namespace aoc24::d1
-{
+namespace aoc24::d1 {
+inline ll
+p1 (vec<string> input) {
+   auto nums = numbers_in_columns<ll, 2>(input);
 
-inline vec<string>
-get_all_digits_str(
-   const string& line,
-   const map<string, string>& name_to_digit)
-{
-   vec<string> digits;
+   absl::c_sort(nums[0]);
+   absl::c_sort(nums[1]);
 
-   for(int i=0; i<line.size(); ++i)
-   {
-      if (isdigit(line[i]))
-         digits.push_back(ctos(line[i]));
-
-      // else try parse
-      string name_candidate;
-      for (int j = i; j < line.size(); ++j)
-      {
-         name_candidate += line[j];
-         if (name_to_digit.contains(name_candidate))
-         {
-            digits.push_back(name_to_digit.at(name_candidate));
-            continue;
-         }
-         if (!any_key_starts_with(name_to_digit, name_candidate))
-         {
-            break;
-         }
-      }
-   }
-
-   return digits;
+   return
+      sr::fold_left(
+         sv::zip_transform(
+            abs_minus<ll>,
+            nums[0],
+            nums[1]),
+         0, std::plus());
 }
 
 inline ll
-p1 (vec<string> input)
-{
-   ll calibration_number = 0;
-   for(auto line : input)
-   {
-      auto first = get_first_digit(line);
-      auto last = get_last_digit(line);
+p2 (vec<string> input) {
+   auto nums = numbers_in_columns<ll, 2>(input);
 
-      string str_number;
-      str_number += first;
-      str_number += last;
-      ll ll_number = stoll(str_number);
+   auto count_fun = [&nums] (ll num) {
+      return absl::c_count(nums[1], num);
+   };
 
-      calibration_number += ll_number;
-   }
-
-   return calibration_number;
+   return
+      sr::fold_left(
+         sv::zip_transform(
+            std::multiplies(),
+            nums[0],
+            nums[0] | sv::transform(count_fun)
+         ),
+         0, std::plus());
 }
-
-inline ll
-p2 (vec<string> input)
-{
-   ll calibration_number = 0;
-   for(const auto& line : input)
-   {
-      auto digits = get_all_digits_str(line, name_to_digit());
-
-      string str_number;
-      str_number += digits[0];
-      str_number += digits[digits.size() - 1];
-      ll ll_number = stoll(str_number);
-
-      calibration_number += ll_number;
-   }
-
-   // Attempt with replace. Done that. It is incorrect in general case.
-   // Consider: "twone"
-
-   return calibration_number;
-}
-
 }

@@ -2,7 +2,7 @@
 
 #include "everything_bagel.h"
 
-namespace aoc24::dX
+namespace aoc24::d6
 {
 
 inline ll

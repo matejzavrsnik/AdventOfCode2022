@@ -85,6 +85,12 @@ using ll = long long;
 static ll max_ll = std::numeric_limits<long long>::max();
 static ll min_ll = std::numeric_limits<long long>::min();
 
+// ranges and views from both std and range-v3
+namespace sr = std::ranges;
+namespace sv = std::ranges::views;
+namespace r3 = ranges;
+namespace v3 = ranges::views;
+
 // mzlib aliases
 using usc = std::unordered_set<mzlib::grid::cell>;
 template<typename T> using gridt = mzlib::grid::type<T>;
@@ -107,7 +113,7 @@ using mzlib::find_subsequence;
 using mzlib::repeated_sequences;
 using mzlib::circular_next_iterator;
 
-// tools reusable in aoc23
+// tools reusable in aoc24
 // future additions to my lib, perhaps
 
 // common converters and predicated for range transformations, filtering, etc
@@ -185,3 +191,52 @@ any_key_starts_with(
 
    return !such_keys.empty();
 }
+
+template<typename T, ll Columns>
+vec<vec<T>> numbers_in_columns(vec<string> input) {
+   vec<vec<T>> values(Columns, vec<T>());
+   for (auto line : input) {
+      auto numbers_in_line = split(line, " ");
+      for (int i=0; i<Columns; ++i)
+         values[i].push_back(strv_to_ll(numbers_in_line[i]));
+   }
+   return values;
+}
+
+namespace mzlib
+{
+
+template <typename First, typename Second>
+std::ostream&
+print (
+   const std::tuple<First, Second>& p,
+   mzlib::print_parameters params = mzlib::print_parameters()
+)
+{
+   params.stream << "[";
+   print(std::get<0>(p), params) << ",";
+   print(std::get<1>(p), params) << "]" << std::endl;
+   return params.stream;
+}
+
+}
+
+template <typename T>
+T abs_minus(T a, T b)
+{
+   return std::abs(a-b);
+}
+
+// the following tuple operations looks stupid but are handy with ranges
+template <typename T>
+T difference_tuple(std::tuple<T, T> t)
+{
+   return std::abs(std::get<0>(t)-std::get<1>(t));
+}
+
+template <typename T>
+T multiply_tuple(std::tuple<T, T> t)
+{
+   return std::get<0>(t)*std::get<1>(t);
+}
+// end of tuple ops
