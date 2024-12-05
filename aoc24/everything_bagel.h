@@ -60,6 +60,7 @@ template<typename T, typename U> using pair = std::pair<T, U>;
 template<typename T> using qu = std::queue<T>;
 template<typename T> using pqu = std::priority_queue<T>;
 using std::string;
+using std::string_view;
 using std::cout;
 using std::endl;
 using std::stoll;
