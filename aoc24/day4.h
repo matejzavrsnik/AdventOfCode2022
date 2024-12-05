@@ -16,6 +16,17 @@ xmas(const gridt<char> g, cell c, direction d) {
    return s == "XMAS";
 }
 
+inline bool
+xmas_faster(const gridt<char> g, cell c, direction d) {
+   string s = "XMAS";
+   for (auto step=0; step<4; ++step) {
+      if (!grid::is_in(g, c)) return false;
+      if (grid::access(g, c) != s[step]) return false;
+      c = grid::move_screen(c, d);
+   }
+   return true;
+}
+
 inline ll
 p1 (vec<string> input)
 {
@@ -24,42 +35,16 @@ p1 (vec<string> input)
    for (int w = 0; w < grid::width(g); ++w)
       for (int h = 0; h < grid::width(g); ++h) {
          cell c{w, h};
-         if (xmas(g, c, direction::e)) ++count;
-         if (xmas(g, c, direction::se)) ++count;
-         if (xmas(g, c, direction::s)) ++count;
-         if (xmas(g, c, direction::sw)) ++count;
-         if (xmas(g, c, direction::w)) ++count;
-         if (xmas(g, c, direction::nw)) ++count;
-         if (xmas(g, c, direction::n)) ++count;
-         if (xmas(g, c, direction::ne)) ++count;
+         if (xmas_faster(g, c, direction::e)) ++count;
+         if (xmas_faster(g, c, direction::se)) ++count;
+         if (xmas_faster(g, c, direction::s)) ++count;
+         if (xmas_faster(g, c, direction::sw)) ++count;
+         if (xmas_faster(g, c, direction::w)) ++count;
+         if (xmas_faster(g, c, direction::nw)) ++count;
+         if (xmas_faster(g, c, direction::n)) ++count;
+         if (xmas_faster(g, c, direction::ne)) ++count;
       }
    return count;
-}
-
-template <typename T>
-bool
-check_for_drawing (
-   const mzlib::grid::type<T>& grid,
-   const mzlib::grid::type<T>& drawing,
-   const mzlib::grid::cell& c,
-   T neutral_value = '.'
-)
-{
-   mzlib::grid::cell drawing_pixel{0, 0};
-   const mzlib::grid::cell drawing_size = mzlib::grid::size(drawing);
-   do
-   {
-      auto canvas_pixel = drawing_pixel + c;
-      const auto pixel_value = mzlib::grid::access(drawing, drawing_pixel);
-      if (pixel_value == neutral_value)
-         continue;
-      const auto value_on_grid = mzlib::grid::access(grid, canvas_pixel);
-      if (value_on_grid != pixel_value)
-         return false;
-   }
-   while (mzlib::grid::move_to_next_cell(drawing_pixel, {0, 0}, drawing_size));
-
-   return true;
 }
 
 inline ll
@@ -95,7 +80,7 @@ p2 (vec<string> input)
       for (int w = 0; w < grid::width(g)-2; ++w)
          for (int h = 0; h < grid::width(g)-2; ++h) {
             cell c{w, h};
-            if (check_for_drawing(g, xmas, c)) ++count;
+            if (mzlib::grid::check_for_drawing(g, xmas, c)) ++count;
          }
    return count;
 }

@@ -5,15 +5,7 @@
 
 // my lib includes
 #include "filesystem/read_write_file.h"
-#include "grid/grid.h"
-#include "grid/convert_to_grid.h"
-#include "grid/move_to_next_cell.h"
-#include "grid/move_cartesian.h"
-#include "grid/move_screen.h"
-#include "grid/is_in.h"
-#include "grid/get_neighbour_cells.h"
-#include "grid/get_all_cells.h"
-#include "grid/get_all_cells_with_value.h"
+#include "grid/all.h"
 #include "lang/exceptions.h"
 #include "lang/equal_to.h"
 #include "lang/less_than.h"
