@@ -38,9 +38,10 @@
 #include <unordered_set>
 #include <map>
 #include <unordered_map>
-#include <string>
+#include <stack>
 #include <queue>
 #include <vector>
+#include <string>
 #include <utility>
 #include <algorithm>
 #include <ranges>
@@ -50,6 +51,7 @@
 template<typename T> using uset = std::unordered_set<T>;
 template<typename T> using mset = std::multiset<T>;
 template<typename T> using set = std::set<T>;
+template<typename T> using stack = std::stack<T>;
 template<typename T, typename U> using umap = std::unordered_map<T, U>;
 template<typename T, typename U> using mmap = std::multimap<T, U>;
 template<typename T, typename U> using map = std::map<T, U>;
@@ -231,3 +233,56 @@ T multiply_tuple(std::tuple<T, T> t)
    return std::get<0>(t)*std::get<1>(t);
 }
 // end of tuple ops
+
+inline int
+direction_to_degrees (direction d) {
+   static map<direction, int> degrees{
+         {direction::n, 0},
+         {direction::ne, 45},
+         {direction::e, 90},
+         {direction::se, 135},
+         {direction::s, 180},
+         {direction::sw, 225},
+         {direction::w, 270},
+         {direction::nw, 315},
+      };
+   return degrees[d];
+}
+
+inline direction
+degrees_to_direction (int d) {
+   static map<int, direction> degrees{
+            {0, direction::n},
+            {45, direction::ne},
+            {90, direction::e},
+            {135, direction::se},
+            {180, direction::s},
+            {225, direction::sw},
+            {270, direction::w},
+            {315, direction::nw},
+         };
+   return degrees[d];
+}
+
+inline direction
+turn(direction current, int degrees) {
+   return degrees_to_direction(direction_to_degrees(current)+degrees);
+}
+
+namespace std
+{
+
+template <typename First, typename Second>
+struct hash<pair<First, Second>>
+{
+   size_t
+   operator() (const pair<First, Second>& p) const noexcept
+   {
+      size_t h = 112358;
+      ::mzlib::hash_combine(h, p.first);
+      ::mzlib::hash_combine(h, p.second);
+      return h;
+   }
+};
+
+}
