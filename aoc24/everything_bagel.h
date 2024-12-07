@@ -269,6 +269,8 @@ turn(direction current, int degrees) {
    return degrees_to_direction(direction_to_degrees(current)+degrees);
 }
 
+// vec<string> parts = absl::StrSplit(input, absl::ByAnyChar("|"), absl::SkipEmpty());
+
 namespace std
 {
 
@@ -285,4 +287,35 @@ struct hash<pair<First, Second>>
    }
 };
 
+}
+
+inline
+ll try_mul(ll a, ll b) {
+   ll x = a * b;
+   if (a != 0 && x / a != b) {
+      throw mzlib::exception::out_of_range();
+   }
+   return x;
+}
+
+inline
+ll try_add(ll a, ll b)
+{
+   if (a >= 0) {
+      if (std::numeric_limits<ll>::max() - a < b) {
+         throw mzlib::exception::out_of_range();
+      }
+   }
+   else {
+      if (b < std::numeric_limits<ll>::min() - a) {
+         throw mzlib::exception::out_of_range();
+      }
+   }
+   return a + b;
+}
+
+template<typename It>
+void print(It begin, It end) {
+   for (auto it=begin; it<end; ++it) cout << " " << *it;
+   cout << endl;
 }
