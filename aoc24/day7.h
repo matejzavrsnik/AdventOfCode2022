@@ -5,8 +5,6 @@
 namespace aoc24::d7
 {
 
-
-
 template<typename It>
 int solve_ce(ll final_result, ll partial_result, It begin, It end) {
 
@@ -26,8 +24,8 @@ int solve_ce(ll final_result, ll partial_result, It begin, It end) {
 }
 
 inline ll
-p1 (vec<string> input)
-{
+p1 (vec<string> input) {
+
    vec<vec<ll>> calibration_equations;
    for (auto line : input) {
       vec<string> parts_s = absl::StrSplit(line, absl::ByAnyChar(": "), absl::SkipEmpty());
@@ -50,40 +48,40 @@ bool solve_ce2(ll final_result, ll partial_result, It begin, It end, int level =
    if (final_result<partial_result) return 0; // not a way
 
    auto next = *begin;
-//auto s = string(level, ' ');
+
    if (begin+1 == end) { // last case
       if (partial_result+next == final_result) {
-         //cout<<s<<partial_result<<"+"<<next<<" win"<<endl;
+         //cout<<ind(level)<<partial_result<<"+"<<next<<" win"<<endl;
          return true;
       }
-      //else { cout<<s<<partial_result<<"+"<<next<<" no"<<endl;}
+      //else { cout<<ind(level)<<partial_result<<"+"<<next<<" no"<<endl;}
       if (partial_result*next == final_result) {
-         //cout<<s<<partial_result<<"*"<<next<<" win"<<endl;
+         //cout<<ind(level)<<partial_result<<"*"<<next<<" win"<<endl;
          return true;
       }
-      //else { cout<<s<<partial_result<<"*"<<next<<" no"<<endl;}
+      //else { cout<<ind(level)<<partial_result<<"*"<<next<<" no"<<endl;}
       auto glued = str_to_ll(std::to_string(partial_result)+std::to_string(next));
       if (glued == final_result) {
-         //cout<<s<<partial_result<<"|"<<glued<<" win"<<endl;
+         //cout<<ind(level)<<partial_result<<"|"<<glued<<" win"<<endl;
          return true;
       }
-      //else { cout<<s<<"|"<<glued<<" no"<<endl;}
+      //else { cout<<ind(level)<<"|"<<glued<<" no"<<endl;}
    }
    else {
-      //cout<<s<<partial_result<<"+"<<next<<"="<<try_add(partial_result,next)<<endl;
+      //cout<<ind(level)<<partial_result<<"+"<<next<<"="<<try_add(partial_result,next)<<endl;
       bool solved = solve_ce2(final_result, try_add(partial_result,next), begin+1, end, level+1);
       if (solved) return true;
 
 
       if (partial_result>0) { // no point mul with 0
-         //cout<<s<<partial_result<<"*"<<next<<"="<<try_mul(partial_result, next)<<endl;
+         //cout<<ind(level)<<partial_result<<"*"<<next<<"="<<try_mul(partial_result, next)<<endl;
          solved = solve_ce2(final_result, try_mul(partial_result, next), begin+1, end, level+1);
       }
       if (solved) return true;
 
       if (partial_result>0) { // no point concat with 0 in front
          partial_result = str_to_ll(std::to_string(partial_result)+std::to_string(next));
-         //cout<<s<<"|("<<partial_result<<")"<<endl;
+         //cout<<ind(level)<<"|("<<partial_result<<")"<<endl;
          solved = solve_ce2(final_result, partial_result, begin+1, end, level+1);
          if (solved) return true;
       }

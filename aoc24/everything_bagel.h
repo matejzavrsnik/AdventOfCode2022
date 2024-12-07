@@ -314,8 +314,52 @@ ll try_add(ll a, ll b)
    return a + b;
 }
 
-template<typename It>
-void print(It begin, It end) {
-   for (auto it=begin; it<end; ++it) cout << " " << *it;
-   cout << endl;
+template <typename Iterator>
+requires (
+   mzlib::iterator<Iterator>
+)
+std::ostream&
+print (
+   const Iterator& begin,
+   const Iterator& end,
+   mzlib::print_parameters params = mzlib::print_parameters()
+)
+{
+   bool first = true;
+   params.stream << "[";
+   for (auto it=begin; it<end; ++it)
+   {
+      if (!first)
+         params.stream << ",";
+      first = false;
+      print(*it, params);
+   }
+   params.stream << "]" << std::endl;
+
+   return params.stream;
+}
+
+// purpose: when couting from recursive functions it gets confusing without indent
+class ind {
+public:
+   ind(int level, char ch = ' ') :
+      l(level),
+      c(ch)
+   {}
+
+private:
+   int l;
+   char c;
+
+   friend std::ostream& operator<< (std::ostream& os, ind i);
+};
+
+inline
+std::ostream&
+operator<< (
+   std::ostream& os,
+   ind i)
+{
+   while (i.l--) os << i.c;
+   return os;
 }
