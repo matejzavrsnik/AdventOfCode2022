@@ -363,3 +363,46 @@ operator<< (
    while (i.l--) os << i.c;
    return os;
 }
+
+namespace mzlib::grid
+{
+
+template <typename T>
+std::vector<mzlib::grid::cell>
+get_cells_line_segment (
+   const mzlib::grid::type<T>& field,
+   const cell& from,
+   const cell& to
+)
+{
+   std::vector<mzlib::grid::cell> segment;
+   if (from != to) {
+      const auto increment = to-from;
+      cell c = to;
+      while (grid::is_in(field, c)) {
+         segment.push_back(c);
+         c += increment;
+      }
+   }
+   return segment;
+}
+
+template <typename T>
+std::set<mzlib::grid::cell>
+get_collinear_cells (
+   const mzlib::grid::type<T>& field,
+   const cell& cell1,
+   const cell& cell2
+)
+{
+   std::set<mzlib::grid::cell> collinear;
+   if (cell1 != cell2) {
+      const auto from_1_to_2 = get_cells_line_segment(field, cell1, cell2);
+      const auto from_2_to_1 = get_cells_line_segment(field, cell2, cell1);
+      collinear.insert(from_1_to_2.begin(), from_1_to_2.end());
+      collinear.insert(from_2_to_1.begin(), from_2_to_1.end());
+   }
+   return collinear;
+}
+
+}

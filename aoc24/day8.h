@@ -22,12 +22,9 @@ p1 (vec<string> input)
    for (auto [freq, locations] : freq_loc)
       for (auto loc1 : locations)
          for (auto loc2 : locations)
-            if (loc1 != loc2) {
-               // A[5,2] -> B[4,4] -> [3,6] = [4-5+4, 4-2+4] = (B-A)+B
-               auto antinode_loc = loc2+(loc2-loc1);
-               if (grid::is_in(g, antinode_loc))
-                     antinodes.insert(antinode_loc);
-            }
+            if (loc1 != loc2)
+               if (const auto antinode_loc = loc2+(loc2-loc1); grid::is_in(g, antinode_loc))
+                  antinodes.insert(antinode_loc);
 
    // set of #, size, is result
    return antinodes.size();
@@ -41,25 +38,16 @@ p2 (vec<string> input)
    // get all cells with any frequency
    map<char, set<cell>> freq_loc;
    auto all_cells = grid::get_all_cells(g);
-   for (auto cell : all_cells)
+   for (const auto& cell : all_cells)
       if (grid::access(g, cell) != '.')
          freq_loc[grid::access(g, cell)].insert(cell);
 
    // for each pair, calculate # using distance * 2
    set<cell> antinodes;
-   for (auto [freq, locations] : freq_loc)
-      for (auto loc1 : locations)
-         for (auto loc2 : locations)
-            if (loc1 != loc2) {
-               // A[5,2] -> B[4,4] -> [3,6] = [4-5+4, 4-2+4] = (B-A)+B
-               auto increment = loc2-loc1;
-               cell antinode_loc = loc2;
-               while (grid::is_in(g, antinode_loc)) {
-                  antinodes.insert(antinode_loc);
-                  grid::access(g, antinode_loc) = '#';
-                  antinode_loc += increment;
-               }
-            }
+   for (const auto& locations : freq_loc | std::views::values)
+      for (const auto& loc1 : locations)
+         for (const auto& loc2 : locations)
+            antinodes.merge(grid::get_collinear_cells(g, loc1, loc2));
 
    // set of #, size, is result
    return antinodes.size();
