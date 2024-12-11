@@ -131,8 +131,16 @@ size_eq(const Collection& c) {
 // obnoxious!
 inline string ctos(char c) { return string(1, c); }
 
+// obsolete
 inline ll ctoll(char c) {
    ll r =c-'0';
+   if (r>9 || r<0) throw;
+   return r;
+}
+
+template<std::integral I>
+I cto(const char c) {
+   I r = c-'0';
    if (r>9 || r<0) throw;
    return r;
 }
@@ -408,6 +416,17 @@ get_collinear_cells (
       collinear.insert(from_2_to_1.begin(), from_2_to_1.end());
    }
    return collinear;
+}
+
+template <typename T>
+bool
+destination_exactly_one_larger (
+   const grid::type<T>& grid,
+   const cell& from,
+   const cell& to
+)
+{
+   return grid::access(grid, to) - 1 == grid::access(grid, from);
 }
 
 }
