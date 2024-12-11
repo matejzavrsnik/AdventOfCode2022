@@ -131,6 +131,11 @@ size_eq(const Collection& c) {
 // obnoxious!
 inline string ctos(char c) { return string(1, c); }
 
+inline ll ctoll(char c) {
+   ll r =c-'0';
+   if (r>9 || r<0) throw;
+   return r;
+}
 
 inline char
 get_first_digit(const string& line)
