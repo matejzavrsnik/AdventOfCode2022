@@ -23,6 +23,7 @@
 #include "iterators/find_subsequence.h"
 #include "iterators/repeated_ranges.h"
 #include "iterators/circular_next.h"
+#include "tools/converters.h"
 
 // abseil includes
 #include <absl/algorithm/container.h>
@@ -40,6 +41,7 @@
 #include <unordered_map>
 #include <stack>
 #include <queue>
+#include <utility>
 #include <vector>
 #include <string>
 #include <utility>
@@ -377,6 +379,23 @@ operator<< (
    return os;
 }
 
+namespace mzlib {
+template<>
+inline std::set<cell> convert(
+   const std::vector<cell>& vec)
+{
+   return std::set<cell>(vec.begin(), vec.end());
+}
+
+template<>
+inline uset<cell> convert(
+   const std::vector<cell>& vec)
+{
+   return uset<cell>(vec.begin(), vec.end());
+}
+
+}
+
 namespace mzlib::grid
 {
 
@@ -429,5 +448,85 @@ destination_exactly_one_larger (
    return grid::access(grid, to) - 1 == grid::access(grid, from);
 }
 
+template <typename T>
+std::set<cell>
+get_region (
+   const type<T>& grid,
+   const cell& c
+)
+{
+   set<cell> region;
+   region.insert(c);
+   uset<cell> neighbours = convert<uset<cell>>(get_neighbouring_cells(grid, c));
+   uset<cell> considered;
+   while (!neighbours.empty()) {
+      uset<cell> neighbours_neighbours;
+      for (auto neighbour : neighbours) {
+         considered.insert(neighbour);
+         if (access(grid, neighbour) == access(grid, c)) {
+            region.insert(neighbour);
+            for (auto n_of_n : get_neighbouring_cells(grid, neighbour))
+               if (!considered.contains(n_of_n) && access(grid, neighbour) == access(grid, c))
+                  neighbours_neighbours.insert(n_of_n);
+         }
+      }
+      neighbours.swap(neighbours_neighbours);
+   }
+   return region;
 }
+
+template <typename T>
+std::set<std::set<cell>>
+get_all_regions (
+   const type<T>& grid
+) {
+   set<set<cell>> all_regions;
+   uset<cell> placed;
+   for (auto& c : get_all_cells(grid)) {
+      if (!placed.contains(c)) {
+         set<cell> region = grid::get_region(grid, c);
+         for (const auto& placed_cell : region)
+            placed.insert(placed_cell);
+         all_regions.insert(region);
+      }
+   }
+   return all_regions;
+}
+
+inline void
+print_region (grid::type<char> grid, const set<cell>& region, char symbol = '.') {
+   for (auto c : region)
+      grid::access(grid, c) = symbol;
+   print(grid);
+}
+
+inline std::pair<cell, cell> //todo: mzlib::screen_rectangle
+get_region_box_screen (
+   const std::set<cell>& region
+) {
+   cell top_left{max_ll, max_ll}, bottom_right{0,0};
+   for (const auto& c : region) {
+      if (c[0] < top_left[0]) top_left[0]=c[0];
+      if (c[1] < top_left[1]) top_left[1]=c[1];
+      if (c[0] > bottom_right[0]) bottom_right[0]=c[0];
+      if (c[1] > bottom_right[1]) bottom_right[1]=c[1];
+   }
+   return std::make_pair(top_left, bottom_right);
+}
+
+template <typename T, typename Func>
+void
+scan_left_to_right_top_to_bottom_screen (
+   const type<T>& grid,
+   Func function
+) {
+   for (int j = 0; j < grid::height(grid); ++j)
+         for (int i = 0; i < grid::width(grid); ++i)
+            function(cell{i, j});
+}
+
+
+
+}
+
 
