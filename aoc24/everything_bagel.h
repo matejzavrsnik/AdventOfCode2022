@@ -529,4 +529,12 @@ scan_left_to_right_top_to_bottom_screen (
 
 }
 
-
+namespace mzlib {
+inline
+std::ostream&
+operator<< (std::ostream& os, cell c)
+{
+   cout << "[" << c[0] << "," << c[1] << "]";
+   return os;
+}
+}
