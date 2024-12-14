@@ -61,6 +61,7 @@ template<typename T> using vec = std::vector<T>;
 template<typename T, typename U> using pair = std::pair<T, U>;
 template<typename T> using qu = std::queue<T>;
 template<typename T> using pqu = std::priority_queue<T>;
+template<typename T> using opt = std::optional<T>;
 using std::string;
 using std::string_view;
 using std::cout;
@@ -73,8 +74,8 @@ using std::min;
 using std::min_element;
 using std::distance;
 using std::accumulate;
-template<typename T> using opt = std::optional<T>;
 using std::nullopt;
+using std::tuple;
 
 using ll = long long;
 static ll max_ll = std::numeric_limits<long long>::max();
@@ -213,7 +214,7 @@ vec<vec<T>> numbers_in_columns(vec<string> input) {
 
 namespace mzlib
 {
-
+/*
 template <typename First, typename Second>
 std::ostream&
 print (
@@ -226,7 +227,7 @@ print (
    print(std::get<1>(p), params) << "]" << std::endl;
    return params.stream;
 }
-
+*/
 }
 
 template <typename T>
@@ -528,7 +529,7 @@ scan_left_to_right_top_to_bottom_screen (
 
 
 }
-
+/*
 namespace mzlib {
 inline
 std::ostream&
@@ -537,4 +538,6 @@ operator<< (std::ostream& os, cell c)
    cout << "[" << c[0] << "," << c[1] << "]";
    return os;
 }
+
 }
+*/
