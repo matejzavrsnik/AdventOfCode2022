@@ -24,6 +24,8 @@
 #include "iterators/repeated_ranges.h"
 #include "iterators/circular_next.h"
 #include "tools/converters.h"
+#include "nature/matrix.h"
+#include "laws/matrix_operations.h"
 
 // abseil includes
 #include <absl/algorithm/container.h>
@@ -393,6 +395,20 @@ inline uset<cell> convert(
    const std::vector<cell>& vec)
 {
    return uset<cell>(vec.begin(), vec.end());
+}
+
+template<>
+inline direction convert(
+   const char& ch)
+{
+   switch (ch) {
+      case '<': return direction::w;
+      case '>': return direction::e;
+      case '^': return direction::n;
+      case 'v': return direction::s;
+      default: throw mzlib::exception::invalid_values("char not translatable to direction");
+   }
+
 }
 
 }
