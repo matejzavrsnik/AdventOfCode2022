@@ -62,7 +62,7 @@ p2 (vec<string> input)
       return std::tuple{
          cell{stoll(partsa[3]), stoll(partsa[5])},
          cell{stoll(partsb[3]), stoll(partsb[5])},
-         cell{stoll(prize[2]), stoll(prize[4])}
+         cell{stoll(prize[2])+10000000000000, stoll(prize[4])+10000000000000}
       };
    };
 
@@ -75,7 +75,6 @@ p2 (vec<string> input)
             auto a = std::get<0>(it);
             auto b = std::get<1>(it);
             auto p = std::get<2>(it);
-
             // 1) n*a0 + m*b0 = p0
             // 2) n*a1 + m*b1 = p1
 
@@ -95,7 +94,7 @@ p2 (vec<string> input)
             auto m = (p[1]*a[0] - p[0]*a[1]) / (b[0]*a[1] + b[1]*a[0]);
             auto n = (p[0] - m*b[0]) / a[0];
 
-            auto result = n+3*m;
+            ll result = n+3*m;
 
             // 1) n*a0 + m*b0 = p0
             // 2) n*a1 + m*b1 = p1
@@ -121,13 +120,22 @@ p2 (vec<string> input)
             //   => n34+((8400-n94)/22)*67=5400
             //   =>
 
-            n = (p[0]*b[1]-b[0]*p[1]) / (a[0]*b[1]-b[0]*a[1]);
-            m = (a[0]*p[1]-p[0]*a[1]) / (a[0]*b[1]-b[0]*a[1]);
-            result = n+3*m;
-            return result;
+            // I have no clue why my derived equation is wrong and why this
+            // one copied from the internet (I am admitting this yes) is correct.
+            // I must have forgotten my algebra.
+            auto den = a[0]*b[1]-b[0]*a[1];
+            if (den==0) return max_ll;
+
+            auto num_n = p[0]*b[1]-b[0]*p[1];
+            auto num_m = a[0]*p[1]-p[0]*a[1];
+            auto nn = num_n / den;
+            auto mm = num_m / den;
+
+            return p==nn*a+mm*b
+               ? 3*nn+mm
+               : max_ll;
          })
          | sv::filter([](auto it) {
-            cout << it << endl;
             return it != max_ll;
          }),
       0, std::plus());

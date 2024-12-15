@@ -54,12 +54,12 @@ TEST(aoc24, d13_p2_example)
       "Prize: X=18641, Y=10279"
    };
    auto result = d13::p2(input);
-   ASSERT_EQ(1, result); // right answer from reddit: 875318608908
+   ASSERT_EQ(875318608908, result);
 }
 
 TEST(aoc24, d13_p2)
 {
    vec<string> input = read_file_lines("./res/aoc24/day13.input.txt");
    auto result = d13::p2(input);
-   ASSERT_EQ(1, result);
+   ASSERT_EQ(93217456941970, result);
 }
