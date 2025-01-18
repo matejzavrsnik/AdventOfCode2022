@@ -22,3 +22,5 @@ What I learned doing Advent of Code and how to be better next time.
 - Before AoC starts, go through standard library, my library, AoC library to remind yourself what's there.
 - Use existing building blocks and combine, rather than build custom code.
 - prefer std::set over std::unordered_set; the speedup is negligable and usually not the point of the problem, while you can use set operations on std::set. Worse, the operations work on unordered_sets too but give wrong results.
+- don't name line, numbers, second, i, x, y, z; you'll get lost sooner than you think
+- adjusting input format for the algorithm is easier than selecting an algorithm for the input format

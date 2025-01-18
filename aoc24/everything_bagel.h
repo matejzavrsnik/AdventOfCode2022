@@ -78,6 +78,7 @@ using std::distance;
 using std::accumulate;
 using std::nullopt;
 using std::tuple;
+using std::make_tuple;
 
 using ll = long long;
 static ll max_ll = std::numeric_limits<long long>::max();
@@ -408,7 +409,19 @@ inline direction convert(
       case 'v': return direction::s;
       default: throw mzlib::exception::invalid_values("char not translatable to direction");
    }
+}
 
+template<>
+inline char convert(
+   const direction& d)
+{
+   switch (d) {
+      case direction::w: return '<';
+      case direction::e: return '>';
+      case direction::n: return '^';
+      case direction::s: return 'v';
+      default: throw mzlib::exception::invalid_values("direction not translatable to one char");
+   }
 }
 
 }
